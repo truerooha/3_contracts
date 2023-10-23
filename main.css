@@ -1,0 +1,71 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+  }
+  
+  .container {
+    display: flex;
+    height: 100vh;
+    align-items: flex-start;
+    margin: 20px;
+  }
+  
+  .navigation {
+    width: 200px;
+    height: 95vh;
+    background-color: #333;
+    color: #ffffff;
+  }
+  
+  .navigation ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .navigation li {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .navigation a:hover {
+    color: #ff6600; /* Меняем цвет текста при наведении */
+  }
+
+  .navigation a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .active {
+    background-color: #555;
+  }
+  
+  .container {
+    display: flex;
+  }
+  
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+  }
+  
+  .card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    height: 300px;
+    width: 400px;
+  }
+  
+  .card h1 {
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+  }
