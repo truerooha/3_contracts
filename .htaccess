@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    RewriteCond %{REQUEST_METHOD} !POST
+
+    RewriteRule ^(.*)$ login.php [L]
+</IfModule>
