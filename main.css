@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
+    height: 100vh;
   }
   
   .container {
@@ -11,7 +12,10 @@ body {
     align-items: flex-start;
     margin: 20px;
   }
-  
+
+  .greeting {
+    font-size: 24pt;
+  }
   .navigation {
     width: 200px;
     height: 95vh;
@@ -26,7 +30,15 @@ body {
   
   .navigation li {
     padding: 10px;
-    text-align: center;
+    text-align: left;
+    margin-left: 10px;
+    
+  }
+
+  .navigation li::before {
+    content: "\f05a";
+    font-family: 'Font Awesome';
+    margin-right: 5px;
   }
   
   .navigation a:hover {
@@ -43,15 +55,13 @@ body {
     background-color: #555;
   }
   
-  .container {
-    display: flex;
-  }
-  
   .content {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     flex: 1;
+    margin-left: 20px;
   }
   
   .card {
@@ -62,10 +72,27 @@ body {
     text-align: center;
     height: 300px;
     width: 400px;
+    margin-left: 20px;
+  }
+
+  .cards {
+    display: flex;
+    flex-direction: row;
   }
   
-  .card h1 {
-    font-size: 24px;
+  .card h2 {
+    font-size: 18px;
     margin: 0;
     padding: 0;
+    text-align: left;
+  }
+
+  .spacer {
+    height: 20px; /* Регулируйте высоту, чтобы установить нужный отступ */
+    width: 100%; /* Растянуть элемент на всю ширину */
+    pointer-events: none;
+  }
+
+  .greeting {
+    text-align: left;
   }
