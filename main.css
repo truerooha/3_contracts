@@ -13,14 +13,13 @@ body {
     margin: 20px;
   }
 
-  .greeting {
-    font-size: 24pt;
-  }
   .navigation {
     width: 200px;
     height: 95vh;
     background-color: #333;
     color: #ffffff;
+    border-radius: 5px;
+
   }
   
   .navigation ul {
@@ -35,12 +34,6 @@ body {
     
   }
 
-  .navigation li::before {
-    content: "\f05a";
-    font-family: 'Font Awesome';
-    margin-right: 5px;
-  }
-  
   .navigation a:hover {
     color: #ff6600; /* Меняем цвет текста при наведении */
   }
@@ -58,7 +51,7 @@ body {
   .content {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start  ;
     justify-content: center;
     flex: 1;
     margin-left: 20px;
@@ -91,8 +84,4 @@ body {
     height: 20px; /* Регулируйте высоту, чтобы установить нужный отступ */
     width: 100%; /* Растянуть элемент на всю ширину */
     pointer-events: none;
-  }
-
-  .greeting {
-    text-align: left;
   }

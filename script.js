@@ -1,3 +1,32 @@
+const pages = {
+  main: {
+      name: "Главное",
+      path: "main",
+  },
+  contracts: {
+      name: "Договоры",
+      path: "contracts",
+  },
+  counterparties: {
+      name: "Контрагенты",
+      path: "counterparties",
+  },
+  search: {
+    name: "Поиск",
+    path: "search",
+  },
+  settings: {
+    name: "Настройки",
+    path: "settings",
+  },
+  support: {
+    name: "Помощь",
+    path: "support",
+  }
+};
+
+let currentPage = pages.main;
+
 document.addEventListener("DOMContentLoaded", function() {
     const navItems = document.querySelectorAll(".navigation li");
   
