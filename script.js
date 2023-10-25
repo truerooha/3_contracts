@@ -33,12 +33,9 @@ document.addEventListener("DOMContentLoaded", function() {
   
     navItems.forEach(item => {
       item.addEventListener("click", function(event) {
-        event.preventDefault(); // Предотвратить переход по ссылке
+        event.preventDefault();
   
-        // Снимите класс "active" со всех элементов навигации
         navItems.forEach(item => item.classList.remove("active"));
-  
-        // Установите класс "active" только для выбранного элемента
         item.classList.add("active");
 
         if (pages[item.id]) {
@@ -47,9 +44,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       });
     });
-  
-    // По умолчанию установите класс "active" для элемента "Главное"
-    document.getElementById("main").classList.add("active");
+
+      document.getElementById("main").classList.add("active");
   });
 
   function changePage(page) {

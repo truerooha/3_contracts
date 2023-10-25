@@ -35,7 +35,7 @@ body {
   }
 
   .navigation a:hover {
-    color: #ff6600; /* Меняем цвет текста при наведении */
+    color: #ff6600;
   }
 
   .navigation a {
@@ -50,10 +50,13 @@ body {
 
   .page {
     display: none;
+    opacity: 0;
+    transition: opacity 0.1s ease;
   }
 
   .page.activePage {
       display: block;
+      opacity: 1;
   }
 
   .content {
