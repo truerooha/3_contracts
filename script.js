@@ -26,6 +26,7 @@ const pages = {
 };
 
 let currentPage = pages.main;
+changePage(currentPage);
 
 document.addEventListener("DOMContentLoaded", function() {
     const navItems = document.querySelectorAll(".navigation li");
@@ -39,9 +40,24 @@ document.addEventListener("DOMContentLoaded", function() {
   
         // Установите класс "active" только для выбранного элемента
         item.classList.add("active");
+
+        if (pages[item.id]) {
+            currentPage = pages[item.id];
+            changePage(currentPage);
+        }
       });
     });
   
     // По умолчанию установите класс "active" для элемента "Главное"
     document.getElementById("main").classList.add("active");
   });
+
+  function changePage(page) {
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(page => page.classList.remove('activePage'));
+
+    const currentPage = document.getElementById("c-" + page.path);
+    if (currentPage) {
+        currentPage.classList.add('activePage');
+    }
+}

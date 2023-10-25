@@ -47,11 +47,19 @@ body {
   .active {
     background-color: #555;
   }
-  
+
+  .page {
+    display: none;
+  }
+
+  .page.activePage {
+      display: block;
+  }
+
   .content {
     display: flex;
     flex-direction: column;
-    align-items: flex-start  ;
+    align-items: flex-start ;
     justify-content: center;
     flex: 1;
     margin-left: 20px;
