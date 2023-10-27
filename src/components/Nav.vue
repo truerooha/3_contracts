@@ -1,7 +1,7 @@
 <template>
   <div class="navigation">
     <ul>
-      <router-link class="nav-link" to="/main">Главное</router-link>
+      <router-link class="nav-link" to="/main">Главная</router-link>
       <router-link class="nav-link" to="/contracts">Договоры</router-link>
       <router-link class="nav-link" to="/counterparties">Контрагенты</router-link>
       <router-link class="nav-link" to="/search">Поиск</router-link>

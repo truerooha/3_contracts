@@ -1,5 +1,5 @@
 <template>
-  <h1 class="page-h1">Main</h1>
+  <h1 class="page-h1">Главная</h1>
 </template>
 
 <script>

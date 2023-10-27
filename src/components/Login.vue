@@ -26,14 +26,9 @@ export default {
 </script>
 
 <style scoped>
-    body {
-        background-size: cover;
-        background-position: center;
-        font-family: Arial, sans-serif;
-    }
     .login-container {
         width: 300px;
-        margin: 0 auto;
+        margin: auto;
         text-align: center;
         padding: 20px;
         background-color: rgba(255, 255, 255, 0.7);

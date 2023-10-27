@@ -35,23 +35,25 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
-    height: 100vh;
+    height: 100%;
   }
   
 .container {
   display: flex;
-  height: 100vh;
-  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  align-items: top;
+  justify-content: center;
   margin: 20px;
 }
 
 .page-container {
-  margin-left: 20px;
-  width: 100vh;
+  margin-left: 30px;
+  width: 100%;
 }
 
 .page-h1 {
-  font-size: 48pt;
+  font-size: 24pt;
   text-align: left;
 }
 </style>
