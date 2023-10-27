@@ -1,0 +1,16 @@
+<template>
+  <h1>Помощь</h1>
+  <p>Все виды получения саппорта</p>
+  <br>
+  <p>Написать тикет, открыть чат, поставить оценку</p>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style>
+
+</style>
