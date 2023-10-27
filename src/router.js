@@ -6,20 +6,12 @@ import Search from './components/Search.vue';
 import Settings from './components/Settings.vue';
 import Support from './components/Support.vue';
 import Login from './components/Login.vue';
+import Cookies from 'js-cookie';
 
 const routes = [
-  { path: '/', redirect: '/login' },
+  { path: '/', redirect: '/main' },
   { path: '/main', component: Main },
-  { path: '/contracts',
-     component: Contracts,
-     beforeEnter: (to, from, next) => {
-      if (true) {
-        next(); // Переход на страницу контрактов
-      } else {
-        next('/login'); // Перенаправление на страницу авторизации, если пользователь не авторизован
-      }
-    },
-  },
+  { path: '/contracts', component: Contracts},
   { path: '/counterparties', component: Counterparties },
   { path: '/search', component: Search },
   { path: '/settings', component: Settings },
@@ -30,6 +22,16 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const isAuthorized = Cookies.get('authorized') === 'true';
+
+  if (to.path !== '/login' && !isAuthorized) {
+    next('/login');
+  } else {
+    next();
+  }
 });
 
 export default router;

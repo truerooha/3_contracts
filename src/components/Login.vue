@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import Cookies from "js-cookie";
 export default {
   data() {
     return {
@@ -19,6 +20,12 @@ export default {
   },
   methods: {
     submitForm() {
+      //TODO авторизация по куки - временная
+      //TODO проверить вообще, авторизован ли пользователь
+      //TODO если не авторизован, пороверить имя пароль
+      //TODO если имя пароль правильные - авторизовать
+      const expiresInDays = 1;
+      Cookies.set('authorized', 'true', { expires: expiresInDays });
       this.$router.push('/main');
     },
   },
