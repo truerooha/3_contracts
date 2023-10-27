@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Navigation />
+    <Navigation v-if="$route.name !== 'Login'" />
     <div class="page-container">
       <router-view></router-view>
     </div>
@@ -9,10 +9,12 @@
 
 <script>
 import Navigation from './components/Nav.vue';
+import LoginForm from './components/Login.vue';
 
 export default {
   name: 'App',
   components: {
+    LoginForm,
     Navigation
   }
 }
