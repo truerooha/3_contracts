@@ -10,7 +10,16 @@ import Login from './components/Login.vue';
 const routes = [
   { path: '/', redirect: '/login' },
   { path: '/main', component: Main },
-  { path: '/contracts', component: Contracts },
+  { path: '/contracts',
+     component: Contracts,
+     beforeEnter: (to, from, next) => {
+      if (true) {
+        next(); // Переход на страницу контрактов
+      } else {
+        next('/login'); // Перенаправление на страницу авторизации, если пользователь не авторизован
+      }
+    },
+  },
   { path: '/counterparties', component: Counterparties },
   { path: '/search', component: Search },
   { path: '/settings', component: Settings },

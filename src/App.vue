@@ -2,7 +2,7 @@
   <div class="container">
     <Navigation v-if="$route.name !== 'Login'" />
     <div class="page-container">
-      <router-view></router-view>
+      <router-view />
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 body {
@@ -55,5 +55,6 @@ body {
 .page-h1 {
   font-size: 24pt;
   text-align: left;
+  color: #383535;
 }
 </style>
