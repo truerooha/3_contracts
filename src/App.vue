@@ -27,6 +27,31 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 20px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    height: 100vh;
+  }
+  
+.container {
+  display: flex;
+  height: 100vh;
+  align-items: flex-start;
+  margin: 20px;
+}
+
+.page-container {
+  margin-left: 20px;
+  width: 100vh;
+}
+
+.page-h1 {
+  font-size: 48pt;
+  text-align: left;
 }
 </style>

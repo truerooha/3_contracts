@@ -19,8 +19,7 @@ export default {
   },
   methods: {
     submitForm() {
-      // Обработка отправки формы, например, отправка данных на сервер или локальную проверку
-      // this.username и this.password содержат значения полей ввода
+      this.$router.push('/main');
     },
   },
 };
@@ -63,24 +62,5 @@ export default {
     }
     .login-form button:hover {
         background-color: #2980b9; /* Голубой цвет при наведении */
-    }
-    /* Для иконки человечка */
-    .icon-input:nth-child(1)::before {
-        content: "\f007"; /* Юникод-символ иконки человечка */
-        font-family: FontAwesome; /* Подключите шрифт со значками (FontAwesome, например) */
-        position: absolute;
-        margin: 0;
-        padding: 10px;
-        color: #3498db; /* Цвет иконки */
-    }
-
-    /* Для иконки с замком */
-    .passInput::before {
-        content: "\f023"; /* Юникод-символ иконки с замком */
-        font-family: FontAwesome; /* Подключите шрифт со значками (FontAwesome, например) */
-        position: absolute;
-        margin: 0;
-        padding: 10px;
-        color: #3498db; /* Цвет иконки */
     }
 </style>
