@@ -11,6 +11,8 @@
 
 <script>
 import Cookies from "js-cookie";
+import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -20,13 +22,30 @@ export default {
   },
   methods: {
     submitForm() {
-      //TODO авторизация по куки - временная
-      //TODO проверить вообще, авторизован ли пользователь
-      //TODO если не авторизован, пороверить имя пароль
-      //TODO если имя пароль правильные - авторизовать
-      const expiresInDays = 1;
-      Cookies.set('authorized', 'true', { expires: expiresInDays });
-      this.$router.push('/main');
+
+      const data = {
+        username: this.username,
+        password: this.password,
+      };
+
+      axios.post('http://localhost:8888/3_contracts/login.php', data)
+        .then((response) => {
+          // Обработайте ответ от сервера, например, проверьте успешность авторизации
+          if (response.data.authorized === true) {
+            // Устанавливаем куки "authorized"
+            const expiresInDays = 1;
+            Cookies.set('authorized', 'true', { expires: expiresInDays });
+            // Переход на главную страницу
+            this.$router.push('/main');
+          } else {
+            // Ошибка авторизации
+            console.log('Неправильное имя пользователя или пароль');
+          }
+        })
+        .catch((error) => {
+          // Обработка ошибки запроса
+          console.error('Произошла ошибка при отправке запроса: ' + error);
+      });
     },
   },
 };
