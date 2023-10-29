@@ -25,25 +25,25 @@ export default {
 
       const data = {
         username: this.username,
-        password: this.password,
+        password: this.password
       };
 
-      axios.post('http://localhost:8888/3_contracts/login.php', data)
+      axios.post('http://localhost:8888/3_contracts/server/login.php', data)
         .then((response) => {
-          // Обработайте ответ от сервера, например, проверьте успешность авторизации
+
           if (response.data.authorized === true) {
-            // Устанавливаем куки "authorized"
+
             const expiresInDays = 1;
             Cookies.set('authorized', 'true', { expires: expiresInDays });
-            // Переход на главную страницу
+
             this.$router.push('/main');
           } else {
-            // Ошибка авторизации
+
             console.log('Неправильное имя пользователя или пароль');
           }
         })
         .catch((error) => {
-          // Обработка ошибки запроса
+
           console.error('Произошла ошибка при отправке запроса: ' + error);
       });
     },
@@ -74,7 +74,7 @@ export default {
     .login-form button {
         width: 90%;
         padding: 10px;
-        background-color: #3498db; /* Голубой цвет кнопки */
+        background-color: #3498db;
         color: #fff;
         border: none;
         border-radius: 5px;
@@ -82,6 +82,6 @@ export default {
         margin-top: 10px;
     }
     .login-form button:hover {
-        background-color: #2980b9; /* Голубой цвет при наведении */
+        background-color: #2980b9;
     }
 </style>
