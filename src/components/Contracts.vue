@@ -107,26 +107,22 @@ export default {
       this.isContractFormVisible = false;
     },
     saveContract(contractData) {
+      const contractJSON = JSON.stringify(contractData);
+      console.log(contractJSON);
 
-    const contractJSON = JSON.stringify(contractData);
-    console.log(contractJSON);
-
-    axios.post('http://localhost:8888/3_contracts/server/api.php', contractJSON, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => {
+      axios.post('http://localhost:8888/3_contracts/server/api.php', contractJSON, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
-      .catch((error) => {
-        // Ошибка при сохранении данных
-        console.error('Ошибка при сохранении договора:', error);
-      });
-      },
-      closeForm() {
-        // Закрыть форму
-        this.$emit('close');
-      }
+        .then((response) => {
+        })
+        .catch((error) => {
+          console.error('Ошибка при сохранении договора:', error);
+        });
+      this.hideContractForm();
+      this.loadContracts();
+    }
   },
   components: {
     ContractForm

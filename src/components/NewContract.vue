@@ -9,10 +9,10 @@
 
         <section class="modal-body">
           <slot name="body" >
-            <input v-model="contract.number" placeholder="Номер договора" />
-            <input v-model="contract.date" placeholder="Дата договора" />
-            <input v-model="contract.counterparty_id" placeholder="Контрагент" />
-            <input v-model="contract.amount" placeholder="Сумма" />
+            <input v-model="contract.number" placeholder="Номер договора" required/>
+            <input v-model="contract.date" placeholder="Дата договора" required/>
+            <input v-model="contract.counterparty_id" placeholder="Контрагент" required/>
+            <input v-model="contract.amount" placeholder="Сумма" required/>
           </slot>
         </section>
 
@@ -45,7 +45,7 @@ export default {
       contract: {
         number: "",
         date: "",
-        counterparty_id: "",
+        counterparty_id: 1,
         amount: "",
       },
       title: "Новый договор"

@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(":number", $data["number"]);
         $stmt->bindParam(":date", $formattedDate);
-        $stmt->bindParam(":counterparty_id", 1);
+        $stmt->bindParam(":counterparty_id", $data["counterparty_id"]);
         $stmt->bindParam(":amount", $data["amount"]);
         $stmt->execute();
 
