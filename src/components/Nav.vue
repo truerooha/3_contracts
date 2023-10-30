@@ -1,5 +1,12 @@
 <template>
   <div class="navigation">
+    <div class="comp-badge">
+      <img src="@/assets/icons/user.jpeg" class="ava" alt="Главная">
+      <div class="comp-details">
+        <h3>Panadey</h3>
+        <p>contracts</p>
+      </div>
+    </div>
     <ul>
       <router-link class="nav-link" :class="{ active: $route.path === '/main' }" to="/main">
         <div class="icon-container">
@@ -49,6 +56,40 @@ export default {
 </script>
 
 <style>
+
+.comp-badge {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.ava {
+  width: 36px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.comp-details {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-left: 5px;
+  border-radius: 10px;
+}
+
+.comp-details h3 {
+  padding: 0;
+  margin: 0;
+}
+
+.comp-details p {
+  padding: 0;
+  margin: 0;
+  color: #666952;
+}
+
 .icon-container {
   display: flex;
   align-items: center;
@@ -77,6 +118,7 @@ export default {
 }
 
 .navigation ul {
+    margin-top: 40px;
     list-style-type: none;
     padding: 0;
 }
@@ -84,8 +126,9 @@ export default {
 .navigation .nav-link {
     display: flex;
     text-decoration: none;
+    align-items: center;
     padding: 10px;
-    margin-left: 10px;
+    margin-left: 16px;
     margin-top: 10px;
     font-size: 11pt;
     color: #666952;
@@ -97,13 +140,13 @@ export default {
 }
 
 .spacer {
-    height: 40px; /* Регулируйте высоту, чтобы установить нужный отступ */
-    width: 100%; /* Растянуть элемент на всю ширину */
+    height: 40px;
+    width: 100%;
     pointer-events: none;
 }
 
 .navigation .nav-link.active {
-
+  font-weight: 900;
   color: #537C3C;
   border-radius: 10px;
 }

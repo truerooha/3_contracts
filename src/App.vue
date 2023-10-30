@@ -46,7 +46,7 @@ body {
 }
 
 .page-container {
-  margin: 0px 30px;
+  margin: 10px 30px;
   width: 100%;
   }
 
