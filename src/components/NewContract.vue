@@ -1,6 +1,6 @@
 <template>
       <div class="modal-backdrop">
-      <div class="modal">
+      <div class="modal theme-color">
         <header class="modal-header">
           <slot name="header" >
             {{ title }}
@@ -11,7 +11,7 @@
           <slot name="body" >
             <input v-model="contract.number" placeholder="Номер договора" />
             <input v-model="contract.date" placeholder="Дата договора" />
-            <input v-model="contract.counterparty" placeholder="Контрагент" />
+            <input v-model="contract.counterparty_id" placeholder="Контрагент" />
             <input v-model="contract.amount" placeholder="Сумма" />
           </slot>
         </section>
@@ -20,7 +20,7 @@
           <button
             type="button"
             class="btn btn-prima"
-            @click="saveForm"
+            @click="saveContract"
           >
             Сохранить
           </button>
@@ -45,7 +45,7 @@ export default {
       contract: {
         number: "",
         date: "",
-        counterparty: "",
+        counterparty_id: "",
         amount: "",
       },
       title: "Новый договор"
@@ -56,7 +56,6 @@ export default {
       this.$emit("save", this.contract);
     },
     closeForm() {
-      // Закрыть форму
       this.$emit("close");
     },
   },
@@ -67,12 +66,13 @@ export default {
 
 input {
   display: block;
-  border: 1px solid #f7f5f5;
+  border: 1px solid #f2f8e4;
   margin-top: 10px;
-  border-radius: 5px;
+  border-radius: 6px;
   padding: 10px;
   width: 90%;
 }
+
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -95,6 +95,7 @@ input {
   border-radius: 20px;
   height: 340px;
   width: 280px;
+  background-color: #F9FAF6;
 }
 
 .modal-header {

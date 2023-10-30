@@ -1,6 +1,6 @@
 <template>
   <h1 class="page-h1">Договоры</h1>
-  <div class="page-content">
+  <div class="page-content theme-color">
       <div class="search-container">
         <div class="search-input">
           <img src="@/assets/icons/search.svg" class="icon-search" alt="Поиск">
@@ -181,19 +181,20 @@ export default {
 .search-input {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 180px;
-  height: 32px;
+  height: 28px;
   background-color: white;
   border-radius: 20px;
   padding: 10px;
   border: 1px solid #f7f5f5;
-
 }
 
 input {
   border: none;
   outline: none;
   width: 100%;
+  height: 20px;
 }
 
 .contract-table {

@@ -55,7 +55,6 @@ body {
   display: block;
   width: 95%;
   height: 90%;
-  background-color: #F9FAF6;
   border-radius: 20px;
   padding: 30px;
 }

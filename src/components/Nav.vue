@@ -1,5 +1,5 @@
 <template>
-  <div class="navigation">
+  <div class="navigation theme-color">
     <div class="comp-badge">
       <img src="@/assets/icons/user.jpeg" class="ava" alt="Главная">
       <div class="comp-details">
@@ -113,7 +113,6 @@ export default {
 .navigation {
     width: 240px;
     height: 100vh;
-    background-color: #F9FAF6;
     padding: 10px; 
 }
 

@@ -11,10 +11,19 @@
     background-color: #f89c40;
   }
 
+  .btn-prima:hover {
+    background-color: #f6b26f;
+  }
+
   .btn-common {
     color: #666952;
   }
 
-  .btn-prima:hover {
-    background-color: #f6b26f;
+  .btn-common:hover {
+    color: #666952;
+    background-color: #f4f2f2;
+  }
+
+  .theme-color {
+    background-color: #F9FAF6
   }
