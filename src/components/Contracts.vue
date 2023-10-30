@@ -9,8 +9,15 @@
             placeholder="Поиск..."
           />
         </div>
-      <button class="search-button">+ Добавить</button>
+      <button @click="showContractForm" class="search-button">+ Добавить</button>
       </div>
+      <div class="modal" v-if="isContractFormVisible">
+        <div class="modal-content">
+          <!-- Вставьте компонент формы сюда -->
+          <contract-form @close="hideContractForm" @save="saveContract" />
+        </div>
+      </div>
+
       <table class="contract-table">
         <thead>
           <tr>
@@ -40,12 +47,14 @@
 
 <script>
 import axios from 'axios';
+import ContractForm from "./NewContract.vue";
 
 export default {
   name: 'Contracts',
   data() {
     return {
       contracts: [],
+      isContractFormVisible: false
     };
   },
   mounted() {
@@ -92,12 +101,44 @@ export default {
           console.error('Ошибка при удалении договора:', error);
         });
       }
+    },
+    showContractForm() {
+      this.isContractFormVisible = true; // При нажатии на кнопку "+" Добавить показать модальную форму
+    },
+    hideContractForm() {
+      this.isContractFormVisible = false; // Закрыть модальную форму
+    },
+    saveContract(contractData) {
+      console.log(contractData);
+      this.hideContractForm();
     }
-  }
+  },
+  components: {
+    ContractForm
+  },
 };
 </script>
 
 <style scoped>
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Затемнение фона */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
 .icon-trash {
   width: 20px;
   cursor: pointer;
