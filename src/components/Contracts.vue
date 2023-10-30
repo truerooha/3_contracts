@@ -9,14 +9,14 @@
             placeholder="Поиск..."
           />
         </div>
-      <button @click="showContractForm" class="search-button">+ Добавить</button>
+      <button @click="showContractForm" class="search-button btn btn-prima">+ Добавить</button>
       </div>
-      <div class="modal" v-if="isContractFormVisible">
-        <div class="modal-content">
-          <!-- Вставьте компонент формы сюда -->
-          <contract-form @close="hideContractForm" @save="saveContract" />
-        </div>
-      </div>
+
+      <ContractForm
+        v-show="isContractFormVisible"
+        @close="hideContractForm"
+        @save="saveContract"
+      />
 
       <table class="contract-table">
         <thead>
@@ -74,7 +74,7 @@ export default {
     deleteContract(contract) {
       const confirmed = confirm('Вы уверены, что хотите удалить этот договор?');
       if (!confirmed) {
-        return; // Если пользователь отменил удаление, ничего не делаем.
+        return;
       }
 
       const index = this.contracts.indexOf(contract);
@@ -82,16 +82,14 @@ export default {
         this.contracts.splice(index, 1);
         const contractId = contract.id;
 
-        // Создаем объект для отправки
         const requestData = { contract_id: contractId };
         
-        // Преобразуем объект в строку JSON
         const jsonData = JSON.stringify(requestData);
 
         axios.delete('http://localhost:8888/3_contracts/server/api.php', {
-          data: jsonData, // Указываем данные для DELETE запроса
+          data: jsonData,
           headers: {
-            'Content-Type': 'application/json', // Устанавливаем заголовок для JSON
+            'Content-Type': 'application/json',
           },
         })
         .then(() => {
@@ -103,15 +101,32 @@ export default {
       }
     },
     showContractForm() {
-      this.isContractFormVisible = true; // При нажатии на кнопку "+" Добавить показать модальную форму
+      this.isContractFormVisible = true;
     },
     hideContractForm() {
-      this.isContractFormVisible = false; // Закрыть модальную форму
+      this.isContractFormVisible = false;
     },
     saveContract(contractData) {
-      console.log(contractData);
-      this.hideContractForm();
-    }
+
+    const contractJSON = JSON.stringify(contractData);
+    console.log(contractJSON);
+
+    axios.post('http://localhost:8888/3_contracts/server/api.php', contractJSON, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+      })
+      .catch((error) => {
+        // Ошибка при сохранении данных
+        console.error('Ошибка при сохранении договора:', error);
+      });
+      },
+      closeForm() {
+        // Закрыть форму
+        this.$emit('close');
+      }
   },
   components: {
     ContractForm
@@ -124,9 +139,9 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Затемнение фона */
+  width: 200px;
+  height: 200px;
+  background-color: rgba(242, 237, 237, 0.5); /* Затемнение фона */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -144,7 +159,6 @@ export default {
   cursor: pointer;
 }
 
-
 .icon-trash:hover {
   color: #f7f5f5;
 }
@@ -157,12 +171,6 @@ export default {
 }
 
 .search-button {
-  background-color: #f89c40;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 20px;
-  cursor: pointer;
   margin-left: auto;
 }
 
