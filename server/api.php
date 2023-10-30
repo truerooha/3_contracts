@@ -1,11 +1,44 @@
 <?php
-// Заглушка с данными
-$contracts = [
-    ["id" => 1, "number" => "0018", "date" => "2023-10-30", "counterparty" => "Контрагент 1", "amount" => "1000 руб."],
-    ["id" => 2, "number" => "002", "date" => "2023-10-31", "counterparty" => "Контрагент 2", "amount" => "1500 руб."],
-    ["id" => 3, "number" => "003", "date" => "2023-11-01", "counterparty" => "Контрагент 3", "amount" => "2000 руб."],
-    // Добавьте другие данные о договорах
-];
+
+$host = 'localhost';
+$port = 8889;
+$database = 'contracts';
+$username = 'root';
+$password = 'root'; 
+
+try {
+    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$database;charset=utf8", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Ошибка подключения к базе данных: " . $e->getMessage());
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
+    $data = json_decode(file_get_contents("php://input"), true);
+    $contract_id = $data["contract_id"];
+    
+    try {
+        $stmt = $pdo->prepare("DELETE FROM Contracts WHERE contract_id = :contract_id");
+        $stmt->bindParam(":contract_id", $contract_id, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        echo "Договор успешно удален.";
+    } catch (PDOException $e) {
+        echo "Ошибка при удалении договора: " . $e->getMessage();
+    }
+}
+
+$sql = "SELECT Contracts.contract_id AS id, Contracts.contract_number AS number, Contracts.contract_date AS date,  Contracts.contract_amount AS amount, counterparties.name AS CPname
+FROM Contracts
+INNER JOIN counterparties ON Contracts.counterparty_id = counterparties.id;
+";
+
+try {
+    $stmt = $pdo->query($sql);
+    $contracts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("Ошибка выполнения SQL-запроса: " . $e->getMessage());
+}
 
 // Отправка данных в формате JSON в ответ на HTTP-запрос
 header("Content-Type: application/json");

@@ -6,9 +6,7 @@
           <img src="@/assets/icons/search.svg" class="icon-search" alt="Поиск">
           <input
             type="text"
-            v-model="searchQuery"
             placeholder="Поиск..."
-            @input="emitSearchQuery"
           />
         </div>
       <button class="search-button">+ Добавить</button>
@@ -20,14 +18,20 @@
             <th>Дата</th>
             <th>Контрагент</th>
             <th>Сумма</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="contract in contracts" :key="contract.id">
             <td>{{ contract.number }}</td>
             <td>{{ contract.date }}</td>
-            <td>{{ contract.counterparty }}</td>
+            <td>{{ contract.CPname }}</td>
             <td>{{ contract.amount }}</td>
+            <td>
+            <span @click="deleteContract(contract)">
+              <img src="@/assets/icons/trash.svg" class="icon-trash" alt="Удалить">
+            </span>
+          </td>
           </tr>
         </tbody>
       </table>
@@ -41,12 +45,7 @@ export default {
   name: 'Contracts',
   data() {
     return {
-      contracts: [
-        { id: 1, number: '001', date: '2023-10-30', counterparty: 'Контрагент 1', amount: '1000 руб.' },
-        { id: 2, number: '002', date: '2023-10-31', counterparty: 'Контрагент 2', amount: '1500 руб.' },
-        { id: 3, number: '003', date: '2023-11-01', counterparty: 'Контрагент 3', amount: '2000 руб.' },
-        // Добавьте другие данные о договорах
-      ],
+      contracts: [],
     };
   },
   mounted() {
@@ -61,12 +60,54 @@ export default {
         .catch((error) => {
           console.error('Ошибка при загрузке данных:', error);
         });
+    },
+
+    deleteContract(contract) {
+      const confirmed = confirm('Вы уверены, что хотите удалить этот договор?');
+      if (!confirmed) {
+        return; // Если пользователь отменил удаление, ничего не делаем.
+      }
+
+      const index = this.contracts.indexOf(contract);
+      if (index !== -1) {
+        this.contracts.splice(index, 1);
+        const contractId = contract.id;
+
+        // Создаем объект для отправки
+        const requestData = { contract_id: contractId };
+        
+        // Преобразуем объект в строку JSON
+        const jsonData = JSON.stringify(requestData);
+
+        axios.delete('http://localhost:8888/3_contracts/server/api.php', {
+          data: jsonData, // Указываем данные для DELETE запроса
+          headers: {
+            'Content-Type': 'application/json', // Устанавливаем заголовок для JSON
+          },
+        })
+        .then(() => {
+          console.log('Договор удален успешно.');
+        })
+        .catch((error) => {
+          console.error('Ошибка при удалении договора:', error);
+        });
+      }
     }
-  },
+  }
 };
 </script>
 
 <style scoped>
+.icon-trash {
+  width: 20px;
+  cursor: pointer;
+}
+
+
+.icon-trash:hover {
+  color: #f7f5f5;
+}
+ 
 .search-container {
   display: flex;
   align-items: center;
