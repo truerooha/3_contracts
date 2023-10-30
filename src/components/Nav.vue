@@ -1,13 +1,43 @@
 <template>
   <div class="navigation">
     <ul>
-      <router-link class="nav-link" :class="{ active: $route.path === '/main' }" to="/main">Главная</router-link>
-      <router-link class="nav-link" :class="{ active: $route.path === '/contracts' }" to="/contracts">Договоры</router-link>
-      <router-link class="nav-link" :class="{ active: $route.path === '/counterparties' }" to="/counterparties">Контрагенты</router-link>
-      <router-link class="nav-link" :class="{ active: $route.path === '/search' }" to="/search">Поиск</router-link>
+      <router-link class="nav-link" :class="{ active: $route.path === '/main' }" to="/main">
+        <div class="icon-container">
+          <i class="icon fa fa-home"></i>
+        </div>
+        Главная
+      </router-link>
+      <router-link class="nav-link" :class="{ active: $route.path === '/contracts' }" to="/contracts">
+        <div class="icon-container">
+          <i class="icon fa fa-file-contract"></i>
+        </div>
+        Договоры
+      </router-link>
+      <router-link class="nav-link" :class="{ active: $route.path === '/counterparties' }" to="/counterparties">
+        <div class="icon-container">
+          <i class="icon fa fa-users"></i>
+        </div>
+        Контрагенты
+      </router-link>
+      <router-link class="nav-link" :class="{ active: $route.path === '/search' }" to="/search">
+        <div class="icon-container">
+          <i class="icon fa fa-search"></i>
+        </div>
+        Поиск
+      </router-link>
       <div class="spacer"></div>
-      <router-link class="nav-link" :class="{ active: $route.path === '/settings' }" to="/settings">Настройки</router-link>
-      <router-link class="nav-link" :class="{ active: $route.path === '/support' }" to="/support">Помощь</router-link>
+      <router-link class="nav-link" :class="{ active: $route.path === '/settings' }" to="/settings">
+        <div class="icon-container">
+          <i class="icon fa fa-cog"></i>
+        </div>
+        Настройки
+      </router-link>
+      <router-link class="nav-link" :class="{ active: $route.path === '/support' }" to="/support">
+        <div class="icon-container">
+          <i class="icon fa fa-life-ring"></i>
+        </div>
+        Помощь
+      </router-link>
     </ul>
   </div>
 </template>
@@ -19,14 +49,20 @@ export default {
 </script>
 
 <style>
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  width: 20px;
+}
 
 .navigation {
-    width: 200px;
-    height: 100%;
+    width: 240px;
+    height: 100vh;
     background-color: #ffffff;
     color: #0d0b0b;
-    border-radius: 5px;
-
+    padding: 10px; 
 }
 
 .navigation ul {
@@ -35,12 +71,11 @@ export default {
 }
 
 .navigation .nav-link {
-    display: block;
+    display: flex;
     text-decoration: none;
     padding: 10px;
-    text-align: left;
     margin-left: 10px;
-    color: #383535;
+    color: #9da1a4;
 }
 
 .navigation .nav-link:hover {
@@ -54,8 +89,9 @@ export default {
 }
 
 .navigation .nav-link.active {
-  background-color: #3498db;
-  color: #dbe8ef;
+  background-color: rgb(52, 152, 219, 0.1);
+  color: #349ad2;
+  border-radius: 10px;
 }
 
 </style>

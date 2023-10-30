@@ -27,8 +27,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 40px;
-}
+  }
 
 body {
     font-family: Arial, sans-serif;
@@ -44,7 +43,6 @@ body {
   width: 100%;
   align-items: top;
   justify-content: center;
-  margin: 20px;
 }
 
 .page-container {
