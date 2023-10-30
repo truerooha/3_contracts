@@ -48,14 +48,16 @@ body {
 .page-container {
   margin: 10px 30px;
   width: 100%;
+  
   }
 
 .page-content {
   display: block;
-  width: 100%;
-  height: 100%;
-  background-color: white;
+  width: 95%;
+  height: 90%;
+  background-color: #F9FAF6;
   border-radius: 20px;
+  padding: 30px;
 }
 
 .page-h1 {
