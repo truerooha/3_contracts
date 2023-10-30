@@ -3,38 +3,38 @@
     <ul>
       <router-link class="nav-link" :class="{ active: $route.path === '/main' }" to="/main">
         <div class="icon-container">
-          <i class="icon fa fa-home"></i>
+          <img src="@/assets/icons/home.svg" class="icon" alt="Главная">
         </div>
         Главная
       </router-link>
       <router-link class="nav-link" :class="{ active: $route.path === '/contracts' }" to="/contracts">
         <div class="icon-container">
-          <i class="icon fa fa-file-contract"></i>
+          <img src="@/assets/icons/doc.svg" class="icon" alt="Договоры">
         </div>
         Договоры
       </router-link>
       <router-link class="nav-link" :class="{ active: $route.path === '/counterparties' }" to="/counterparties">
         <div class="icon-container">
-          <i class="icon fa fa-users"></i>
+        <img src="@/assets/icons/people.svg" class="icon" alt="Контрагенты">
         </div>
         Контрагенты
       </router-link>
       <router-link class="nav-link" :class="{ active: $route.path === '/search' }" to="/search">
         <div class="icon-container">
-          <i class="icon fa fa-search"></i>
+          <img src="@/assets/icons/search.svg" class="icon-search" alt="Поиск">
         </div>
         Поиск
       </router-link>
       <div class="spacer"></div>
       <router-link class="nav-link" :class="{ active: $route.path === '/settings' }" to="/settings">
         <div class="icon-container">
-          <i class="icon fa fa-cog"></i>
+          <img src="@/assets/icons/settings.svg" class="icon" alt="Настройки">
         </div>
         Настройки
       </router-link>
       <router-link class="nav-link" :class="{ active: $route.path === '/support' }" to="/support">
         <div class="icon-container">
-          <i class="icon fa fa-life-ring"></i>
+          <img src="@/assets/icons/support.svg" class="icon" alt="Помощь">
         </div>
         Помощь
       </router-link>
@@ -54,14 +54,25 @@ export default {
   align-items: center;
   justify-content: center;
   margin-right: 10px;
-  width: 20px;
+  width: 28px;
+}
+
+.icon {
+  width: 24px;
+  margin-right: 10px;
+  color: currentColor;
+}
+
+.icon-search {
+  width: 28px;
+  margin-right: 10px;
+  color: currentColor;
 }
 
 .navigation {
     width: 240px;
     height: 100vh;
-    background-color: #ffffff;
-    color: #0d0b0b;
+    background-color: #F9FAF6;
     padding: 10px; 
 }
 
@@ -75,11 +86,14 @@ export default {
     text-decoration: none;
     padding: 10px;
     margin-left: 10px;
-    color: #9da1a4;
+    margin-top: 10px;
+    font-size: 11pt;
+    color: #666952;
+
 }
 
 .navigation .nav-link:hover {
-  color: #3498db;
+  color: #d1d5d8;
 }
 
 .spacer {
@@ -89,8 +103,8 @@ export default {
 }
 
 .navigation .nav-link.active {
-  background-color: rgb(52, 152, 219, 0.1);
-  color: #349ad2;
+
+  color: #537C3C;
   border-radius: 10px;
 }
 

@@ -33,7 +33,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: white;
     height: 100%;
   }
   
@@ -46,12 +46,21 @@ body {
 }
 
 .page-container {
-  margin-left: 30px;
+  margin: 0px 30px;
   width: 100%;
+  }
+
+.page-content {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-radius: 20px;
 }
 
 .page-h1 {
-  font-size: 24pt;
+  font-size: 20pt;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   text-align: left;
   color: #383535;
 }

@@ -1,8 +1,6 @@
 <template>
   <h1 class="page-h1">Договоры</h1>
-  <p>здесь возможно фильты</p>
-  <br>
-  <p>здесь красивый список договоров</p>
+  <div class="page-content">всё основное тут</div>
 </template>
 
 <script>
