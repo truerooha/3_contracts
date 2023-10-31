@@ -10,7 +10,7 @@
         <section class="modal-body">
           <slot name="body" >
             <input v-model="contract.number" placeholder="Номер договора" required/>
-            <input v-model="contract.date" placeholder="Дата договора" required/>
+            <input v-model="contract.date" type="date" placeholder="Дата договора" required/>
             <input v-model="contract.counterparty_id" placeholder="Контрагент" required/>
             <input v-model="contract.amount" placeholder="Сумма" required/>
           </slot>
@@ -83,7 +83,6 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 20px
 }
 
 .modal {
