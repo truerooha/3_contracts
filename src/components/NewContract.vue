@@ -13,6 +13,7 @@
             <input v-model="contract.date" type="date" placeholder="Дата договора" required/>
             <input v-model="contract.counterparty_id" placeholder="Контрагент" required/>
             <input v-model="contract.amount" placeholder="Сумма" required/>
+            <input type="file" @change="handleFileUpload" />
           </slot>
         </section>
 
@@ -58,7 +59,15 @@ export default {
     closeForm() {
       this.$emit("close");
     },
-  },
+    handleFileUpload(event) {
+      const file = event.target.files[0]; // Получите первый выбранный файл
+      if (file) {
+        // Вы можете обработать файл здесь, например, отправив его на сервер или сохранить локально
+        console.log('Загружен файл:', file.name);
+        // Здесь вы также можете обновить состояние вашего компонента, чтобы отобразить информацию о загруженном файле на вашей карточке договора
+      }
+    }
+  }
 };
 </script>
 
@@ -92,7 +101,6 @@ input {
   display: flex;
   flex-direction: column;
   border-radius: 20px;
-  height: 340px;
   width: 280px;
   background-color: #F9FAF6;
 }
