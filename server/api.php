@@ -30,21 +30,46 @@ if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $data = json_decode(file_get_contents("php://input"), true);
-    $date = $data["date"]; // Получите дату из данных в формате "2023-10-19"
+    $date = $data["date"];
     $formattedDate = date("Y-m-d", strtotime($date));
 
-    $sql = "INSERT INTO Contracts (contract_number, contract_date, counterparty_id, contract_amount) VALUES (:number, :date, :counterparty_id, :amount)";
+    $sqlContract = "INSERT INTO Contracts (contract_number, contract_date, counterparty_id, contract_amount) VALUES (:number, :date, :counterparty_id, :amount)";
 
     try {
-        $stmt = $pdo->prepare($sql);
+        $stmt = $pdo->prepare($sqlContract);
         $stmt->bindParam(":number", $data["number"]);
         $stmt->bindParam(":date", $formattedDate);
         $stmt->bindParam(":counterparty_id", $data["counterparty_id"]);
         $stmt->bindParam(":amount", $data["amount"]);
         $stmt->execute();
 
+        $contractId = $pdo->lastInsertId();
+
+        if (!empty($data["attach"])) {
+
+            $ownerType = "contracts"; // Тип владельца файла
+            $sqlOwner = "INSERT INTO attachment_owners (contract_id, owner_type) VALUES (:contract_id, :owner_type)";
+            $stmtOwner = $pdo->prepare($sqlOwner);
+            $stmtOwner->bindParam(":contract_id", $contractId);
+            $stmtOwner->bindParam(":owner_type", $ownerType);
+            $stmtOwner->execute();
+
+            $ownerId = $pdo->lastInsertId();
+            $fileName = $data["attach"]["name"];
+            $fileName = preg_replace('/[^\p{L}\p{N}\s]/u', '', $fileName);
+            file_put_contents('log.txt', $fileName, FILE_APPEND);
+
+            $sqlAttachment = "INSERT INTO attachment_files (owner_id, file_name) VALUES (:owner_id, :file_name)";
+            $stmtAttachment = $pdo->prepare($sqlAttachment);
+            $stmtAttachment->bindParam(":owner_id", $ownerId);
+            $stmtAttachment->bindParam(":file_name", $fileName);
+            $stmtAttachment->execute();
+            
+        }
+
         echo "Договор успешно сохранен.";
     } catch (PDOException $e) {
+        file_put_contents('log.txt', $e, FILE_APPEND);
         echo "Ошибка при сохранении договора: " . $e->getMessage();
     }
 }

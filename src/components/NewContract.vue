@@ -57,15 +57,29 @@ export default {
     saveContract() {
       this.$emit("save", this.contract);
     },
+
     closeForm() {
       this.$emit("close");
     },
+
     handleFileUpload(event) {
-      const file = event.target.files[0]; // Получите первый выбранный файл
+      const file = event.target.files[0];
       if (file) {
-        // Вы можете обработать файл здесь, например, отправив его на сервер или сохранить локально
-        console.log('Загружен файл:', file.name);
-        // Здесь вы также можете обновить состояние вашего компонента, чтобы отобразить информацию о загруженном файле на вашей карточке договора
+        const reader = new FileReader();
+
+        reader.onload = () => {
+          const fileData = reader.result;
+          const attach = {
+            name: file.name,
+            size: file.size,
+            type: file.type,
+            data: fileData, 
+          };
+
+          this.contract.attach = attach;
+
+        }
+        reader.readAsArrayBuffer(file);
       }
     }
   }

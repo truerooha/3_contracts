@@ -108,7 +108,6 @@ export default {
     },
     saveContract(contractData) {
       const contractJSON = JSON.stringify(contractData);
-      console.log(contractJSON);
 
       axios.post('http://localhost:8888/3_contracts/server/api.php', contractJSON, {
         headers: {
@@ -141,7 +140,6 @@ tbody tr:hover {
   border-radius: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
-
 
 .contract-page {
   display: block;
