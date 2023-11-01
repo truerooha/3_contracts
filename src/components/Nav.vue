@@ -55,7 +55,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .comp-badge {
   display: flex;
@@ -113,7 +113,7 @@ export default {
 .navigation {
     width: 240px;
     height: 100vh;
-    padding: 10px; 
+    padding: 10px;
 }
 
 .navigation ul {

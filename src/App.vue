@@ -31,6 +31,7 @@ export default {
 
 body {
     font-family: Arial, sans-serif;
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
     background-color: white;
@@ -45,24 +46,10 @@ body {
   justify-content: center;
 }
 
-.page-container {
-  margin: 10px 30px;
-  width: 100%;
-  
-  }
-
-.page-content {
-  display: block;
-  width: 95%;
-  height: 90%;
-  border-radius: 20px;
-  padding: 30px;
-}
-
 .page-h1 {
   font-size: 20pt;
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   text-align: left;
   color: #383535;
-}
+} 
 </style>

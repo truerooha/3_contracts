@@ -131,6 +131,20 @@ export default {
 </script>
 
 <style scoped>
+
+.page-content {
+  display: block;
+  width: 95%;
+  height: 90%;
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.icon-search {
+  width: 28px;
+  margin-right: 10px;
+}
+
 .modal {
   position: fixed;
   top: 0;
