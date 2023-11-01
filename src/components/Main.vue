@@ -1,6 +1,6 @@
 <template>
   <h1 class="page-h1">Главная</h1>
-  <div class="page-content">
+  <div class="page-content main-page">
     <div class="card">
       <h1>20</h1>
       <div class="badge"><span>777</span></div>
@@ -33,7 +33,7 @@ export default {
 
 <style scoped>
 
-.page-content {
+.main-page {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 15px;

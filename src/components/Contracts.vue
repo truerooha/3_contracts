@@ -1,6 +1,6 @@
 <template>
   <h1 class="page-h1">Договоры</h1>
-  <div class="page-content theme-color">
+  <div class="page-content contract-page theme-color">
       <div class="search-container">
         <div class="search-input">
           <img src="@/assets/icons/search.svg" class="icon-search" alt="Поиск">
@@ -132,12 +132,13 @@ export default {
 
 <style scoped>
 
-.page-content {
+.contract-page {
   display: block;
-  width: 95%;
   height: 90%;
   border-radius: 20px;
   padding: 30px;
+  justify-self: center;
+  align-self: center;
 }
 
 .icon-search {
