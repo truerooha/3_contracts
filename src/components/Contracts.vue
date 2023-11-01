@@ -132,10 +132,21 @@ export default {
 
 <style scoped>
 
+tbody tr {
+  cursor: pointer;
+}
+
+tbody tr:hover {
+  opacity: 70%;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+
 .contract-page {
   display: block;
   height: 90%;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 30px;
   justify-self: center;
   align-self: center;

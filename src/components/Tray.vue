@@ -21,7 +21,7 @@ export default {
   border-radius: 16px;
   grid-column: span 3;
   background-color: #a0a0a0;
-  padding: 8px;
+  padding: 5px;
   text-align: center;
   margin-top: 10px;
 }

@@ -48,6 +48,7 @@ export default {
         date: "",
         counterparty_id: 1,
         amount: "",
+        attach: null
       },
       title: "Новый договор"
     };
