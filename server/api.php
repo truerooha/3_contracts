@@ -57,12 +57,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $ownerId = $pdo->lastInsertId();
             $fileName = $data["attach"]["name"];
             $fileName = preg_replace('/[^\p{L}\p{N}\s]/u', '', $fileName);
-            file_put_contents('log.txt', $fileName, FILE_APPEND);
+            $fileData = $data["attach"]["data"];
 
-            $sqlAttachment = "INSERT INTO attachment_files (owner_id, file_name) VALUES (:owner_id, :file_name)";
+            $sqlAttachment = "INSERT INTO attachment_files (owner_id, file_name, file_data) VALUES (:owner_id, :file_name, :file_data)";
             $stmtAttachment = $pdo->prepare($sqlAttachment);
             $stmtAttachment->bindParam(":owner_id", $ownerId);
             $stmtAttachment->bindParam(":file_name", $fileName);
+            $stmtAttachment->bindParam(":file_data", $fileData);
             $stmtAttachment->execute();
             
         }
