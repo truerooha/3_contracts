@@ -25,7 +25,7 @@
 import Tray from './Tray.vue';
 
 export default {
-   components: {
+  components: {
     Tray
   } 
 }
