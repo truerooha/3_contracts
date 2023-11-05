@@ -1,17 +1,5 @@
 <?php
-
-$host = 'localhost';
-$port = 8889;
-$database = 'contracts';
-$username = 'root';
-$password = 'root'; 
-
-try {
-    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$database;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Ошибка подключения к базе данных: " . $e->getMessage());
-}
+require_once 'db_connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
     $data = json_decode(file_get_contents("php://input"), true);
