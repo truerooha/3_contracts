@@ -2,9 +2,11 @@
 require_once 'db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     $userData = json_decode(file_get_contents('php://input'), true);
-    $username = $userData['username'];
-    $password = $userData['password'];
+    $username = filter_var(trim($userData['username']), FILTER_SANITIZE_STRING);
+    $password = filter_var(trim($userData['password']), FILTER_SANITIZE_STRING);
+    $password = md5($password."itsalive");
 
     $sqlNewUser = "INSERT INTO users (username, password) VALUES (:username, :password)";
 

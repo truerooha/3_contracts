@@ -12,7 +12,9 @@ try {
     file_put_contents('server_log/log.txt', $e, FILE_APPEND);
     die("Ошибка при выполнении SQL-запроса: " . $e->getMessage());
 } finally {
-    $pdo = null;
+    if ($pdo !== null) {
+        $pdo = null;
+    }
 }
 
 ?>  
