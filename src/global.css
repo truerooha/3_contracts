@@ -41,3 +41,32 @@
     margin: 10px;
     width: 80%;
   }
+
+  .common-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: rgb(255, 255, 255, 0.5);
+  }
+  
+  .common-table th, .common-table td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #f7f5f5;; 
+  }
+  
+  .common-table th {
+    background-color: #f7f5f5;
+    color: #666952;  
+  }
+
+  .common-table tbody tr {
+    cursor: pointer;
+  }
+  
+  .common-table tbody tr:hover {
+    opacity: 70%;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }

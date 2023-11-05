@@ -11,6 +11,7 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Ошибка подключения к базе данных: " . $e->getMessage());
+    file_put_contents('server_log/log.txt', $e, FILE_APPEND);
 }
 
 ?>

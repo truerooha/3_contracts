@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         echo "Договор успешно сохранен.";
     } catch (PDOException $e) {
-        file_put_contents('log.txt', $e, FILE_APPEND);
+        file_put_contents('server_log/log.txt', $e, FILE_APPEND);
         echo "Ошибка при сохранении договора: " . $e->getMessage();
     }
 }

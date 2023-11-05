@@ -18,7 +18,7 @@
         @save="saveContract"
       />
 
-      <table class="contract-table">
+      <table class="common-table">
         <thead>
           <tr>
             <th>Номер договора</th>
@@ -131,15 +131,7 @@ export default {
 
 <style scoped>
 
-tbody tr {
-  cursor: pointer;
-}
 
-tbody tr:hover {
-  opacity: 70%;
-  border-radius: 10px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
 
 .contract-page {
   display: block;
@@ -215,24 +207,5 @@ input {
   outline: none;
   width: 100%;
   height: 20px;
-}
-
-.contract-table {
-  width: 100%;
-  border-collapse: collapse;
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: rgb(255, 255, 255, 0.5);
-}
-
-.contract-table th, .contract-table td {
-  padding: 14px;
-  text-align: left;
-  border-bottom: 1px solid #f7f5f5;; 
-}
-
-.contract-table th {
-  background-color: #f7f5f5;
-  color: #666952;  
 }
 </style>

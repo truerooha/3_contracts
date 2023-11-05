@@ -1,41 +1,41 @@
 <template>
-      <div class="modal-backdrop">
-      <div class="modal theme-color">
-        <header class="modal-header">
-          <slot name="header" >
-            {{ title }}
-          </slot>
-        </header>
+    <div class="modal-backdrop">
+    <div class="modal theme-color">
+      <header class="modal-header">
+        <slot name="header" >
+          {{ title }}
+        </slot>
+      </header>
 
-        <section class="modal-body">
-          <slot name="body" >
-            <input v-model="contract.number" placeholder="Номер договора" required/>
-            <input v-model="contract.date" type="date" placeholder="Дата договора" required/>
-            <input v-model="contract.counterparty_id" placeholder="Контрагент" required/>
-            <input v-model="contract.amount" placeholder="Сумма" required/>
-            <input type="file" @change="handleFileUpload" />
-          </slot>
-        </section>
+      <section class="modal-body">
+        <slot name="body" >
+          <input v-model="contract.number" placeholder="Номер договора" required/>
+          <input v-model="contract.date" type="date" placeholder="Дата договора" required/>
+          <input v-model="contract.counterparty_id" placeholder="Контрагент" required/>
+          <input v-model="contract.amount" placeholder="Сумма" required/>
+          <input type="file" @change="handleFileUpload" />
+        </slot>
+      </section>
 
-        <footer class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-prima"
-            @click="saveContract"
-          >
-            Сохранить
-          </button>
+      <footer class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-prima"
+          @click="saveContract"
+        >
+          Сохранить
+        </button>
 
-          <button
-            type="button"
-            class="btn btn-common"
-            @click="closeForm"
-          >
-            Закрыть
-          </button>
-        </footer>
-      </div>
+        <button
+          type="button"
+          class="btn btn-common"
+          @click="closeForm"
+        >
+          Закрыть
+        </button>
+      </footer>
     </div>
+  </div>
 </template>
 
 <script>
