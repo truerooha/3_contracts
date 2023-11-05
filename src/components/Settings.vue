@@ -2,8 +2,8 @@
   <h1 class="page-h1">Настройки системы</h1>
     <div class="page-content settings-page theme-color">
       <section class="new-user">
-          <input v-model="newuser.username" placeholder="Имя пользователя" required/>
-          <input v-model="newuser.password" placeholder="Пароль" required/>
+          <input v-model="newUser.username" placeholder="Имя пользователя" required/>
+          <input v-model="newUser.password" placeholder="Пароль" required/>
           <br>
           <button
               type="button"
@@ -41,7 +41,7 @@ export default {
     name: 'Settings',
     data() {
       return {
-        newuser: {
+        newUser: {
           username: "",
           password: "",
         },
@@ -53,7 +53,7 @@ export default {
     },
     methods: {
       loadUsers() {
-        axios.get('http://localhost:8888/3_contracts/server/users.php')
+        axios.get('http://localhost:8888/3_contracts/server/loadUsers.php')
         .then((response) => {
           this.users = response.data;
         })
@@ -62,14 +62,15 @@ export default {
         });
       },
       saveUser() {
-        const userJSON = JSON.stringify(this.newuser);
+        const userJSON = JSON.stringify(this.newUser);
 
-        axios.post('http://localhost:8888/3_contracts/server/users.php', userJSON, {
+        axios.post('http://localhost:8888/3_contracts/server/saveUser.php', userJSON, {
           headers: {
             'Content-Type': 'application/json',
           },
         })
           .then((response) => {
+            this.loadUsers();
           })
           .catch((error) => {
             console.error('Ошибка при сохранении пользователя:', error);
