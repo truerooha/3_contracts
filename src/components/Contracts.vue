@@ -48,6 +48,7 @@
 <script>
 import axios from 'axios';
 import ContractForm from "./NewContract.vue";
+import { useToast } from "vue-toastification";
 
 export default {
   name: 'Contracts',
@@ -115,6 +116,10 @@ export default {
         },
       })
         .then((response) => {
+          const toast = useToast();
+          toast.success("Договор сохранён", {
+          timeout: 2000
+      });
         })
         .catch((error) => {
           console.error('Ошибка при сохранении договора:', error);
