@@ -36,6 +36,7 @@
 
 <script>
 import axios from 'axios';
+import { useToast } from "vue-toastification";
 
 export default {
     name: 'Settings',
@@ -70,9 +71,22 @@ export default {
           },
         })
           .then((response) => {
-            this.newUser.username = ""
-            this.newUser.password = ""
-            this.loadUsers();
+            const toast = useToast();
+
+            if (response.status == 200) {
+              toast.success("Пользователь успешно создан", {
+                timeout: 2000
+              });
+              this.newUser.username = ""
+              this.newUser.password = ""
+              this.loadUsers();
+            } else if (response.status == 207) {
+              toast.error(response.data.Message, {
+                timeout: 2000
+              });
+
+            }
+      
           })
           .catch((error) => {
             console.error('Ошибка при сохранении пользователя:', error);
