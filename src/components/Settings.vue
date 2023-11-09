@@ -70,6 +70,8 @@ export default {
           },
         })
           .then((response) => {
+            this.newUser.username = ""
+            this.newUser.password = ""
             this.loadUsers();
           })
           .catch((error) => {
