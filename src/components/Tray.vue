@@ -4,7 +4,7 @@
         <div class="main-area" >
           <img id="icon1" class="icon draggable" draggable="true" src="@/assets/icons/jpg.png" alt="jpg" @dragstart="onDragStart"> 
           <img id="icon2" class="icon draggable" src="@/assets/icons/xml.png" alt="jpg" @dragstart="onDragStart">
-          <img id="icon3" class="icon draggable" src="@/assets/icons/pdf.png" alt="jpg" @dragstart="onDragStart">
+          <img id="icon3" class="icon draggable" src="@/assets/icons/pdf.svg" alt="jpg" @dragstart="onDragStart">
         </div>
         <div class="drop-area" id="drop-area" @dragover="onDragOver" @drop="onDrop">договоры</div>
       </div>
@@ -40,6 +40,7 @@ export default {
   cursor: grab;
   width: 48px;
 }
+
 .big-card {
   display: flex;
   flex-direction: column;
@@ -65,11 +66,11 @@ export default {
 
 .tray-area {
   display: flex;
-  background: rgb(222, 222, 222);
+  background: white;
   border-radius: 10px;
   width: 100%;
   height: 100%;
-  color: #fdfdfd;
+  color: white;
   overflow: hidden;
 }
 
@@ -84,20 +85,24 @@ export default {
   display: flex;
   justify-content: center; /* Центрирование по горизонтали */
   align-items: center;
-  width: 180px;
+  width: 240px;
   margin: 0;
   padding: 0;
-  background:#444444;
+  background: #F3FAF7;
   justify-self: end;
   writing-mode: vertical-rl; /* Это свойство устанавливает вертикальное направление текста */
   text-orientation: upright;
   letter-spacing: 18px;
   font-size: 18pt;
   text-transform: uppercase;
+  border: 1px dashed #31C48D;
+  border-radius: 12px;
 }
 
 .drop-area:hover {
-    opacity: 70%;
+    background: #DEF7EC;
+    border: 1px solid #31C48D;
+
 }
 
 </style>

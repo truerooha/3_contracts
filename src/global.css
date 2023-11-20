@@ -1,27 +1,30 @@
 .btn {
     border: none;
     border-radius: 20px;
-    padding: 10px 16px;
+    padding: 8px 12px 8px 12px;
     font-size: 14px;
     cursor: pointer;
   }
 
   .btn-prima {
     color: white;
-    background-color: #f89c40;
+    background-color: #31C48D;
   }
 
   .btn-prima:hover {
-    background-color: #f6b26f;
+    background-color: #0E9F6E;
   }
 
   .btn-common {
-    color: #666952;
+    color: #718096;
+    background-color: #f4f2f2;
+
   }
 
   .btn-common:hover {
-    color: #666952;
-    background-color: #f4f2f2;
+    color: #424b58;
+    background-color: #dddddd;
+
   }
   
   .page-container {
@@ -32,12 +35,11 @@
     justify-self: center;
     border-radius: 40px 0px 0px 40px;
     background: #F7FAFC;
-    padding-left: 40px;
+    padding: 40px;
   }
 
   .page-content {
-    margin: 10px;
-    width: 80%;
+    width: 100%;
   }
 
   .common-table {

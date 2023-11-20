@@ -191,10 +191,6 @@ export default {
   margin-left: auto;
 }
 
-.search-button:hover {
-  background-color: #f6b26f;
-}
-
 .search-input {
   display: flex;
   align-items: center;
