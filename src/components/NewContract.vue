@@ -1,6 +1,6 @@
 <template>
     <div class="modal-backdrop">
-    <div class="modal theme-color">
+    <div class="modal">
       <header class="modal-header">
         <slot name="header" >
           {{ title }}

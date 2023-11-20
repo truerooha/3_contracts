@@ -1,6 +1,6 @@
 <template>
   <h1 class="page-h1">Договоры</h1>
-  <div class="page-content contract-page theme-color">
+  <div class="page-content contract-page">
       <div class="search-container">
         <div class="search-input">
           <img src="@/assets/icons/search.svg" class="icon-search" alt="Поиск">

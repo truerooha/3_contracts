@@ -1,6 +1,6 @@
 <template>
   <h1 class="page-h1">Контрагенты</h1>
-  <div class="page-content theme-color" id="cp-page">
+  <div class="page-content" id="cp-page">
     <div id="cp-table">
       Список
     </div>

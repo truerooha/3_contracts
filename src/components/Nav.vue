@@ -1,5 +1,5 @@
 <template>
-  <div class="navigation theme-color">
+  <div class="navigation">
     <div class="comp-badge">
       <img src="@/assets/icons/user.jpeg" class="ava" alt="Главная">
       <div class="comp-details">
@@ -135,7 +135,10 @@ export default {
 }
 
 .navigation .nav-link:hover {
-  color: #d1d5d8;
+  color: #718096;
+  background: #F3FAF7;
+  border-radius: 12px;
+
 }
 
 .spacer {
@@ -146,8 +149,9 @@ export default {
 
 .navigation .nav-link.active {
   font-weight: 900;
-  color: #537C3C;
-  border-radius: 10px;
+  color: #31C48D;
+  border-radius: 12px;
+  background: #F3FAF7;
 }
 
 </style>

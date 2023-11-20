@@ -1,6 +1,6 @@
 <template>
   <h1 class="page-h1">Настройки системы</h1>
-    <div class="page-content settings-page theme-color">
+    <div class="page-content settings-page">
       <section class="new-user">
           <input v-model="newUser.username" placeholder="Имя пользователя" required/>
           <input v-model="newUser.password" placeholder="Пароль" required/>

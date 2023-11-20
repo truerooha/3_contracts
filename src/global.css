@@ -23,18 +23,16 @@
     color: #666952;
     background-color: #f4f2f2;
   }
-
-  .theme-color {
-    background-color: #F9FAF6
-  }
-
+  
   .page-container {
-    margin: 10px 30px;
     width: 100%;
-    height: 95vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-self: center;
+    border-radius: 40px 0px 0px 40px;
+    background: #F7FAFC;
+    padding-left: 40px;
   }
 
   .page-content {
