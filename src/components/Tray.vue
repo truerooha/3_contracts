@@ -5,12 +5,25 @@
         <img id="icon2" class="icon draggable" src="@/assets/icons/xml.png" alt="jpg" @dragstart="onDragStart">
         <img id="icon3" class="icon draggable" src="@/assets/icons/pdf.svg" alt="jpg" @dragstart="onDragStart">
       </div>
-      <div class="drop-area" id="drop-area" @dragover="onDragOver" @drop="onDrop">договоры</div>
+      <div class="drop-area" id="drop-area" @dragover="onDragOver" @dragleave="onDragLeave" @drop="onDrop">
+        <div id="drop-text" v-if="isDropAreaVisible">
+          <h4> Новый договор</h4>
+          <p>Перенесите документы или черновик в данную область, чтобы создать договор </p>
+        </div>
+        <div v-if="!isDropAreaVisible">
+          <img src="@/assets/icons/new.svg" alt="new" @dragstart="onDragStart">
+        </div>
+      </div>
     </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      isDropAreaVisible: true,
+    };
+  },
   methods: {
     onDragStart(e) {
       e.dataTransfer.setData('text/plain', e.target.id);
@@ -18,7 +31,11 @@ export default {
     onDragOver(e) {
       e.preventDefault();
       let dropArea = document.getElementById("drop-area");
-      dropArea.style.opacity = "70%";
+      this.isDropAreaVisible = false;
+    },
+     onDragLeave(e) {
+      e.preventDefault();
+      this.isDropAreaVisible = true;
     },
     onDrop(e) {
       e.preventDefault();
@@ -28,7 +45,7 @@ export default {
       if (e.target.id === 'drop-area') {
         draggedElement.style.display = 'none'; // иконка исчезает
       }
-    },
+    }
   },
 };
 </script>
@@ -80,26 +97,29 @@ export default {
 
 .drop-area {
   display: flex;
-  justify-content: center; /* Центрирование по горизонтали */
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   width: 240px;
   margin: 0;
-  padding: 0;
+  padding: 10px;
   background: #F3FAF7;
-  justify-self: end;
-  writing-mode: vertical-rl; /* Это свойство устанавливает вертикальное направление текста */
-  text-orientation: upright;
-  letter-spacing: 18px;
-  font-size: 18pt;
-  text-transform: uppercase;
   border: 1px dashed #31C48D;
   border-radius: 12px;
 }
 
-.drop-area:hover {
-    background: #DEF7EC;
-    border: 1px solid #31C48D;
+.drop-area h4 {
+  font-size: 18px;
+  color: #31C48D;
+}
 
+.drop-area p {
+  font-size: 14px;
+  color: #718096;
+}
+
+.drop-area:hover {
+  background: #DEF7EC;
+  border: 1px solid #31C48D;
 }
 
 </style>
