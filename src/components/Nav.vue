@@ -43,15 +43,27 @@
         <div class="icon-container">
           <img src="@/assets/icons/support.svg" class="icon" alt="Помощь">
         </div>
-        Помощь
+        Помощь  
+      </router-link>
+      <router-link @click="handleLogout" class="nav-link" :class="{ active: $route.path === '/login' }" to="/login">
+        <div class="icon-container">
+          <img src="@/assets/icons/logout.svg" class="icon" alt="Выход">
+        </div>
+        Выход
       </router-link>
     </ul>
   </div>
 </template>
 
 <script>
+import Cookies from "js-cookie";
 export default {
-    name: 'Navigation'
+    name: 'Navigation',
+    methods: {
+      handleLogout() {
+        Cookies.remove("authorized")
+      }
+    }
 }
 </script>
 

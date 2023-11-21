@@ -1,13 +1,11 @@
 <template>
   <div class="big-card">
-      <div class="tray-area">
-        <div class="main-area" >
-          <img id="icon1" class="icon draggable" draggable="true" src="@/assets/icons/jpg.png" alt="jpg" @dragstart="onDragStart"> 
-          <img id="icon2" class="icon draggable" src="@/assets/icons/xml.png" alt="jpg" @dragstart="onDragStart">
-          <img id="icon3" class="icon draggable" src="@/assets/icons/pdf.svg" alt="jpg" @dragstart="onDragStart">
-        </div>
-        <div class="drop-area" id="drop-area" @dragover="onDragOver" @drop="onDrop">договоры</div>
+      <div class="main-area" >
+        <img id="icon1" class="icon draggable" draggable="true" src="@/assets/icons/jpg.png" alt="jpg" @dragstart="onDragStart"> 
+        <img id="icon2" class="icon draggable" src="@/assets/icons/xml.png" alt="jpg" @dragstart="onDragStart">
+        <img id="icon3" class="icon draggable" src="@/assets/icons/pdf.svg" alt="jpg" @dragstart="onDragStart">
       </div>
+      <div class="drop-area" id="drop-area" @dragover="onDragOver" @drop="onDrop">договоры</div>
     </div>
 </template>
 
@@ -43,13 +41,12 @@ export default {
 
 .big-card {
   display: flex;
-  flex-direction: column;
   color: white;
   cursor: pointer;
+  background: white;
   border-radius: 16px;
   grid-column: span 3;
-  background-color: #c4c2c2;
-  padding: 5px;
+  padding: 24px;
   text-align: center;
   margin-top: 10px;
   
