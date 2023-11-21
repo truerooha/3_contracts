@@ -1,57 +1,62 @@
 <template>
   <div class="navigation">
-    <div class="comp-badge">
-      <img src="@/assets/icons/user.jpeg" class="ava" alt="Главная">
-      <div class="comp-details">
-        <h3>Panadey</h3>
-        <p>contracts</p>
+    <div class="lists">
+      <div class="comp-badge">
+        <img src="@/assets/icons/user.jpeg" class="ava" alt="Главная">
+        <div class="comp-details">
+          <h3>Panadey</h3>
+          <p>contracts</p>
+        </div>
       </div>
+      <ul class="top-links">
+        <router-link class="nav-link" :class="{ active: $route.path === '/main' }" to="/main">
+          <div class="icon-container">
+            <img src="@/assets/icons/home.svg" class="icon" alt="Главная">
+          </div>
+          Главная
+        </router-link>
+        <router-link class="nav-link" :class="{ active: $route.path === '/contracts' }" to="/contracts">
+          <div class="icon-container">
+            <img src="@/assets/icons/doc.svg" class="icon" alt="Договоры">
+          </div>
+          Договоры
+        </router-link>
+        <router-link class="nav-link" :class="{ active: $route.path === '/counterparties' }" to="/counterparties">
+          <div class="icon-container">
+          <img src="@/assets/icons/people.svg" class="icon" alt="Контрагенты">
+          </div>
+          Контрагенты
+        </router-link>
+        <router-link class="nav-link" :class="{ active: $route.path === '/search' }" to="/search">
+          <div class="icon-container">
+            <img src="@/assets/icons/search.svg" class="icon-search" alt="Поиск">
+          </div>
+          Поиск
+        </router-link>
+      
+      </ul>
+      <ul class="bottom-links">
+        <router-link class="nav-link" :class="{ active: $route.path === '/settings' }" to="/settings">
+          <div class="icon-container">
+            <img src="@/assets/icons/settings.svg" class="icon" alt="Настройки">
+          </div>
+          Настройки
+        </router-link>
+        <router-link class="nav-link" :class="{ active: $route.path === '/support' }" to="/support">
+          <div class="icon-container">
+            <img src="@/assets/icons/support.svg" class="icon" alt="Помощь">
+          </div>
+          Помощь
+        </router-link>
+        <div class="spacer"></div>
+        <router-link @click="handleLogout" class="nav-link" :class="{ active: $route.path === '/login' }" to="/login">
+          <div class="icon-container">
+            <img src="@/assets/icons/logout.svg" class="icon" alt="Выход">
+          </div>
+          Выход
+        </router-link>
+      </ul>
     </div>
-    <ul>
-      <router-link class="nav-link" :class="{ active: $route.path === '/main' }" to="/main">
-        <div class="icon-container">
-          <img src="@/assets/icons/home.svg" class="icon" alt="Главная">
-        </div>
-        Главная
-      </router-link>
-      <router-link class="nav-link" :class="{ active: $route.path === '/contracts' }" to="/contracts">
-        <div class="icon-container">
-          <img src="@/assets/icons/doc.svg" class="icon" alt="Договоры">
-        </div>
-        Договоры
-      </router-link>
-      <router-link class="nav-link" :class="{ active: $route.path === '/counterparties' }" to="/counterparties">
-        <div class="icon-container">
-        <img src="@/assets/icons/people.svg" class="icon" alt="Контрагенты">
-        </div>
-        Контрагенты
-      </router-link>
-      <router-link class="nav-link" :class="{ active: $route.path === '/search' }" to="/search">
-        <div class="icon-container">
-          <img src="@/assets/icons/search.svg" class="icon-search" alt="Поиск">
-        </div>
-        Поиск
-      </router-link>
-      <div class="spacer"></div>
-      <router-link class="nav-link" :class="{ active: $route.path === '/settings' }" to="/settings">
-        <div class="icon-container">
-          <img src="@/assets/icons/settings.svg" class="icon" alt="Настройки">
-        </div>
-        Настройки
-      </router-link>
-      <router-link class="nav-link" :class="{ active: $route.path === '/support' }" to="/support">
-        <div class="icon-container">
-          <img src="@/assets/icons/support.svg" class="icon" alt="Помощь">
-        </div>
-        Помощь  
-      </router-link>
-      <router-link @click="handleLogout" class="nav-link" :class="{ active: $route.path === '/login' }" to="/login">
-        <div class="icon-container">
-          <img src="@/assets/icons/logout.svg" class="icon" alt="Выход">
-        </div>
-        Выход
-      </router-link>
-    </ul>
   </div>
 </template>
 
@@ -128,13 +133,37 @@ export default {
     padding: 10px;
 }
 
-.navigation ul {
-    margin-top: 40px;
+.lists {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+}
+
+.lists ul {
     list-style-type: none;
     padding: 0;
 }
 
-.navigation .nav-link {
+.bottom-links {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  margin-top: auto;
+  margin-bottom: 40px; 
+}
+
+.bottom-links .nav-link {
+    margin-top: 10px;
+}
+
+.spacer {
+  border-bottom: 1px solid #EDF2F7;
+  height: 10px;
+  margin-left: 20px;
+}
+
+.lists .nav-link {
     display: flex;
     text-decoration: none;
     align-items: center;
@@ -146,20 +175,14 @@ export default {
 
 }
 
-.navigation .nav-link:hover {
+.lists .nav-link:hover {
   color: #718096;
   background: #F3FAF7;
   border-radius: 12px;
 
 }
 
-.spacer {
-    height: 40px;
-    width: 100%;
-    pointer-events: none;
-}
-
-.navigation .nav-link.active {
+.lists .nav-link.active {
   font-weight: 900;
   color: #31C48D;
   border-radius: 12px;
