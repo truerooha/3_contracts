@@ -2,7 +2,7 @@
   <h1 class="page-h1">Главная</h1>
   <div class="page-content main-page">
     <div class="green card">
-      <h1>20</h1>      <img src="@/assets/icons/docs.svg" alt="docs">
+      <h1>20</h1>      
       <h4>Истекающие договоры</h4>
     </div>
     <div class="white card">
@@ -55,6 +55,7 @@ export default {
 
 .green {
   background-color: #31C48D;
+  background: url('@/assets/bg.svg') center/cover; 
   color: white
 }
 
