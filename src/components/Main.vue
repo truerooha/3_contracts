@@ -1,7 +1,7 @@
 <template>
   <h1 class="page-h1">Главная</h1>
   <div class="page-content main-page">
-    <div class="green card">
+    <div class="green card" @click="goToContractsPage">
       <div class="card-header">
         <div class="card-icon">
           <img class="icon" src="@/assets/icons/cont.svg" alt="">
@@ -33,6 +33,11 @@
 import Tray from './Tray.vue';
 
 export default {
+  methods: {
+    goToContractsPage() {
+      this.$router.push('/contracts');
+    },
+  },
   components: {
     Tray
   } 
