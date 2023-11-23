@@ -1,9 +1,18 @@
 <template>
   <div class="big-card">
       <div class="main-area" >
-        <img id="icon1" class="icon draggable" draggable="true" src="@/assets/icons/jpg.png" alt="jpg" @dragstart="onDragStart"> 
-        <img id="icon2" class="icon draggable" src="@/assets/icons/xml.png" alt="jpg" @dragstart="onDragStart">
-        <img id="icon3" class="icon draggable" src="@/assets/icons/pdf.svg" alt="jpg" @dragstart="onDragStart">
+        <div class="add-el">
+            <svg class="add" width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <TrayElement
+          v-for="(file, index) in files"
+          :key="index"
+          :imageSrc="getImageSrc(file.fileType)"
+          :altText="file.fileDescrip"
+        />
       </div>
       <div class="drop-area" id="drop-area" @dragover="onDragOver" @dragleave="onDragLeave" @drop="onDrop">
         <div id="drop-text" v-if="isDropAreaVisible">
@@ -11,20 +20,39 @@
           <p>Перенесите документы или черновик в данную область, чтобы создать договор </p>
         </div>
         <div v-if="!isDropAreaVisible">
-          <img src="@/assets/icons/new.svg" alt="new" @dragstart="onDragStart">
+          <img class="add" src="@/assets/icons/new.svg" alt="new" @dragstart="onDragStart">
         </div>
       </div>
     </div>
 </template>
 
 <script>
+import TrayElement from './TrayElement.vue';
 export default {
+  components: { TrayElement },
   data() {
     return {
       isDropAreaVisible: true,
+      files: [
+        { fileType: 'pdf', fileDescrip: 'Документ в формате PDF' },
+        { fileType: 'jpg', fileDescrip: 'Изображение в формате JPG' },
+        { fileType: 'xls', fileDescrip: 'Изображение в формате' },
+      ]
     };
   },
   methods: {
+    getImageSrc(fileType) {
+      switch (fileType) {
+      case 'pdf':
+        return require('@/assets/icons/pdf.svg');
+      case 'jpg':
+        return require('@/assets/icons/jpg.svg');
+      case 'xls':
+        return require('@/assets/icons/xls.svg');
+      default:
+        return require('@/assets/icons/default.svg');
+      }
+    },
     onDragStart(e) {
       e.dataTransfer.setData('text/plain', e.target.id);
     },
@@ -41,9 +69,8 @@ export default {
       e.preventDefault();
       const draggedElementId = e.dataTransfer.getData('text/plain');
       const draggedElement = document.getElementById(draggedElementId);
-
       if (e.target.id === 'drop-area') {
-        draggedElement.style.display = 'none'; // иконка исчезает
+        draggedElement.style.display = 'none';
       }
     }
   },
@@ -51,6 +78,26 @@ export default {
 </script>
 
 <style scoped>
+.add{
+  width: 48px;
+  color: #CBD5E0
+}
+.add-el {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  width: 120px;
+  border: 1px dashed #CBD5E0;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.add-el:hover {
+  opacity: 60%;
+  cursor: pointer;
+}
+
 .icon {
   cursor: grab;
   width: 48px;
@@ -90,7 +137,7 @@ export default {
 
 .main-area {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
   padding: 20px;
   width: 100%;
 }

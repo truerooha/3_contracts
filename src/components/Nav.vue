@@ -17,7 +17,7 @@
         </router-link>
         <router-link class="nav-link" :class="{ active: $route.path === '/contracts' }" to="/contracts">
           <div class="icon-container">
-            <img src="@/assets/icons/doc.svg" class="icon" alt="Договоры">
+            <img src="@/assets/icons/conts.svg" class="icon" alt="Договоры">
           </div>
           Договоры
         </router-link>
