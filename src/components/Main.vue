@@ -2,18 +2,28 @@
   <h1 class="page-h1">Главная</h1>
   <div class="page-content main-page">
     <div class="green card">
-      <h1>20</h1>      
-      <h4>Истекающие договоры</h4>
+      <div class="card-header">
+        <div class="card-icon">
+          <img class="icon" src="@/assets/icons/cont.svg" alt="">
+          <h2>Договоры</h2>      
+        </div>
+      </div>
+      <div class="attr1">
+        <h1>20</h1>      
+        <h4>истекает</h4>
+      </div>
+      <div class="attr2">
+        <h1>134</h1>      
+        <h4>всего</h4>
+      </div>
     </div>
     <div class="white card">
       <h1>5</h1>
-      <img src="@/assets/icons/tasks.svg" alt="task">
       <h4>Задачи</h4>
     </div>
     <div class="white card">
       <h1>2</h1>
-      <img src="@/assets/icons/comunication.svg" alt="task">
-      <h4>Коммуникаций</h4>
+      <h4>Уведомления</h4>
     </div>
     <Tray/>
   </div>
@@ -43,12 +53,12 @@ export default {
 .card {
   cursor: pointer;
   display: grid;
-  grid-template-columns: 2fr 2fr 2fr;
+  grid-template-columns: 2fr 2fr;
   grid-template-areas: 
-    'h1 badge image'
-    'h4 h4 image';
+    'header header'
+    'attr1 attr2';
   border-radius: 20px;
-  align-items: center;
+  align-items: left;
   gap: 5px;
   padding: 10px 10px 10px 40px;
 }
@@ -64,25 +74,38 @@ export default {
   color: #A0AEC0
 }
 
+.card h2 {
+  font-size: 18px;
+}
+
 .card:hover {
   opacity: 70%;
 }
 
-.card h4 {
-  grid-area: h4;
-  text-align: left;
+.card-icon {
+  display: flex;
+  align-items: center ;
+  height: 36px;
+  width: 36px;
+  background: white;
+  border-radius: 12px;
 }
 
-.card h1 {
-  grid-area: h1;
-  text-align: left;
+.card-header {
+  grid-area: header;
 }
 
-.card img {
-  width: 64px;
-  grid-area: image;
-  justify-self: center;
-  align-self: center;
-  color: white;
+.icon {
+  width: 16px;
 }
+.attr1 {
+  text-align: left;
+  grid-area: attr1;
+}
+
+.attr2 {
+  text-align: left;
+  grid-area: attr2;
+}
+
 </style>
