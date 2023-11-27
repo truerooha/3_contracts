@@ -37,7 +37,9 @@ export default {
       files: [
         { fileType: 'pdf', fileDescrip: 'Документ в формате PDF' },
         { fileType: 'jpg', fileDescrip: 'Изображение в формате JPG' },
-        { fileType: 'xls', fileDescrip: 'Изображение в формате' },
+        { fileType: 'xls', fileDescrip: 'Документ в формате xls' },
+        { fileType: 'group', fileDescrip: 'Пачка файлов' },
+        { fileType: 'draft', fileDescrip: 'Черновик документа' },
       ]
     };
   },
@@ -50,6 +52,10 @@ export default {
         return require('@/assets/icons/jpg.svg');
       case 'xls':
         return require('@/assets/icons/xls.svg');
+      case 'group':
+        return require('@/assets/icons/group.svg');
+      case 'draft':
+        return require('@/assets/icons/draft.svg');
       default:
         return require('@/assets/icons/default.svg');
       }
@@ -120,6 +126,7 @@ p {
   padding: 24px;
   text-align: center;
   margin-top: 10px;
+  box-shadow: 0px 10px 16px -4px #71809614;
   
 }
 

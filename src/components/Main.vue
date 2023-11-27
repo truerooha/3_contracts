@@ -66,6 +66,7 @@ export default {
   align-items: left;
   gap: 5px;
   padding: 10px 10px 10px 40px;
+  box-shadow: 0px 10px 16px -4px #71809614;
 }
 
 .green {
