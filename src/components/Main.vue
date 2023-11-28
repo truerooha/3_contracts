@@ -9,13 +9,12 @@
           <h2>Договоры</h2>     
 
         </div>
-        
       <div class="attributes">
-        <div class="attr1">
+        <div class="attr attr1">
           <h1>20</h1>      
           <h4>истекает</h4>
         </div>
-        <div class="attr2">
+        <div class="attr attr2">
           <h1>134</h1>      
           <h4>всего</h4>
         </div>
@@ -52,6 +51,21 @@ export default {
 <style scoped>
 .attributes {
   display: flex;
+  margin-top: auto;
+  justify-content: left;
+}
+
+.attributes h1, h4 {
+  margin: 10px 10px 10px 0px;
+}
+
+.attr1 {
+  text-align: left;
+}
+
+.attr2 {
+  align-self: center;
+  width: 200px;
 }
 
 .main-page {
@@ -97,6 +111,7 @@ export default {
 .card-header {
   display: flex;
   align-items: center;
+  margin-bottom: auto;
 }
 
 .card-icon {
