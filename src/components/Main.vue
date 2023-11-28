@@ -55,8 +55,12 @@ export default {
   justify-content: left;
 }
 
-.attributes h1, h4 {
-  margin: 10px 10px 10px 0px;
+.attributes h1 {
+  margin: 15px 10px 5px 0px;
+}
+
+.attributes h4 {
+  margin: 0px 10px 10px 0px;
 }
 
 .attr1 {

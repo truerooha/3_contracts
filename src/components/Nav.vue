@@ -9,7 +9,7 @@
     />
   <div class="navigation">
     <div class="lists">
-      <div class="comp-details">
+      <div @click="gotoMain" class="comp-details">
         <div class="logo"><span class="green">.</span>contracts</div>
       </div>
       <div class="mini-profile">
@@ -104,6 +104,9 @@ export default {
   components: { Dialog },
     name: 'Navigation',
     methods: {
+      gotoMain() {
+        this.$router.push('/main');  
+      },
       handleConfirm() {
         this.$router.push('/login');
         Cookies.remove("authorized")
@@ -175,6 +178,7 @@ export default {
   height: 64px;
   width: 100%;
   border-bottom: 1px solid #EDF2F7;
+  cursor: pointer;
 }
 
 .icon-container {
