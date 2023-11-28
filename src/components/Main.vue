@@ -2,20 +2,25 @@
   <h1 class="page-h1">Главная</h1>
   <div class="page-content main-page">
     <div class="green card" @click="goToContractsPage">
-      <div class="card-header">
-        <div class="card-icon">
-          <img class="icon" src="@/assets/icons/cont.svg" alt="">
-          <h2>Договоры</h2>      
+        <div class="card-header">
+          <div class="card-icon">
+            <img src="@/assets/icons/cont.svg" alt="">
+          </div>
+          <h2>Договоры</h2>     
+
+        </div>
+        
+      <div class="attributes">
+        <div class="attr1">
+          <h1>20</h1>      
+          <h4>истекает</h4>
+        </div>
+        <div class="attr2">
+          <h1>134</h1>      
+          <h4>всего</h4>
         </div>
       </div>
-      <div class="attr1">
-        <h1>20</h1>      
-        <h4>истекает</h4>
-      </div>
-      <div class="attr2">
-        <h1>134</h1>      
-        <h4>всего</h4>
-      </div>
+      
     </div>
     <div class="white card">
       <h1>5</h1>
@@ -45,6 +50,9 @@ export default {
 </script>
 
 <style scoped>
+.attributes {
+  display: flex;
+}
 
 .main-page {
   display: grid;
@@ -56,16 +64,13 @@ export default {
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
   cursor: pointer;
-  display: grid;
-  grid-template-columns: 2fr 2fr;
-  grid-template-areas: 
-    'header header'
-    'attr1 attr2';
   border-radius: 20px;
   align-items: left;
   gap: 5px;
-  padding: 10px 10px 10px 40px;
+  padding: 20px;
   box-shadow: 0px 10px 16px -4px #71809614;
 }
 
@@ -80,38 +85,32 @@ export default {
   color: #A0AEC0
 }
 
-.card h2 {
+.card-header h2 {
   font-size: 18px;
+  margin-left: 20px;
 }
 
 .card:hover {
   opacity: 70%;
 }
 
+.card-header {
+  display: flex;
+  align-items: center;
+}
+
 .card-icon {
   display: flex;
-  align-items: center ;
+  align-items: center;
+  justify-content: center;
   height: 36px;
   width: 36px;
   background: white;
   border-radius: 12px;
 }
 
-.card-header {
-  grid-area: header;
-}
-
-.icon {
-  width: 16px;
-}
-.attr1 {
-  text-align: left;
-  grid-area: attr1;
-}
-
-.attr2 {
-  text-align: left;
-  grid-area: attr2;
+.card-icon img{
+  width: 24px;
 }
 
 </style>
