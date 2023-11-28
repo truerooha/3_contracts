@@ -1,4 +1,13 @@
 <template>
+  <Dialog
+      v-show="isDialogVisible"
+      question="Будет выполнен выход из системы. Продолжить?"
+      confirmText="Да"
+      cancelText="Нет"
+      @close="closeModal"
+      @confirm="handleConfirm"
+      @cancel="handleCancel"
+    />
   <div class="navigation">
     <div class="lists">
       <div class="comp-details">
@@ -73,16 +82,16 @@
           Помощь
         </router-link>
         <div class="spacer"></div>
-        <router-link @click="handleLogout" class="nav-link" :class="{ active: $route.path === '/login' }" to="/login">
+        <div id="logout" @click="showModal" class="nav-link">
           <div class="icon-container">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M14.2482 15.7469V17.6219C14.2482 18.1192 14.0622 18.5961 13.7309 18.9478C13.3997 19.2994 12.9504 19.4969 12.482 19.4969H5.4169C4.94846 19.4969 4.4992 19.2994 4.16796 18.9478C3.83672 18.5961 3.65063 18.1192 3.65063 17.6219V6.37195C3.65063 5.87467 3.83672 5.39775 4.16796 5.04612C4.4992 4.69449 4.94846 4.49695 5.4169 4.49695H12.1287C13.1041 4.49695 14.2482 5.33648 14.2482 6.37195V8.24695" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M17.2501 15.7469L21.0001 11.9969L17.2501 8.24695" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M8.25024 11.9968H20.2502" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+            </svg>
           </div>
           Выход
-        </router-link>
+        </div>
       </ul>
     </div>
   </div>
@@ -90,17 +99,36 @@
 
 <script>
 import Cookies from "js-cookie";
+import Dialog from './Dialog.vue';
+
 export default {
+  components: { Dialog },
     name: 'Navigation',
     methods: {
-      handleLogout() {
+      handleConfirm() {
+        this.$router.push('/login');
         Cookies.remove("authorized")
-      }
-    }
+      },
+      showModal() {
+      this.isDialogVisible = true;
+      },
+      closeModal() {
+        this.isDialogVisible = false;
+      },
+    },
+  data() {
+    return {
+      isDialogVisible: false,
+    };
+  }
 }
 </script>
 
 <style scoped>
+#logout {
+  cursor: pointer;
+}
+
 .user-name {
   display: flex;
   flex-direction: column;
