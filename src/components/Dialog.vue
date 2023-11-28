@@ -4,8 +4,8 @@
       <span class="close" @click="closeModal">&times;</span>
       <p>{{ question }}</p>
       <div class="button-container">
-        <button @click="confirmAction">{{ confirmText }}</button>
-        <button @click="cancelAction">{{ cancelText }}</button>
+        <button class="btn btn-prima" @click="confirmAction">{{ confirmText }}</button>
+        <button class="btn btn-secondary" @click="cancelAction">{{ cancelText }}</button>
       </div>
     </div>
   </div>
@@ -45,6 +45,9 @@ export default {
 
 <style scoped>
 /* Стили для внешнего вида модального окна */
+p {
+    height: 60%;
+}
 .modal {
   position: fixed;
   z-index: 1;
@@ -57,8 +60,8 @@ export default {
 }
 
 .modal-content {
-    width: 288px;
-    height: 173px;
+    width: 348px;
+    height: 228px;
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;

@@ -6,7 +6,6 @@
       cancelText="Нет"
       @close="closeModal"
       @confirm="handleConfirm"
-      @cancel="handleCancel"
     />
   <div class="navigation">
     <div class="lists">

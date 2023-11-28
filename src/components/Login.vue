@@ -4,7 +4,7 @@
     <form class="login-form" @submit.prevent="submitForm">
       <input v-model="username" type="text" name="username" placeholder="Логин" required>
       <input v-model="password" type="password" name="password" placeholder="Пароль" required>
-      <button type="submit">Войти</button>
+      <button class="btn btn-prima" type="submit">Войти</button>
     </form>
   </div>
 </template>
@@ -53,7 +53,7 @@ export default {
 
 <style scoped>
     .login-container {
-        width: 300px;
+        width: 320px;
         margin: auto;
         text-align: center;
         padding: 20px;
@@ -70,18 +70,5 @@ export default {
         margin: 10px 0;
         border: 1px solid #ccc;
         border-radius: 5px;
-    }
-    .login-form button {
-        width: 90%;
-        padding: 10px;
-        background-color: #3498db;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 10px;
-    }
-    .login-form button:hover {
-        background-color: #2980b9;
     }
 </style>
