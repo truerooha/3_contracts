@@ -2,13 +2,14 @@
   <h1 class="page-h1">Главная</h1>
   <div class="page-content main-page">
     <div class="green card" @click="goToContractsPage">
-        <div class="card-header">
-          <div class="card-icon">
-            <img src="@/assets/icons/cont.svg" alt="">
-          </div>
-          <h2>Договоры</h2>     
 
+      <div class="card-header">
+        <div class="card-icon">
+          <img src="@/assets/icons/cont.svg" alt="">
         </div>
+        <h2>Договоры</h2>     
+      </div>
+
       <div class="attributes">
         <div class="attr attr1">
           <h1>20</h1>      

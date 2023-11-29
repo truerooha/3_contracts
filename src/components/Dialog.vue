@@ -46,7 +46,7 @@ export default {
 <style scoped>
 /* Стили для внешнего вида модального окна */
 p {
-    height: 60%;
+    height: 55%;
 }
 .modal {
   position: fixed;
@@ -60,8 +60,8 @@ p {
 }
 
 .modal-content {
-    width: 348px;
-    height: 228px;
+    width: 320px;
+    height: 180px;
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
