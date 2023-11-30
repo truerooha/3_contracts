@@ -136,8 +136,6 @@ export default {
 
 <style scoped>
 
-
-
 .contract-page {
   display: block;
   height: 90%;
