@@ -53,6 +53,9 @@ export default {
       this.loadUsers();
     },
     methods: {
+      isFormValid() {
+        return this.newUser.username.trim() !== '' && this.newUser.password.trim() !== '';
+      },
       loadUsers() {
         axios.get('http://localhost:8888/3_contracts/server/loadUsers.php')
         .then((response) => {
@@ -63,6 +66,13 @@ export default {
         });
       },
       saveUser() {
+        if (!this.isFormValid()) {
+          const toast = useToast();
+          toast.error("Не заполнены обязательные поля", {
+                timeout: 2000
+              });
+          return
+        }
         const userJSON = JSON.stringify(this.newUser);
 
         axios.post('http://localhost:8888/3_contracts/server/saveUser.php', userJSON, {
