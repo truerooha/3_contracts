@@ -25,6 +25,7 @@
             <th>Дата</th>
             <th>Контрагент</th>
             <th>Сумма</th>
+            <th>Есть файлы</th>
             <th></th>
           </tr>
         </thead>
@@ -34,11 +35,14 @@
             <td>{{ contract.date }}</td>
             <td>{{ contract.CPname }}</td>
             <td>{{ contract.amount }}</td>
-            <td>
-            <span @click="deleteContract(contract)">
-              <img src="@/assets/icons/trash.svg" class="icon-trash" alt="Удалить">
-            </span>
-          </td>
+            <td class="img">
+                <img v-if="contract.hasFiles === '1'" src="@/assets/icons/attach.svg" class="lil-icon" alt="Есть файл">
+            </td>
+            <td class="img">
+              <span @click="deleteContract(contract)">
+                <img src="@/assets/icons/trash.svg" class="lil-icon" alt="Удалить">
+              </span>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -149,25 +153,6 @@ export default {
   width: 28px;
   margin-right: 10px;
 }
-
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 200px;
-  height: 200px;
-  background-color: rgba(242, 237, 237, 0.5); /* Затемнение фона */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
  
 .search-container {
   display: flex;
@@ -184,10 +169,9 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 180px;
   height: 28px;
   background-color: white;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 10px;
   border: 1px solid #f7f5f5;
 }

@@ -22,7 +22,7 @@
             <td>{{ CP.phone }}</td>
             <td>
             <span @click="deleteContract(CP)">
-              <img src="@/assets/icons/trash.svg" class="icon-trash" alt="Удалить">
+              <img src="@/assets/icons/trash.svg" class="lil-icon" alt="Удалить">
             </span>
           </td>
           </tr>
