@@ -168,15 +168,6 @@ export default {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
-
-.icon-trash {
-  width: 20px;
-  cursor: pointer;
-}
-
-.icon-trash:hover {
-  color: #f7f5f5;
-}
  
 .search-container {
   display: flex;
