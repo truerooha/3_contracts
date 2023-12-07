@@ -168,6 +168,7 @@ p {
 .main-area {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(128px, 1fr)); 
   padding: 20px;
   width: 100%;
 }
