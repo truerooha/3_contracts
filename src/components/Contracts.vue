@@ -35,10 +35,10 @@
             <td>{{ contract.date }}</td>
             <td>{{ contract.CPname }}</td>
             <td>{{ contract.amount }}</td>
-            <td class="img">
-                <img v-if="contract.hasFiles === '1'" src="@/assets/icons/attach.svg" class="lil-icon" alt="Есть файл">
+            <td>
+                <img v-if="contract.hasFiles === '1'" src="@/assets/icons/attach.svg" class="lil-icon img" alt="Есть файл">
             </td>
-            <td class="img">
+            <td>
               <span @click="deleteContract(contract)">
                 <img src="@/assets/icons/trash.svg" class="lil-icon" alt="Удалить">
               </span>
@@ -139,7 +139,9 @@ export default {
 </script>
 
 <style scoped>
-
+.img {
+  margin-left: 20px;
+}
 .contract-page {
   display: block;
   height: 90%;
