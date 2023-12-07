@@ -4,6 +4,7 @@
       question="Будет выполнен выход из системы. Продолжить?"
       confirmText="Да"
       cancelText="Нет"
+      buttonType = "success"
       @close="closeModal"
       @confirm="handleConfirm"
     />

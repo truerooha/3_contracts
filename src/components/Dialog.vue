@@ -4,7 +4,7 @@
       <span class="close" @click="closeModal">&times;</span>
       <p>{{ question }}</p>
       <div class="button-container">
-        <button class="btn btn-prima" @click="confirmAction">{{ confirmText }}</button>
+        <button class="btn" :class="buttonClass" @click="confirmAction">{{ confirmText }}</button>
         <button class="btn btn-secondary" @click="cancelAction">{{ cancelText }}</button>
       </div>
     </div>
@@ -26,6 +26,10 @@ export default {
       type: String,
       default: "Отменить",
     },
+    buttonType: {
+      type: String,
+      required: true
+    }
   },
   methods: {
     closeModal() {
@@ -40,6 +44,14 @@ export default {
       this.closeModal();
     },
   },
+  computed: {
+    buttonClass() {
+      return {
+        'btn-prima': this.buttonType === 'success',
+        'btn-error': this.buttonType === 'error'
+      };
+    }
+  }
 };
 </script>
 

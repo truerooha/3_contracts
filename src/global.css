@@ -17,6 +17,15 @@
     background-color: #0E9F6E;
   }
 
+  .btn-error {
+    color: white;
+    background-color: #F05252;
+  }
+
+  .btn-error:hover {
+    background-color: #E02424;
+  }
+
   .btn-common {
     color: #718096;
     background-color: #f4f2f2;
