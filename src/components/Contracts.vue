@@ -1,4 +1,13 @@
 <template>
+  <Dialog
+      v-show="isDialogVisible"
+      question="Вы уверены, что хотите удалить этот договор?"
+      confirmText="Да"
+      cancelText="Нет"
+      buttonType = "error"
+      @close="closeModal"
+      @confirm="handleConfirm"
+    />
   <h1 class="page-h1">Договоры</h1>
   <div class="page-content contract-page">
       <div class="search-container">
@@ -52,6 +61,7 @@
 <script>
 import axios from 'axios';
 import ContractForm from "./NewContract.vue";
+import Dialog from './Dialog.vue';
 import { useToast } from "vue-toastification";
 
 export default {
@@ -59,7 +69,9 @@ export default {
   data() {
     return {
       contracts: [],
-      isContractFormVisible: false
+      isContractFormVisible: false,
+      isDialogVisible: false,
+      deletedContract: null
     };
   },
   mounted() {
@@ -75,20 +87,13 @@ export default {
           console.error('Ошибка при загрузке данных:', error);
         });
     },
-
-    deleteContract(contract) {
-      const confirmed = confirm('Вы уверены, что хотите удалить этот договор?');
-      if (!confirmed) {
-        return;
-      }
-
-      const index = this.contracts.indexOf(contract);
-      if (index !== -1) {
+    handleConfirm() {
+      const index = this.contracts.indexOf(this.deletedContract);
+        if (index !== -1) {
         this.contracts.splice(index, 1);
-        const contractId = contract.id;
-
+        const contractId = this.deletedContract.id;
+        this.deletedContract = null
         const requestData = { contract_id: contractId };
-        
         const jsonData = JSON.stringify(requestData);
 
         axios.delete('http://localhost:8888/3_contracts/server/api.php', {
@@ -104,6 +109,13 @@ export default {
           console.error('Ошибка при удалении договора:', error);
         });
       }
+    },
+    deleteContract(contract) {
+      this.deletedContract = contract
+      this.isDialogVisible = true;
+    },
+    closeModal() {
+      this.isDialogVisible = false;
     },
     showContractForm() {
       this.isContractFormVisible = true;
@@ -133,7 +145,7 @@ export default {
     }
   },
   components: {
-    ContractForm
+    ContractForm, Dialog
   },
 };
 </script>
