@@ -11,8 +11,7 @@
         <slot name="body" >
           <input v-model="contract.number" placeholder="Номер договора" required/>
           <input v-model="contract.date" type="date" placeholder="Дата договора" required/>
-          <Dropdown :options="dropdownOptions" @option-selected="handleOptionSelected"/>
-          <input v-model="contract.counterparty_id" placeholder="Контрагент" required/>
+          <Dropdown :options="CPs" @option-selected="handleOptionSelected"/>
           <input v-model="contract.amount" placeholder="Сумма" required/>
           <input type="file" @change="handleFileUpload" />
         </slot>
@@ -41,6 +40,7 @@
 
 <script>
 import Dropdown from "@/components/lib/Dropdown.vue"
+import axios from 'axios';
 
 export default {
   components: {
@@ -56,24 +56,33 @@ export default {
         amount: "",
         attach: null
       },
-      dropdownOptions: [
-        { id: "github", name: "GitHub" },
-        { id: "instagram", name: "Instagram" },
-        { id: "facebook", name: "Facebook" },
-        { id: "linkedin", name: "LinkedIn" },
-        { id: "twitter", name: "Twitter" },
-        { id: "reddit", name: "Reddit" },
+      CPs: [
       ],
       selectedOption: null,
       title: "Новый договор"
     };
   },
+  mounted() {
+    this.fetchCounterparties();
+  },
   methods: {
+    async fetchCounterparties() {
+      try {
+        const response = await axios.get('http://localhost:8888/3_contracts/server/loadCPs.php');
+        this.CPs = response.data;
+      } catch (error) {
+        console.error('Error fetching counterparties:', error);
+      }
+    },
     handleOptionSelected(option) {
       this.selectedOption = option;
       console.log(option);
     },
     saveContract() {
+      if (this.selectedOption) {
+        this.contract.counterparty_id = this.selectedOption.id;
+      }
+
       this.$emit("save", this.contract);
     },
 
