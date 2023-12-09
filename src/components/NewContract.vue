@@ -11,6 +11,7 @@
         <slot name="body" >
           <input v-model="contract.number" placeholder="Номер договора" required/>
           <input v-model="contract.date" type="date" placeholder="Дата договора" required/>
+          <Dropdown :options="dropdownOptions" @option-selected="handleOptionSelected"/>
           <input v-model="contract.counterparty_id" placeholder="Контрагент" required/>
           <input v-model="contract.amount" placeholder="Сумма" required/>
           <input type="file" @change="handleFileUpload" />
@@ -39,7 +40,12 @@
 </template>
 
 <script>
+import Dropdown from "@/components/lib/Dropdown.vue"
+
 export default {
+  components: {
+    Dropdown
+  },
   props: ["visible"],
   data() {
     return {
@@ -50,10 +56,23 @@ export default {
         amount: "",
         attach: null
       },
+      dropdownOptions: [
+        { id: "github", name: "GitHub" },
+        { id: "instagram", name: "Instagram" },
+        { id: "facebook", name: "Facebook" },
+        { id: "linkedin", name: "LinkedIn" },
+        { id: "twitter", name: "Twitter" },
+        { id: "reddit", name: "Reddit" },
+      ],
+      selectedOption: null,
       title: "Новый договор"
     };
   },
   methods: {
+    handleOptionSelected(option) {
+      this.selectedOption = option;
+      console.log(option);
+    },
     saveContract() {
       this.$emit("save", this.contract);
     },

@@ -1,0 +1,46 @@
+<template>
+  <div class="custom-select">
+    <select v-model="selectedOption" @change="handleSelectChange">
+      <option v-for="option in options" :key="option.id" :value="option.id">
+        {{ option.name }}
+      </option>
+    </select>
+  </div>
+</template>
+
+<script>
+export default {
+    props: {
+        options: {
+            type: Array,
+            required: true,
+        },
+    },
+  data() {
+    return {
+      selectedOption: "",
+    };
+  },
+  methods: {
+    handleSelectChange() {
+    const selectedOption = this.options.find(option => option.id === this.selectedOption);
+
+      this.$emit("option-selected", {   
+        id: this.selectedOption,
+        value: selectedOption ? selectedOption.name : null,
+      });
+    },
+    },
+};
+</script>
+
+<style scoped>
+select {
+    display: block;
+    border: 1px solid #f2f8e4;
+    margin-top: 10px;
+    border-radius: 6px;
+    padding: 10px;
+    width: 100%;
+}
+</style>
