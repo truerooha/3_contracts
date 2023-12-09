@@ -2,7 +2,7 @@
   <div :class="['card', cardClass]" @click="handleClick">
 
       <div class="card-header">
-        <div class="card-icon">
+        <div class="card-icon" :style="{ background: iconColor }" >
           <img v-if="iconUrl" :src="iconUrl" alt="">
         </div>
         <h2>{{ title }}</h2>     
@@ -32,7 +32,11 @@ export default {
     attr1Value: String,
     attr1Label: String,
     attr2Value: String,
-    attr2Label: String
+    attr2Label: String,
+    iconColor: {
+      type: String,
+      default: 'white'
+    }
     },
     methods: {
         handleClick() {
@@ -91,7 +95,6 @@ export default {
   justify-content: center;
   height: 36px;
   width: 36px;
-  background: white;
   border-radius: 12px;
 }
 

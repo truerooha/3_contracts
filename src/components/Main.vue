@@ -20,6 +20,7 @@
         attr2Value="27"
         attr2Label="всего"
         @click="goToContractsPage"
+        iconColor = "#F7FAFC"
     />
     <Widget
         cardClass="gray"
