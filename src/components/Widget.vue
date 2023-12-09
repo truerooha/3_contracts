@@ -3,7 +3,7 @@
 
       <div class="card-header">
         <div class="card-icon">
-          <img src="@/assets/icons/cont.svg" alt="">
+          <img v-if="iconUrl" :src="iconUrl" alt="">
         </div>
         <h2>{{ title }}</h2>     
       </div>
@@ -27,7 +27,7 @@
 export default {
    props: {
     cardClass: String,
-    iconSrc: String,
+    iconUrl: String,
     title: String,
     attr1Value: String,
     attr1Label: String,

@@ -3,7 +3,7 @@
   <div class="page-content main-page">
     <Widget
         cardClass="green"
-        iconSrc="@/assets/icons/conts.svg"
+        :iconUrl="contsSVG" 
         title="Договоры"
         attr1Value="20"
         attr1Label="истекает"
@@ -13,7 +13,7 @@
     />
     <Widget
         cardClass="white"
-        iconSrc="@/assets/icons/tasks.svg"
+        :iconUrl="tasksSVG" 
         title="Задачи"
         attr1Value="5"
         attr1Label="срочные"
@@ -23,7 +23,7 @@
     />
     <Widget
         cardClass="gray"
-        iconSrc="@/assets/icons/cont.svg"
+        :iconUrl="notificationsSVG" 
         title="Уведомления"
         attr1Value="5"
         attr1Label="срочные"
@@ -40,6 +40,13 @@ import Tray from './Tray.vue';
 import Widget from './Widget.vue';
 
 export default {
+  data() {
+    return {
+      contsSVG: require('@/assets/icons/cont.svg'),
+      tasksSVG: require('@/assets/icons/tasks.svg'),
+      notificationsSVG: require('@/assets/icons/notifications.svg'),
+    }
+  },
   methods: {
     goToContractsPage() {
       this.$router.push('/contracts');
@@ -53,7 +60,6 @@ export default {
 </script>
 
 <style scoped>
-
 
 .main-page {
   display: grid;
