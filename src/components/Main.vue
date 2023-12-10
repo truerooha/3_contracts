@@ -60,7 +60,6 @@ export default {
       try {
         const response = await axios.get('http://localhost:8888/3_contracts/server/contractsSummary.php');
         const data = response.data
-        console.log(data)
         this.expiredContracts= data.expired_contracts || '';
         this.totalContracts= data.total_contracts || '';
 

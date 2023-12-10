@@ -20,8 +20,13 @@
       </div>
     </div>
 
-    <div v-else>
-      <h1> СКЕЛЕТОН!!! </h1>
+    <div v-else class="skeleton-wrapper">
+      <PuSkeleton class="top" width = "100px" height = "20px"/>
+      <div class="bottom">
+        <PuSkeleton width = "100px"/>
+        <PuSkeleton width = "100px"/>
+      </div>
+      
     </div>
   </div> 
 </template>
@@ -50,6 +55,22 @@ export default {
 </script>
 
 <style scoped>
+.top {
+  align-self: flex-start;
+  margin-top: 20px;
+}
+
+.bottom {
+  display: flex;
+  margin-top: 50px;
+  gap: 40px;
+}
+
+.skeleton-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .card {
   display: flex;
   flex-direction: column;
