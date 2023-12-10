@@ -92,7 +92,6 @@ export default {
         if (index !== -1) {
         this.contracts.splice(index, 1);
         const contractId = this.deletedContract.id;
-        this.deletedContract = null
         const requestData = { contract_id: contractId };
         const jsonData = JSON.stringify(requestData);
 
@@ -103,6 +102,7 @@ export default {
           },
         })
         .then(() => {
+          this.deletedContract = null
           console.log('Договор удален успешно.');
         })
         .catch((error) => {

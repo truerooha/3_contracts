@@ -1,6 +1,6 @@
 <template>
   <div :class="['card', cardClass]" @click="handleClick">
-
+    <div v-if="cardClass != 'skeleton'" class="content-wrapper">
       <div class="card-header">
         <div class="card-icon" :style="{ background: iconColor }" >
           <img v-if="iconUrl" :src="iconUrl" alt="">
@@ -8,19 +8,22 @@
         <h2>{{ title }}</h2>     
       </div>
 
-    <div class="attributes">
-      <div class="attr attr1">
-        <h1>{{ attr1Value }}</h1>
-        <h4>{{ attr1Label }}</h4>
+      <div class="attributes">
+        <div class="attr attr1">
+          <h1>{{ attr1Value }}</h1>
+          <h4>{{ attr1Label }}</h4>
+        </div>
+        <div class="attr attr2">
+          <h1>{{ attr2Value }}</h1>
+          <h4>{{ attr2Label }}</h4>
+        </div>
       </div>
+    </div>
 
-      <div class="attr attr2">
-        <h1>{{ attr2Value }}</h1>
-        <h4>{{ attr2Label }}</h4>
-      </div>
+    <div v-else>
+      <h1> СКЕЛЕТОН!!! </h1>
     </div>
-      
-    </div>
+  </div> 
 </template>
 
 <script>

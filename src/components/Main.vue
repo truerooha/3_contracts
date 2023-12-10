@@ -2,12 +2,12 @@
   <h1 class="page-h1">Главная</h1>
   <div class="page-content main-page">
     <Widget
-        cardClass="green"
+        :cardClass="cardClass"
         :iconUrl="contsSVG" 
         title="Договоры"
-        attr1Value="20"
+        :attr1Value="expiredContracts"
         attr1Label="истекает"
-        attr2Value="134"
+        :attr2Value="totalContracts"
         attr2Label="всего"
         @click="goToContractsPage"
     />
@@ -39,6 +39,7 @@
 <script>
 import Tray from './Tray.vue';
 import Widget from './Widget.vue';
+import axios from 'axios';
 
 export default {
   data() {
@@ -46,17 +47,41 @@ export default {
       contsSVG: require('@/assets/icons/cont.svg'),
       tasksSVG: require('@/assets/icons/tasks.svg'),
       notificationsSVG: require('@/assets/icons/notifications.svg'),
+      dataLoaded: false,
+      totalContracts: "0",
+      expiredContracts: "0"
     }
   },
   methods: {
     goToContractsPage() {
       this.$router.push('/contracts');
     },
+    async loadDataFromServer() {
+      try {
+        const response = await axios.get('http://localhost:8888/3_contracts/server/contractsSummary.php');
+        const data = response.data
+        console.log(data)
+        this.expiredContracts= data.expired_contracts || '';
+        this.totalContracts= data.total_contracts || '';
+
+        this.dataLoaded = true;
+      } catch (error) {
+        console.error('Ошибка при загрузке данных', error);
+      }
+    },
   },
   components: {
     Tray,
     Widget
-  } 
+  },
+  computed: {
+    cardClass() {
+      return this.dataLoaded ? 'green' : 'skeleton';
+    },
+  },
+  mounted() {
+    this.loadDataFromServer();
+  },
 }
 </script>
 
