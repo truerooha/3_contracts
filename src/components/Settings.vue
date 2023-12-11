@@ -27,6 +27,11 @@
           <tr v-for="user in users" :key="user.id">
             <td>{{ user.id }}</td>
             <td>{{ user.username }}</td>
+            <td>
+              <span @click="deleteUser(user.id)">
+                <img src="@/assets/icons/trash.svg" class="lil-icon" alt="Удалить">
+              </span>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -63,6 +68,23 @@ export default {
         })
         .catch((error) => {
           console.error('Ошибка при загрузке данных:', error);
+        });
+      },
+      deleteUser(userID) {
+      const requestData = { user_id: userID };
+      const jsonData = JSON.stringify(requestData);
+         axios.delete('http://localhost:8888/3_contracts/server/saveUser.php', {
+          data: jsonData,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(() => {
+          this.deletedContract = null
+          console.log('Пользователь успешно удален');
+        })
+        .catch((error) => {
+          console.error('Ошибка при удалении пользователя:', error);
         });
       },
       saveUser() {

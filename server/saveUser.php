@@ -48,6 +48,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
+} elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE')  {
+
+    $data = json_decode(file_get_contents("php://input"), true);
+    $user_id = $data["user_id"];
+
+    try {
+        $stmt = $pdo->prepare("DELETE FROM users WHERE id = :user_id");
+        $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        echo "Пользователь успешно удален.";
+    } catch (PDOException $e) {
+        echo "Ошибка при удалении пользователя: " . $e->getMessage();
+    }
+
 } else {
     echo json_encode(['error' => 'Неверный метод запроса']);
 }
