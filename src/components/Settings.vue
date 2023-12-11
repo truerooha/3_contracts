@@ -1,4 +1,13 @@
 <template>
+  <Dialog
+        v-show="isDialogVisible"
+        question="Вы уверены, что хотите удалить этого пользователя?"
+        confirmText="Да"
+        cancelText="Нет"
+        buttonType = "error"
+        @close="closeModal"
+        @confirm="handleConfirm"
+    />
   <h1 class="page-h1">Настройки системы</h1>
     <div class="page-content settings-page">
       <section class="new-user">
@@ -42,16 +51,21 @@
 <script>
 import axios from 'axios';
 import { useToast } from "vue-toastification";
+import Dialog from './Dialog.vue';
+
 
 export default {
     name: 'Settings',
+    components: {Dialog },
     data() {
       return {
         newUser: {
           username: "",
           password: "",
         },
-        users: []
+        users: [],
+        isDialogVisible: false,
+        deletedUserID: null
       };
     },
     mounted() {
@@ -70,22 +84,32 @@ export default {
           console.error('Ошибка при загрузке данных:', error);
         });
       },
+
       deleteUser(userID) {
-      const requestData = { user_id: userID };
-      const jsonData = JSON.stringify(requestData);
-         axios.delete('http://localhost:8888/3_contracts/server/saveUser.php', {
-          data: jsonData,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-        .then(() => {
-          this.deletedContract = null
-          console.log('Пользователь успешно удален');
-        })
-        .catch((error) => {
-          console.error('Ошибка при удалении пользователя:', error);
-        });
+        this.deletedUserID = userID
+        this.isDialogVisible = true;  
+      },
+      closeModal() {
+        this.isDialogVisible = false;
+      },
+      handleConfirm() {
+        const requestData = { user_id: this.deletedUserID };
+        const jsonData = JSON.stringify(requestData);
+          axios.delete('http://localhost:8888/3_contracts/server/saveUser.php', {
+            data: jsonData,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+          .then(() => {
+            this.users = this.users.filter(user => user.id !== this.deletedUserID);
+            this.deletedUserID = null
+            console.log('Пользователь успешно удален');
+            this.closeModal()
+          })
+          .catch((error) => {
+            console.error('Ошибка при удалении пользователя:', error);
+          });
       },
       saveUser() {
         if (!this.isFormValid()) {
