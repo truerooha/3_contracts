@@ -15,16 +15,26 @@ export default {
         type: Array,
         required: true,
       },
+      extOption: {
+        type: [String, Number], 
+        default: null,
+      },
   },
   data() {
     return {
-      selectedOption: "",
+      selectedOption: this.extOption,
     };
+  },
+  watch: {
+    extOption(newVal) {
+      this.selectedOption = newVal;
+      console.log(newVal)
+    },
   },
   methods: {
     handleSelectChange() {
     const selectedOption = this.options.find(option => option.id === this.selectedOption);
-
+      //this.$emit("input", this.selectedOption); //TODO разобраться, надо ли это
       this.$emit("option-selected", {   
         id: this.selectedOption,
         value: selectedOption ? selectedOption.name : null,

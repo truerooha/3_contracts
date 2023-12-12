@@ -11,7 +11,7 @@
         <slot name="body" >
           <input v-model="contract.number" placeholder="Номер договора" required/>
           <input v-model="contract.date" type="date" placeholder="Дата договора" required/>
-          <Dropdown :options="CPs" @option-selected="handleOptionSelected"/>
+          <Dropdown :options="CPs" :extOption="contract.counterparty_id" @option-selected="handleOptionSelected"/>
           <input v-model="contract.amount" placeholder="Сумма" required/>
           <input type="file" @change="handleFileUpload" />
         </slot>
@@ -76,6 +76,7 @@ export default {
         }
       },
     },
+
   },
   mounted() {
     this.fetchCounterparties()
@@ -97,7 +98,6 @@ export default {
           }
         })
         .then(response => {
-          console.log(response.data)
           this.fillContract(response.data)
         })
         .catch(error => {
