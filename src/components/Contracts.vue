@@ -98,13 +98,8 @@ export default {
         });
     },
     handleConfirm() {
-      const index = this.contracts.indexOf(this.deletedContract);
-        if (index !== -1) {
-        this.contracts.splice(index, 1);
-        const contractId = this.deletedContract.id;
-        const requestData = { contract_id: contractId };
-        const jsonData = JSON.stringify(requestData);
-
+        const requestData = { contract_id: this.deletedContract.id }
+        const jsonData = JSON.stringify(requestData)
         axios.delete('http://localhost:8888/3_contracts/server/api.php', {
           data: jsonData,
           headers: {
@@ -112,14 +107,16 @@ export default {
           },
         })
         .then(() => {
+          this.contracts = this.contracts.filter(contract => contract.id !== this.deletedContract.id);
           this.deletedContract = null
           console.log('Договор удален успешно.');
+          this.closeModal()
+
         })
         .catch((error) => {
           console.error('Ошибка при удалении договора:', error);
         });
-      }
-    },
+      },
     deleteContract(contract) {
       this.deletedContract = contract
       this.isDialogVisible = true;
