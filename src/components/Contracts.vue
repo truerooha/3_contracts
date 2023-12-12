@@ -50,7 +50,7 @@
                 <img v-if="contract.hasFiles === '1'" src="@/assets/icons/attach.svg" class="lil-icon img" alt="Есть файл">
             </td>
             <td>
-              <span @click="deleteContract(contract)">
+              <span @click.stop="deleteContract(contract)">
                 <img src="@/assets/icons/trash.svg" class="lil-icon" alt="Удалить">
               </span>
             </td>
