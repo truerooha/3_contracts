@@ -28,7 +28,6 @@ export default {
   watch: {
     extOption(newVal) {
       this.selectedOption = newVal;
-      console.log(newVal)
     },
   },
   methods: {

@@ -117,11 +117,16 @@ export default {
       }
     },
     clearContract() {
-
+      this.contract ={
+        number: "",
+        date: "",
+        counterparty_id: null,
+        amount: "",
+        attach: null
+      }
     },
     handleOptionSelected(option) {
       this.selectedOption = option;
-      console.log(option);
     },
     saveContract() {
       if (this.selectedOption) {
