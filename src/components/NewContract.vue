@@ -51,7 +51,7 @@ export default {
       type: String,
       default: "",
     },
-    dynamicTitle: ""
+    dynamicTitle: "",
   },
   data() {
     return {
@@ -67,21 +67,46 @@ export default {
       selectedOption: null
     };
   },
+  watch: {
+    contractID: {
+      immediate: false,
+      handler(newValue) {
+        if (newValue !== "") {
+          this.fetchContractData()
+        }
+      },
+    },
+  },
   mounted() {
-    if (this.contractID != "") {
-      this.fetchContractData()
-    } else {
-      this.fetchCounterparties()
-    }
-    
+    this.fetchCounterparties()
   },
   methods: {
+    fillContract(contract) {
+      this.contract.number = contract.contract_number
+      this.contract.date = contract.contract_date
+      this.contract.counterparty_id = contract.counterparty_id
+      this.contract.amount = contract.contract_amount
+
+    },
     async fetchContractData() {
       try {
-        console.log("запрос")
-      } catch (error) {
-        console.error('Ошибка при загрузке данных', error);
-      }
+        const apiUrl = 'http://localhost:8888/3_contracts/server/contract.php';
+        axios.get(apiUrl, {
+          params: {
+              contract_id: this.contractID
+          }
+        })
+        .then(response => {
+          console.log(response.data)
+          this.fillContract(response.data)
+        })
+        .catch(error => {
+            console.error('Ошибка при выполнении запроса:', error);
+        });
+
+          } catch (error) {
+            console.error('Ошибка при загрузке данных', error);
+          }
     },
     async fetchCounterparties() {
       try {
@@ -90,6 +115,9 @@ export default {
       } catch (error) {
         console.error('Error fetching counterparties:', error);
       }
+    },
+    clearContract() {
+
     },
     handleOptionSelected(option) {
       this.selectedOption = option;
@@ -104,7 +132,8 @@ export default {
     },
 
     closeForm() {
-      this.$emit("close");
+      this.$emit("close")
+      this.clearContract()
     },
 
     handleFileUpload(event) {

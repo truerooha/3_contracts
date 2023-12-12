@@ -10,12 +10,12 @@
 
 <script>
 export default {
-    props: {
-        options: {
-            type: Array,
-            required: true,
-        },
-    },
+  props: {
+      options: {
+        type: Array,
+        required: true,
+      },
+  },
   data() {
     return {
       selectedOption: "",
