@@ -23,6 +23,8 @@
 
       <ContractForm
         v-show="isContractFormVisible"
+        :contractID="selectedContract"
+        :dynamicTitle="dynamicTitle"
         @close="hideContractForm"
         @save="saveContract"
       />
@@ -39,7 +41,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="contract in contracts" :key="contract.id">
+          <tr v-for="contract in contracts" :key="contract.id" @click="openContract(contract)">
             <td>{{ contract.number }}</td>
             <td>{{ contract.date }}</td>
             <td>{{ contract.CPname }}</td>
@@ -71,13 +73,21 @@ export default {
       contracts: [],
       isContractFormVisible: false,
       isDialogVisible: false,
-      deletedContract: null
+      deletedContract: null,
+      selectedContract: "",
+      dynamicTitle: ""
     };
   },
   mounted() {
     this.loadContracts();
   },
   methods: {
+    openContract(contract) {
+      this.selectedContract = contract.id
+      this.dynamicTitle = "Старый договор"
+      this.isContractFormVisible = true;
+
+    },
     loadContracts() {
       axios.get('http://localhost:8888/3_contracts/server/api.php')
         .then((response) => {
@@ -116,9 +126,11 @@ export default {
     },
     closeModal() {
       this.isDialogVisible = false;
+      this.selectedContract = ""
     },
     showContractForm() {
-      this.isContractFormVisible = true;
+      this.dynamicTitle = "Новый договор"
+      this.isContractFormVisible = true; //TODO можно объединить с методом открытия
     },
     hideContractForm() {
       this.isContractFormVisible = false;

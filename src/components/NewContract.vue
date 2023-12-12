@@ -3,7 +3,7 @@
     <div class="modal">
       <header class="modal-header">
         <slot name="header" >
-          {{ title }}
+          {{ dynamicTitle }}
         </slot>
       </header>
 
@@ -46,7 +46,13 @@ export default {
   components: {
     Dropdown
   },
-  props: ["visible"],
+  props: {
+    contractID: {
+      type: String,
+      default: "",
+    },
+    dynamicTitle: ""
+  },
   data() {
     return {
       contract: {
@@ -58,14 +64,25 @@ export default {
       },
       CPs: [
       ],
-      selectedOption: null,
-      title: "Новый договор"
+      selectedOption: null
     };
   },
   mounted() {
-    this.fetchCounterparties();
+    if (this.contractID != "") {
+      this.fetchContractData()
+    } else {
+      this.fetchCounterparties()
+    }
+    
   },
   methods: {
+    async fetchContractData() {
+      try {
+        console.log("запрос")
+      } catch (error) {
+        console.error('Ошибка при загрузке данных', error);
+      }
+    },
     async fetchCounterparties() {
       try {
         const response = await axios.get('http://localhost:8888/3_contracts/server/loadCPs.php');
