@@ -63,6 +63,7 @@ input {
   position: relative;
   background-color: #fff;
   border-radius: 10px;
+  border: 1px solid #CBD5E0;
   width: 100%;
 }
 
