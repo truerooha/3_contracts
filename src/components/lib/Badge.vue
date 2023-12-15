@@ -42,6 +42,7 @@ export default {
   border-radius: 8px;
   display: flex;
   align-items: center;
+  user-select: none;
   cursor: pointer;
 }
 

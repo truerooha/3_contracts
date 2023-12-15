@@ -68,7 +68,7 @@ input {
 }
 
 .search-icon {
-  margin: 8px 16px;
+  margin: 10px 0px 8px 16px;
 }
 
 .filter-tags {
