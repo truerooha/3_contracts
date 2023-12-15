@@ -64,7 +64,7 @@ export default {
       text-align: center;
       padding: 20px;
       background-color: rgba(255, 255, 255, 0.7);
-      border-radius: 10px;
+      border-radius: 15px;
       margin-top: 200px;
       box-shadow: 0px 0px 50px rgba(49,196,141, 0.1); 
   }

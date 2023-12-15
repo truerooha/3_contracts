@@ -1,20 +1,41 @@
 <?php
 require_once 'db_connect.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
-    $data = json_decode(file_get_contents("php://input"), true);
-    $contract_id = $data["contract_id"];
-    
-    try {
-        $stmt = $pdo->prepare("DELETE FROM Contracts WHERE contract_id = :contract_id");
-        $stmt->bindParam(":contract_id", $contract_id, PDO::PARAM_INT);
-        $stmt->execute();
+    if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
+        $data = json_decode(file_get_contents("php://input"), true);
+        $contract_id = $data["contract_id"];
         
-        echo "Договор успешно удален.";
-    } catch (PDOException $e) {
-        echo "Ошибка при удалении договора: " . $e->getMessage();
+        try {
+            // Проверяем наличие связанных записей в attachment_owners
+            $stmt_owner = $pdo->prepare("SELECT * FROM attachment_owners WHERE contract_id = :contract_id");
+            $stmt_owner->bindParam(":contract_id", $contract_id, PDO::PARAM_INT);
+            $stmt_owner->execute();
+            $owner = $stmt_owner->fetch(PDO::FETCH_ASSOC);
+
+            if ($owner) {
+                // Удаляем запись из attachment_files
+                $owner_id = $owner['owner_id'];
+                $stmt_files = $pdo->prepare("DELETE FROM attachment_files WHERE owner_id = :owner_id");
+                $stmt_files->bindParam(":owner_id", $owner_id, PDO::PARAM_INT);
+                $stmt_files->execute();
+    
+                // Удаляем запись из attachment_owners
+                $stmt_delete_owner = $pdo->prepare("DELETE FROM attachment_owners WHERE contract_id = :contract_id");
+                $stmt_delete_owner->bindParam(":contract_id", $contract_id, PDO::PARAM_INT);
+                $stmt_delete_owner->execute();
+            }
+
+
+            $stmt = $pdo->prepare("DELETE FROM Contracts WHERE contract_id = :contract_id");
+            $stmt->bindParam(":contract_id", $contract_id, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            echo "Договор успешно удален.";
+        } catch (PDOException $e) {
+            file_put_contents('server_log/log.txt',$e, FILE_APPEND);
+            echo "Ошибка при удалении договора: " . $e->getMessage();
+        }
     }
-}
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $data = json_decode(file_get_contents("php://input"), true);
