@@ -22,28 +22,31 @@
 
 <script>
 export default {
-  data() {
+    data() {
     return {
-      searchQuery: '',
-      filters: [],
+        searchQuery: '',
+        filters: [],
     };
-  },
-  methods: {
-    handleInput() {
-      // Обработка ввода текста поиска
-      // Возможно, здесь вы захотите выполнить какие-то дополнительные действия
     },
-    removeFilter(index) {
-      // Удаление фильтра по индексу
-      this.filters.splice(index, 1);
+    methods: {
+        handleInput() {
+        // Обработка ввода текста поиска
+        // Возможно, здесь вы захотите выполнить какие-то дополнительные действия
+        },
+        removeFilter(index) {
+        // Удаление фильтра по индексу
+            this.filters.splice(index, 1);
+        },
     },
-  },
-  watch: {
-    searchQuery(newValue) {
-      // Здесь вы можете выполнить дополнительные действия при изменении текста поиска
-      console.log('Search query changed:', newValue);
+    watch: {
+        searchQuery(newValue) {
+        // Здесь вы можете выполнить дополнительные действия при изменении текста поиска
+        console.log('Search query changed:', newValue);
     },
-  },
+    },
+    mounted() {
+        this.filters.push('Контрагенты');    
+    }
 };
 </script>
 
@@ -74,9 +77,11 @@ input {
 
 .filter-tag {
   margin-right: 8px;
-  background-color: #e0e0e0;
-  padding: 4px 8px;
-  border-radius: 4px;
+  background-color: #EDF2F7;
+  color: #718096;
+  font-size: 14px;
+  padding: 6px 8px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
 }

@@ -62,7 +62,6 @@ import ContractForm from "./NewContract.vue";
 import SearchInput from "./SearchInput.vue"
 import Dialog from './Dialog.vue';
 import { useToast } from "vue-toastification";
-import SearchInputVue from './SearchInput.vue';
 
 export default {
   name: 'Contracts',
@@ -73,13 +72,17 @@ export default {
       isDialogVisible: false,
       deletedContract: null,
       selectedContract: "",
-      dynamicTitle: ""
+      dynamicTitle: "",
+      initialFilter: 'Контрагент',
     };
   },
   mounted() {
     this.loadContracts();
   },
   methods: {
+    handleAddFilter() {
+
+    },
     openContract(contract) {
       this.selectedContract = contract.id
       this.dynamicTitle = "Старый договор"
