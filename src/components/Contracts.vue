@@ -25,10 +25,7 @@
         @save="saveContract"
       />
       <div class="filters">
-        <badge text="Номер договора"/>
-        <badge text="ИНН"/>
-        <badge text="Контрагент"/>
-        <badge text="Дата"/>
+        <badge v-for="(filter, index) in filters" :key="index" :text="filter.label"/>
       </div>
 
       <table class="common-table">
@@ -85,6 +82,11 @@ export default {
   },
   mounted() {
     this.loadContracts();
+  },
+  computed: {
+    filters() {
+      return this.$store.state.filter.filters
+    }
   },
   methods: {
     handleAddFilter() {
