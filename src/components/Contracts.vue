@@ -11,12 +11,8 @@
   <h1 class="page-h1">Договоры</h1>
   <div class="page-content contract-page">
       <div class="search-container">
-        <div class="search-input">
-          <img src="@/assets/icons/search.svg" class="icon-search" alt="Поиск">
-          <input
-            type="text"
-            placeholder="Поиск..."
-          />
+        <div class="input-wrapper">
+          <search-input @add-filter="handleAddFilter"/>
         </div>
       <button @click="showContractForm" class="search-button btn btn-prima">+ Добавить</button>
       </div>
@@ -63,8 +59,10 @@
 <script>
 import axios from 'axios';
 import ContractForm from "./NewContract.vue";
+import SearchInput from "./SearchInput.vue"
 import Dialog from './Dialog.vue';
 import { useToast } from "vue-toastification";
+import SearchInputVue from './SearchInput.vue';
 
 export default {
   name: 'Contracts',
@@ -110,7 +108,7 @@ export default {
           this.contracts = this.contracts.filter(contract => contract.id !== this.deletedContract.id);
           this.deletedContract = null
           console.log('Договор удален успешно.');
-          this.closeModal()
+            this.closeModal()
 
         })
         .catch((error) => {
@@ -154,12 +152,15 @@ export default {
     }
   },
   components: {
-    ContractForm, Dialog
+    ContractForm, Dialog, SearchInput
   },
 };
 </script>
 
 <style scoped>
+.input-wrapper {
+  width: 60%;
+}
 .img {
   margin-left: 20px;
 }
@@ -167,7 +168,6 @@ export default {
   display: block;
   height: 90%;
   border-radius: 10px;
-  padding: 30px;
   justify-self: center;
   align-self: center;
 }
