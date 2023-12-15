@@ -9,9 +9,9 @@
 
       <section class="modal-body">
         <slot name="body" >
-          <input v-model="contract.number" placeholder="Номер договора" required/>
-          <input v-model="contract.date" type="date" placeholder="Дата договора" required/>
-          <Dropdown :options="CPs" :extOption="contract.counterparty_id" @option-selected="handleOptionSelected"/>
+          <input v-model="contract.number" placeholder="Номер договора" @input="resetAttemptedSave" :class="{ 'error': attemptedSave && !contract.number }" required/>
+          <input v-model="contract.date" type="date" placeholder="Дата договора" @input="resetAttemptedSave" :class="{ 'error': attemptedSave && !contract.date }" required/>
+          <Dropdown :options="CPs" :extOption="contract.counterparty_id" :attemptedSave="attemptedSave"  @option-selected="handleOptionSelected"/>
           <input v-model="contract.amount" placeholder="Сумма" required/>
           <input type="file" @change="handleFileUpload" />
         </slot>
@@ -58,13 +58,14 @@ export default {
       contract: {
         number: "",
         date: "",
-        counterparty_id: 1,
+        counterparty_id: null,
         amount: "",
         attach: null
       },
       CPs: [
       ],
-      selectedOption: null
+      selectedOption: null,
+      attemptedSave: false
     };
   },
   watch: {
@@ -82,6 +83,9 @@ export default {
     this.fetchCounterparties()
   },
   methods: {
+    resetAttemptedSave() {
+      this.attemptedSave = false;
+    },
     fillContract(contract) {
       this.contract.number = contract.contract_number
       this.contract.date = contract.contract_date
@@ -127,8 +131,19 @@ export default {
     },
     handleOptionSelected(option) {
       this.selectedOption = option;
+      this.resetAttemptedSave()
     },
     saveContract() {
+      this.attemptedSave = true;
+      if (!this.contractID) {
+        if (
+          !this.contract.number ||
+          !this.contract.date ||
+          !this.contract.counterparty_id
+        ) {
+          return;
+        }
+    }
       if (this.selectedOption) {
         this.contract.counterparty_id = this.selectedOption.id;
       }
@@ -174,6 +189,10 @@ input {
   border-radius: 6px;
   padding: 10px;
   width: 90%;
+}
+
+input.error {
+  border-color: red;
 }
 
 </style>

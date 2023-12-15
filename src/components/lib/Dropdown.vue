@@ -1,6 +1,6 @@
 <template>
   <div class="custom-select">
-    <select v-model="selectedOption" @change="handleSelectChange">
+    <select v-model="selectedOption" @change="handleSelectChange" :class="{ 'error': attemptedSave && !extOption }">
       <option v-for="option in options" :key="option.id" :value="option.id">
         {{ option.name }}
       </option>
@@ -19,6 +19,10 @@ export default {
         type: [String, Number], 
         default: null,
       },
+      attemptedSave: {
+        type: Boolean,
+        default: false,
+      },
   },
   data() {
     return {
@@ -34,7 +38,7 @@ export default {
     handleSelectChange() {
     const selectedOption = this.options.find(option => option.id === this.selectedOption);
       //this.$emit("input", this.selectedOption); //TODO разобраться, надо ли это
-      this.$emit("option-selected", {   
+      this.$emit("option-selected", {
         id: this.selectedOption,
         value: selectedOption ? selectedOption.name : null,
       });
@@ -51,5 +55,9 @@ select {
     border-radius: 6px;
     padding: 10px;
     width: 100%;
+}
+
+.error {
+  border-color: red;
 }
 </style>
