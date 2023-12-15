@@ -171,6 +171,7 @@ export default {
 .filters {
   display: flex;
   margin-bottom: 20px;
+  height: 32px;
 }
 .input-wrapper {
   width: 60%;

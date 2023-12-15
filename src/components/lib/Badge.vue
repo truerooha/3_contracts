@@ -25,9 +25,6 @@ export default {
     },
   },
   methods: {
-    removeBadge() {
-      this.$emit('remove');
-    },
     toggleActive() {
         this.active = !this.active
     }
