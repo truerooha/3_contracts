@@ -24,6 +24,12 @@
         @close="hideContractForm"
         @save="saveContract"
       />
+      <div class="filters">
+        <badge text="Номер договора"/>
+        <badge text="ИНН"/>
+        <badge text="Контрагент"/>
+        <badge text="Дата"/>
+      </div>
 
       <table class="common-table">
         <thead>
@@ -61,6 +67,7 @@ import axios from 'axios';
 import ContractForm from "./NewContract.vue";
 import SearchInput from "./SearchInput.vue"
 import Dialog from './Dialog.vue';
+import Badge from './lib/Badge.vue'
 import { useToast } from "vue-toastification";
 
 export default {
@@ -155,12 +162,16 @@ export default {
     }
   },
   components: {
-    ContractForm, Dialog, SearchInput
+    ContractForm, Dialog, SearchInput, Badge
   },
 };
 </script>
 
 <style scoped>
+.filters {
+  display: flex;
+  margin-bottom: 20px;
+}
 .input-wrapper {
   width: 60%;
 }
@@ -183,7 +194,7 @@ export default {
 .search-container {
   display: flex;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   width: 100%;
 }
 
