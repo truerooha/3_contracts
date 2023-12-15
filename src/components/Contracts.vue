@@ -170,7 +170,7 @@ export default {
 <style scoped>
 .filters {
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   height: 32px;
 }
 .input-wrapper {
