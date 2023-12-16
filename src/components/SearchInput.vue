@@ -6,7 +6,9 @@
     <input
       type="text"
       v-model="searchQuery"
-      placeholder="Поиск"
+      :placeholder="placeholderText"
+      @focus="updatePlaceholder('')"
+      @blur="updatePlaceholder('Поиск')"
       @input="handleInput"
     />
     <div class="filter-tags">
@@ -26,6 +28,7 @@ export default {
     return {
         searchQuery: '',
         filters: [],
+        placeholderText: "Поиск"
     };
     },
     methods: {
@@ -37,6 +40,9 @@ export default {
         // Удаление фильтра по индексу
             this.filters.splice(index, 1);
         },
+        updatePlaceholder(newText) {
+          this.placeholderText = newText;
+        }
     },
     watch: {
         searchQuery(newValue) {
@@ -55,6 +61,10 @@ input {
     border: none;
     outline: none;
     margin: 0;
+}
+
+input:focus {
+  placeholder: #000;
 }
 
 .custom-input {

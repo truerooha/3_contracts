@@ -1,4 +1,5 @@
 export default {
+    currentFilter: null,
     state: {
         filters: [
         { label: 'Номер договора' },
@@ -7,6 +8,10 @@ export default {
         { label: 'Дата' }]
     },
     actions: {},
-    mutaitons: {},
+    mutaitons: {
+        changeFilter(state, filter) {
+            
+        }
+    },
     getters: {}
 }
