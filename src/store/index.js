@@ -1,7 +1,7 @@
 import { createStore } from 'vuex'
 export const store = createStore({
     state: {
-        currentFilter: null,
+        currentFilterId: null,
         filters: [
         { label: 'Номер договора' },
         { label: 'ИНН' },
@@ -9,8 +9,13 @@ export const store = createStore({
         { label: 'Дата' }]
     },
     mutations: {
-        haveFun(state, filterText) {
-            console.log(filterText)
+        setFilter(state, filterIndex) {
+            console.log(filterIndex)
+            if (filterIndex >= 0 && filterIndex < state.filters.length) {
+                state.currentFilterId = filterIndex;
+            } else {
+                console.error('Invalid filter index:', filterIndex);
+            }
         }
     },
     getters: {

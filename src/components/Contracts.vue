@@ -25,7 +25,7 @@
         @save="saveContract"
       />
       <div class="filters">
-        <badge v-for="(filter, index) in filters" :key="index" :text="filter.label"/>
+        <badge v-for="(filter, index) in filters" :key="index" :text="filter.label" :filterId="index"/>
       </div>
 
       <table class="common-table">
@@ -77,7 +77,6 @@ export default {
       deletedContract: null,
       selectedContract: "",
       dynamicTitle: "",
-      initialFilter: 'Контрагент',
     };
   },
   mounted() {
@@ -137,7 +136,7 @@ export default {
     },
     showContractForm() {
       this.dynamicTitle = "Новый договор"
-      this.isContractFormVisible = true; //TODO можно объединить с методом открытия
+      this.isContractFormVisible = true;
     },
     hideContractForm() {
       this.isContractFormVisible = false;

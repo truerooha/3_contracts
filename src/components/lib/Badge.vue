@@ -12,23 +12,26 @@ export default {
     text: {
       type: String,
       required: true,
-    }
-  },
-  data() {
-    return {
-        active: false
-    }
+    },
+    filterId: {
+      type: Number,
+      required: true,
+    },
   },
   computed: {
     badgeClasses() {
       return {
-        'active-badge': this.active,
+        'active-badge': this.isActive,
       };
+    },
+    isActive() {
+      return this.filterId === store.state.currentFilterId;
     },
   },
   methods: {
     toggleActive() {
-        store.commit('haveFun', this.text)
+        store.commit('setFilter', this.filterId)
+        this.filterId === store.state.currentFilterIndex;
     }
   },
 };
