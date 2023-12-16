@@ -28,8 +28,7 @@ export default {
   },
   methods: {
     toggleActive() {
-        //this.active = !this.active
-        store.commit('ChangeFilter', this.text)
+        store.commit('haveFun', this.text)
     }
   },
 };

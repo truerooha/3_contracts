@@ -85,8 +85,8 @@ export default {
   },
   computed: {
     filters() {
-      return this.$store.state.filter.filters
-    }
+      return this.$store.getters.getFilters;
+    },
   },
   methods: {
     handleAddFilter() {

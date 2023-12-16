@@ -1,8 +1,21 @@
 import { createStore } from 'vuex'
-import filter from './modules/filter'
-
 export const store = createStore({
-    modules: {
-        filter
+    state: {
+        currentFilter: null,
+        filters: [
+        { label: 'Номер договора' },
+        { label: 'ИНН' },
+        { label: 'Контрагент' },
+        { label: 'Дата' }]
+    },
+    mutations: {
+        haveFun(state, filterText) {
+            console.log(filterText)
+        }
+    },
+    getters: {
+        getFilters: state => {
+            return state.filters;
+          },    
     }
 })
