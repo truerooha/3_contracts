@@ -63,10 +63,6 @@ input {
     margin: 0;
 }
 
-input:focus {
-  placeholder: #000;
-}
-
 .custom-input {
   display: flex;
   align-items: center;

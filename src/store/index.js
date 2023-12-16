@@ -10,7 +10,6 @@ export const store = createStore({
     },
     mutations: {
         setFilter(state, filterIndex) {
-            console.log(filterIndex)
             if (filterIndex >= 0 && filterIndex < state.filters.length) {
                 state.currentFilterId = filterIndex;
             } else {
