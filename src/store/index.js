@@ -15,6 +15,9 @@ export const store = createStore({
             } else {
                 console.error('Invalid filter index:', filterIndex);
             }
+        },
+        clearFilter(state) {
+            state.currentFilterId = null 
         }
     },
     getters: {

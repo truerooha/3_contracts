@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { store } from '@/store';
 export default {
     data() {
       return {
@@ -39,7 +40,7 @@ export default {
       // Возможно, здесь вы захотите выполнить какие-то дополнительные действия
       },
       removeFilter() {
-          this.filter = null
+          store.commit('clearFilter')
       },
       updatePlaceholder(newText) {
         this.placeholderText = newText;
@@ -49,9 +50,6 @@ export default {
       searchQuery(newValue) {
       console.log('Search query changed:', newValue);
     },
-    },
-    mounted() {
-      this.filter = "Контрагенты"  
     }
 };
 </script>
