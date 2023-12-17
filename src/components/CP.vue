@@ -5,28 +5,28 @@
   </div>
   <div class="page-content" id="cp-page">
     <table class="cp-table common-table">
-        <thead>
-          <tr>
-            <th>Наименование</th>
-            <th>ИНН</th>
-            <th>E-mail</th>
-            <th>Телефон</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="CP in CPs" :key="CP.id">
-            <td>{{ CP.CPname }}</td>
-            <td>{{ CP.INN }}</td>
-            <td>{{ CP.email }}</td>
-            <td>{{ CP.phone }}</td>
-            <td>
-            <span @click="deleteContract(CP)">
-              <img src="@/assets/icons/trash.svg" class="lil-icon" alt="Удалить">
-            </span>
-          </td>
-          </tr>
-        </tbody>
+      <thead>
+        <tr>
+          <th>Наименование</th>
+          <th>ИНН</th>
+          <th>E-mail</th>
+          <th>Телефон</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="CP in CPs" :key="CP.id">
+          <td>{{ CP.CPname }}</td>
+          <td>{{ CP.INN }}</td>
+          <td>{{ CP.email }}</td>
+          <td>{{ CP.phone }}</td>
+          <td>
+          <span @click="deleteContract(CP)">
+            <img src="@/assets/icons/trash.svg" class="lil-icon" alt="Удалить">
+          </span>
+        </td>
+        </tr>
+      </tbody>
       </table>
   </div>
 </template>

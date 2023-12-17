@@ -12,7 +12,7 @@
   <div class="page-content contract-page">
       <div class="search-container">
         <div class="input-wrapper">
-          <search-input @add-filter="handleAddFilter"/>
+          <search-input/>
         </div>
       <button @click="showContractForm" class="search-button btn btn-prima">+ Добавить</button>
       </div>
@@ -88,9 +88,6 @@ export default {
     },
   },
   methods: {
-    handleAddFilter() {
-
-    },
     openContract(contract) {
       this.selectedContract = contract.id
       this.dynamicTitle = "Старый договор"

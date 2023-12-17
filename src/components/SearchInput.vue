@@ -12,11 +12,9 @@
       @input="handleInput"
     />
     <div class="filter-tags">
-      <!-- Отображение фильтров -->
-      <div v-for="(filter, index) in filters" :key="index" class="filter-tag">
-        {{ filter }}
-        <!-- Кнопка удаления фильтра -->
-        <span @click="removeFilter(index)" class="remove-filter-icon">×</span>
+      <div v-if="currentFilterText" class="filter-tag">
+        {{ currentFilterText }}
+        <span @click="removeFilter()" class="remove-filter-icon">×</span>
       </div>
     </div>
   </div>
@@ -25,42 +23,44 @@
 <script>
 export default {
     data() {
-    return {
+      return {
         searchQuery: '',
-        filters: [],
         placeholderText: "Поиск"
-    };
+      };
+    },
+    computed: {
+    currentFilterText() {
+      return this.$store.getters.getCurrentFilterText;
+    }
     },
     methods: {
-        handleInput() {
-        // Обработка ввода текста поиска
-        // Возможно, здесь вы захотите выполнить какие-то дополнительные действия
-        },
-        removeFilter(index) {
-        // Удаление фильтра по индексу
-            this.filters.splice(index, 1);
-        },
-        updatePlaceholder(newText) {
-          this.placeholderText = newText;
-        }
+      handleInput() {
+      // Обработка ввода текста поиска
+      // Возможно, здесь вы захотите выполнить какие-то дополнительные действия
+      },
+      removeFilter() {
+          this.filter = null
+      },
+      updatePlaceholder(newText) {
+        this.placeholderText = newText;
+      }
     },
     watch: {
-        searchQuery(newValue) {
-        // Здесь вы можете выполнить дополнительные действия при изменении текста поиска
-        console.log('Search query changed:', newValue);
+      searchQuery(newValue) {
+      console.log('Search query changed:', newValue);
     },
     },
     mounted() {
-        this.filters.push('Контрагенты');    
+      this.filter = "Контрагенты"  
     }
 };
 </script>
 
 <style scoped>
 input {
-    border: none;
-    outline: none;
-    margin: 0;
+  border: none;
+  outline: none;
+  margin: 0;
 }
 
 .custom-input {

@@ -3,7 +3,7 @@ export const store = createStore({
     state: {
         currentFilterId: null,
         filters: [
-        { label: 'Номер договора' },
+        { label: 'Номер' },
         { label: 'ИНН' },
         { label: 'Контрагент' },
         { label: 'Дата' }]
@@ -20,6 +20,13 @@ export const store = createStore({
     getters: {
         getFilters: state => {
             return state.filters;
-          },    
+        },
+        getCurrentFilterText: state => {
+            if (state.currentFilterId !== null) {
+              return state.filters[state.currentFilterId].label;
+            } else {
+              return null;
+            }
+        }    
     }
 })
