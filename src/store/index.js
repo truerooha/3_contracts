@@ -4,9 +4,9 @@ export const store = createStore({
         currentFilterId: null,
         filters: [
         { label: 'Номер' },
+        { label: 'Дата' },
         { label: 'ИНН' },
-        { label: 'Контрагент' },
-        { label: 'Дата' }]
+        { label: 'Контрагент' }]
     },
     mutations: {
         setFilter(state, filterIndex) {
