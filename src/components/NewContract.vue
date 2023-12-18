@@ -95,12 +95,8 @@ export default {
     },
     async fetchContractData() {
       try {
-        const apiUrl = 'http://localhost:8888/3_contracts/server/contract.php';
-        axios.get(apiUrl, {
-          params: {
-              contract_id: this.contractID
-          }
-        })
+        const apiUrl = `http://localhost:3000/contracts/${this.contractID}`;
+        axios.get(apiUrl)
         .then(response => {
           this.fillContract(response.data)
         })

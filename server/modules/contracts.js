@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const dayjs = require('dayjs');
 const Database = require('./db');
 
 async function getSummary(req, res) {
@@ -24,6 +25,26 @@ async function getSummary(req, res) {
   }
 }
 
+async function getContractById(contractId, res) {
+  const db = new Database();
+  try { 
+    await db.connect();
+
+    const sqlQuery = 'SELECT * FROM contracts WHERE contract_id = ?';
+    const results = await db.query(sqlQuery, [contractId]);
+    const result = results.length > 0 ? results[0] : null;
+    if (result && result.contract_date) {
+      result.contract_date = dayjs(result.contract_date).format('YYYY-MM-DD');
+    }
+    res.send(result);
+    
+  } catch (error) {
+    console.error('Ошибка: ', error);
+  } finally {
+    await db.end();
+  }
+}
+
 router.get('/summary', (req, res) => {
   getSummary(req, res)
 });
@@ -32,13 +53,13 @@ router.get('/', (req, res) => {
   res.send('Метод для получения всех договоров');
 });
   
-  router.get('/:id', (req, res) => {
-    const contractId = req.params.id;
-    res.send(`Метод для получения договора по ID: ${contractId}`);
-  });
-  
-  router.post('/', (req, res) => {
-    res.send('Метод для создания нового договора');
-  });
+router.get('/:id', (req, res) => {
+  const contractId = req.params.id;
+  getContractById(contractId,res)  
+});
+
+router.post('/', (req, res) => {
+  res.send('Метод для создания нового договора');
+});
   
   module.exports = router;
