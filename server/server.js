@@ -5,10 +5,12 @@ const port = 3000;
 
 app.use(cors())
 
-const contractsRoutes = require('./modules/contracts');
+const contractsRoutes = require('./modules/contracts.js');
+const CPRoutes = require('./modules/CP.js');
 app.use('/contracts', contractsRoutes);
+app.use('/CP', CPRoutes);
 
-app.get('/api/hello', (req, res) => {
+app.get('/api', (req, res) => {
     res.json({ message: 'Hello from Node.js API!' });
 });
 

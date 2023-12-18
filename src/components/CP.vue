@@ -52,10 +52,9 @@ export default {
 
     },
     fetchData() {
-      axios.get('http://localhost:3000/api/hello')
+      axios.get('http://localhost:3000/CP')
         .then(response => {
-          this.message = response.data.message;
-          console.log(this.message)
+          console.log(response)
         })
         .catch(error => {
           console.error('Error fetching data:', error);
