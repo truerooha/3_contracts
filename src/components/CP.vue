@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'Counterparties',
   data() {
@@ -42,10 +44,23 @@ export default {
       ]
     };
   },
+  mounted() {
+    this.fetchData()
+  },
   methods: {
     openCPForm() {
 
-    }
+    },
+    fetchData() {
+      axios.get('http://localhost:3000/api/hello')
+        .then(response => {
+          this.message = response.data.message;
+          console.log(this.message)
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    },
   }
 }
 </script>
