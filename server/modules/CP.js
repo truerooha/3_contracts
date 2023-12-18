@@ -9,7 +9,6 @@ async function getCPs(req, res) {
 
     const sqlQuery = 'SELECT * FROM counterparties';
     const results = await db.query(sqlQuery);
-    console.log('Результаты запроса: ', results);
     res.send(results)
   } catch (error) {
     console.error('Ошибка: ', error);

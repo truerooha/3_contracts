@@ -114,7 +114,7 @@ export default {
     },
     async fetchCounterparties() {
       try {
-        const response = await axios.get('http://localhost:8888/3_contracts/server/loadCPs.php');
+        const response = await axios.get('http://localhost:3000/CP');
         this.CPs = response.data;
       } catch (error) {
         console.error('Error fetching counterparties:', error);
