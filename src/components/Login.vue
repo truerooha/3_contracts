@@ -32,7 +32,7 @@ export default {
         password: this.password
       };
 
-      axios.post('http://localhost:8888/3_contracts/server/login.php', data)
+      axios.post('http://localhost:3000/users/login', data)
         .then((response) => {
 
           if (response.data.authorized === true) {

@@ -4,6 +4,7 @@ const app = express();
 const port = 3000;
 
 app.use(cors())
+app.use(express.json())
 
 const contractsRoutes = require('./modules/contracts.js');
 const CPRoutes = require('./modules/CP.js');
