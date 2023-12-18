@@ -76,7 +76,7 @@ export default {
         return this.newUser.username.trim() !== '' && this.newUser.password.trim() !== '';
       },
       loadUsers() {
-        axios.get('http://localhost:8888/3_contracts/server/loadUsers.php')
+        axios.get('http://localhost:3000/users')
         .then((response) => {
           this.users = response.data;
         })

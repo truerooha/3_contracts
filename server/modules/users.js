@@ -2,14 +2,16 @@ const express = require('express');
 const router = express.Router();
 const Database = require('./db');
 
-async function getCPs(req, res) {
+async function getUsers(req, res) {
   const db = new Database();
   try {
     await db.connect();
 
-    const sqlQuery = 'SELECT * FROM counterparties';
+    const sqlQuery = 'SELECT * FROM users';
     const results = await db.query(sqlQuery);
+    console.log(results)
     res.send(results)
+
   } catch (error) {
     console.error('Ошибка: ', error);
   } finally {
@@ -18,7 +20,7 @@ async function getCPs(req, res) {
 }
 
 router.get('/', (req, res) => {
-    getCPs(req,res)
+    getUsers(req,res)
 });
   
 router.get('/:id', (req, res) => {

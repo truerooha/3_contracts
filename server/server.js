@@ -7,8 +7,11 @@ app.use(cors())
 
 const contractsRoutes = require('./modules/contracts.js');
 const CPRoutes = require('./modules/CP.js');
+const usersRoutes = require('./modules/users.js');
+
 app.use('/contracts', contractsRoutes);
 app.use('/CP', CPRoutes);
+app.use('/users', usersRoutes);
 
 app.get('/api', (req, res) => {
     res.json({ message: 'Hello from Node.js API!' });
