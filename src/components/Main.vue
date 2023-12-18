@@ -58,10 +58,10 @@ export default {
     },
     async loadDataFromServer() {
       try {
-        const response = await axios.get('http://localhost:8888/3_contracts/server/contractsSummary.php');
+        const response = await axios.get('http://localhost:3000/contracts/summary');
         const data = response.data
-        this.expiredContracts= data.expired_contracts || '';
-        this.totalContracts= data.total_contracts || '';
+        this.expiredContracts= data.expired_contracts.toString() || '';
+        this.totalContracts= data.total_contracts.toString() || '';
 
         this.dataLoaded = true;
       } catch (error) {

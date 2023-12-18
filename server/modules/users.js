@@ -9,7 +9,6 @@ async function getUsers(req, res) {
 
     const sqlQuery = 'SELECT * FROM users';
     const results = await db.query(sqlQuery);
-    console.log(results)
     res.send(results)
 
   } catch (error) {
