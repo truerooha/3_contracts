@@ -95,8 +95,9 @@ export default {
 
     },
     loadContracts() {
-      axios.get('http://localhost:8888/3_contracts/server/api.php')
+      axios.get('http://localhost:3000/contracts')
         .then((response) => {
+          console.log(response.data)
           this.contracts = response.data;
         })
         .catch((error) => {

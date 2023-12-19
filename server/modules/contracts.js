@@ -45,12 +45,45 @@ async function getContractById(contractId, res) {
   }
 }
 
+async function getContracts(req, res) {
+  const db = new Database();
+  try { 
+    await db.connect();
+
+    const sqlQuery = `
+    SELECT 
+        Contracts.contract_id AS id,
+        Contracts.contract_number AS number,
+        Contracts.contract_date AS date,
+        Contracts.contract_amount AS amount,
+        counterparties.name AS CPname,
+        CASE WHEN attachment_owners.contract_id IS NOT NULL THEN true ELSE false END AS hasFiles
+    FROM Contracts
+    INNER JOIN counterparties ON Contracts.counterparty_id = counterparties.id
+    LEFT JOIN attachment_owners ON Contracts.contract_id = attachment_owners.contract_id;
+    `
+    const results = await db.query(sqlQuery);
+
+    for (let result of results) {
+      if (result && result.date) {
+         result.date = dayjs(result.date).format('YYYY-MM-DD');
+      }  
+    }
+    res.send(results);
+    
+  } catch (error) {
+    console.error('Ошибка: ', error);
+  } finally {
+    await db.end();
+  }
+}
+
 router.get('/summary', (req, res) => {
   getSummary(req, res)
 });
 
 router.get('/', (req, res) => {
-  res.send('Метод для получения всех договоров');
+  getContracts(req, res)
 });
   
 router.get('/:id', (req, res) => {

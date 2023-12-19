@@ -84,29 +84,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
-//TODO тут надо отрефакторить, увести в отдельный метод. Да и в целом заняться этим файлом
-$sql = "
-SELECT 
-    Contracts.contract_id AS id,
-    Contracts.contract_number AS number,
-    Contracts.contract_date AS date,
-    Contracts.contract_amount AS amount,
-    counterparties.name AS CPname,
-    CASE WHEN attachment_owners.contract_id IS NOT NULL THEN true ELSE false END AS hasFiles
-FROM Contracts
-INNER JOIN counterparties ON Contracts.counterparty_id = counterparties.id
-LEFT JOIN attachment_owners ON Contracts.contract_id = attachment_owners.contract_id;
-";
-
-try {
-    $stmt = $pdo->query($sql);
-    $contracts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    die("Ошибка выполнения SQL-запроса: " . $e->getMessage());
-}
-
-// Отправка данных в формате JSON в ответ на HTTP-запрос
-header("Content-Type: application/json");
-echo json_encode($contracts);
-
 ?>
