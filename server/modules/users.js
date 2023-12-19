@@ -40,6 +40,46 @@ async function login(req, res) {
   }
 }
 
+async function saveUser(req, res) {
+  const db = new Database();
+  const { username, password } = req.body;
+  try {
+    await db.connect();
+
+    //узнать, нет ли юзера 
+    const sqlQuery = 'SELECT * FROM users WHERE `username` = ? ';
+    const results = await db.query(sqlQuery, [username]);
+    if (results.length > 0) {
+      const errorMessage = { Message: 'Пользователь с таким логином уже существует', Code: '0001' };
+      return { statusCode: 207, body: JSON.stringify(errorMessage) };
+    }
+
+    const hashedPassword= md5(password + 'itsalive');
+    const sqlNewUser = "INSERT INTO users (username, password) VALUES (?, ?)";
+    const resultNewUser = await db.query(sqlNewUser, [username, hashedPassword]);
+
+  } catch (error) {
+    console.error('Ошибка: ', error);
+  } finally {
+    await db.end();
+  }
+}
+
+async function removeUser(userId) {
+  const db = new Database();
+  try {
+    await db.connect();
+
+    //узнать, нет ли юзера 
+    const sqlQuery = 'DELETE FROM users WHERE `id` = ? ';
+    const results = await db.query(sqlQuery, [userId]);
+  } catch (error) {
+    console.error('Ошибка: ', error);
+  } finally {
+    await db.end();
+  }
+}
+
 router.get('/', (req, res) => {
     getUsers(req,res)
 });
@@ -48,13 +88,13 @@ router.post('/login', (req, res) => {
   login(req, res)
 });
   
-router.get('/:id', (req, res) => {
-  const contractId = req.params.id;
-  res.send(`Метод для получения контрагента по ID: ${contractId}`);
+router.post('/new', (req, res) => {
+  saveUser(req,res)
 });
-  
-router.post('/', (req, res) => {
-  res.send('Метод для создания нового конрагента');
+
+router.delete('/remove/:id', (req, res) => {
+  console.log(req.params.id)
+  removeUser(req.params.id)
 });
   
 module.exports = router;

@@ -93,14 +93,7 @@ export default {
         this.isDialogVisible = false;
       },
       handleConfirm() {
-        const requestData = { user_id: this.deletedUserID };
-        const jsonData = JSON.stringify(requestData);
-          axios.delete('http://localhost:8888/3_contracts/server/saveUser.php', {
-            data: jsonData,
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          })
+          axios.delete(`http://localhost:3000/users/remove/${this.deletedUserID}`)
           .then(() => {
             this.users = this.users.filter(user => user.id !== this.deletedUserID);
             this.deletedUserID = null
@@ -121,7 +114,7 @@ export default {
         }
         const userJSON = JSON.stringify(this.newUser);
 
-        axios.post('http://localhost:8888/3_contracts/server/saveUser.php', userJSON, {
+        axios.post('http://localhost:3000/users/new', userJSON, {
           headers: {
             'Content-Type': 'application/json',
           },
