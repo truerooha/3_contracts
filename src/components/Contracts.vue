@@ -46,7 +46,7 @@
             <td>{{ contract.CPname }}</td>
             <td>{{ contract.amount }}</td>
             <td>
-                <img v-if="contract.hasFiles === '1'" src="@/assets/icons/attach.svg" class="lil-icon img" alt="Есть файл">
+                <img v-if="contract.hasFiles === 1" src="@/assets/icons/attach.svg" class="lil-icon img" alt="Есть файл">
             </td>
             <td>
               <span @click.stop="deleteContract(contract)">
@@ -97,6 +97,7 @@ export default {
     loadContracts() {
       axios.get('http://localhost:3000/contracts')
         .then((response) => {
+          console.log(response.data)
           this.contracts = response.data;
         })
         .catch((error) => {
