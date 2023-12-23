@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const dayjs = require('dayjs');
 const Database = require('./db');
+const { Blob } = require('buffer');
 
 async function getSummary(req, res) {
   const db = new Database();
@@ -111,14 +112,31 @@ async function saveContract(req, res) {
 
   try {
     await db.connect();
-    
+
     const data = req.body;
     const date = data.date;
     const formattedDate = new Date(date).toISOString().slice(0, 10);
 
-
     const sqlNewContract = 'INSERT INTO Contracts (contract_number, contract_date, counterparty_id, contract_amount) VALUES (?, ?, ?, ?)'
-    const resultNewContract = await db.query(sqlNewContract, [data.number,formattedDate,  data.counterparty_id, data.amount]);
+    const newContractResult = await db.query(sqlNewContract, [data.number,formattedDate,  data.counterparty_id, data.amount]);
+
+    const contractId = newContractResult.insertId;
+    
+    if (data.attach) {
+
+      const sqlOwner = 'INSERT INTO attachment_owners (contract_id, owner_type) VALUES (?, ?)'
+      const ownerResult = await db.query(sqlOwner, [contractId, 'contracts']);
+      
+      const ownerId = ownerResult.insertId;
+      const fileName = data.attach.name.replace(/[^\w\s]/gi, '');
+      const fileData = data.attach.data.toString('base64');
+
+      const sqlAttach = 'INSERT INTO attachment_files (owner_id, file_name, file_data) VALUES (?, ?, ?)'
+      await db.query(sqlAttach, [ownerId, fileName, fileData]);
+
+    }
+
+    res.send('Договор успешно сохранен.');
 
   } catch (error) {
     console.error('Ошибка: ', error);
@@ -127,7 +145,6 @@ async function saveContract(req, res) {
   }
 
 }
-
 
 router.get('/summary', (req, res) => {
   getSummary(req, res)

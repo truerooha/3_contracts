@@ -134,8 +134,7 @@ export default {
     },
     saveContract(contractData) {
       const contractJSON = JSON.stringify(contractData);
-
-      axios.post('http://localhost:8888/3_contracts/server/api.php', contractJSON, {
+      axios.post('http://localhost:3000/contracts/new', contractJSON, {
         headers: {
           'Content-Type': 'application/json',
         },
