@@ -89,7 +89,7 @@ export default {
   },
   methods: {
     openContract(contract) {
-      this.selectedContract = contract.id
+      this.selectedContract = contract.id.toString()
       this.dynamicTitle = "Старый договор"
       this.isContractFormVisible = true;
 
@@ -97,7 +97,6 @@ export default {
     loadContracts() {
       axios.get('http://localhost:3000/contracts')
         .then((response) => {
-          console.log(response.data)
           this.contracts = response.data;
         })
         .catch((error) => {
@@ -105,14 +104,7 @@ export default {
         });
     },
     handleConfirm() {
-        const requestData = { contract_id: this.deletedContract.id }
-        const jsonData = JSON.stringify(requestData)
-        axios.delete('http://localhost:8888/3_contracts/server/api.php', {
-          data: jsonData,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
+        axios.delete(`http://localhost:3000/contracts/remove/${this.deletedContract.id}`)
         .then(() => {
           this.contracts = this.contracts.filter(contract => contract.id !== this.deletedContract.id);
           this.deletedContract = null

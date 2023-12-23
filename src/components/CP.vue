@@ -54,7 +54,6 @@ export default {
     fetchData() {
       axios.get('http://localhost:3000/CP')
         .then(response => {
-          console.log(response)
         })
         .catch(error => {
           console.error('Error fetching data:', error);

@@ -78,6 +78,35 @@ async function getContracts(req, res) {
   }
 }
 
+async function removeContract(contractId) {
+  const db = new Database();
+  try {
+    // Проверяем наличие связанных записей в attachment_owners
+    const sqlOwner = "SELECT * FROM attachment_owners WHERE `contract_id` = ?"
+    const resultsOwner = await db.query(sqlOwner, [contractId]);
+
+    if (resultsOwner.length > 0) {
+        const resultOwner = resultsOwner[0]
+
+        const owner_id = resultOwner.owner_id;
+        const sqlAttach = "DELETE FROM attachment_files WHERE `owner_id` = ?";
+        await db.query(sqlAttach, [owner_id])
+
+        const sqlDeleteOwners = "DELETE FROM attachment_owners WHERE `contract_id` = ?"
+        await db.query(sqlDeleteOwners, [contractId])
+         
+    }
+    const sqlQuery = 'DELETE FROM Contracts WHERE `contract_id` = ? ';
+    const results = await db.query(sqlQuery, [contractId]);
+    res.send("Договор успешно удален.");
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Ошибка при удалении договора: " + error.message);
+    }
+}
+
+
 router.get('/summary', (req, res) => {
   getSummary(req, res)
 });
@@ -89,6 +118,11 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   const contractId = req.params.id;
   getContractById(contractId,res)  
+});
+
+router.get('/remove/:id', (req, res) => {
+  const contractId = req.params.id;
+  removeContract(contractId,res)  
 });
 
 router.post('/', (req, res) => {
