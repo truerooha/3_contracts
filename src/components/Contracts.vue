@@ -97,7 +97,6 @@ export default {
     loadContracts() {
       axios.get('http://localhost:3000/contracts')
         .then((response) => {
-          console.log(response.data)
           this.contracts = response.data;
         })
         .catch((error) => {
@@ -105,7 +104,6 @@ export default {
         });
     },
     handleConfirm() {
-        console.log(this.deletedContract.id)
         axios.delete(`http://localhost:3000/contracts/remove/${this.deletedContract.id}`)
         .then(() => {
           this.contracts = this.contracts.filter(contract => contract.id !== this.deletedContract.id);
