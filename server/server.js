@@ -6,9 +6,12 @@ const port = 3000;
 app.use(cors())
 app.use(express.json())
 
+const middleware = require('./modules/middlware');
 const contractsRoutes = require('./modules/contracts.js');
 const CPRoutes = require('./modules/CP.js');
 const usersRoutes = require('./modules/users.js');
+
+app.use(middleware.requestMiddleware);
 
 app.use('/contracts', contractsRoutes);
 app.use('/CP', CPRoutes);
