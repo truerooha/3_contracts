@@ -78,7 +78,7 @@ async function getContracts(req, res) {
   }
 }
 
-async function removeContract(contractId) {
+async function removeContract(contractId, res) {
   const db = new Database();
   try {
     // Проверяем наличие связанных записей в attachment_owners
@@ -120,7 +120,7 @@ router.get('/:id', (req, res) => {
   getContractById(contractId,res)  
 });
 
-router.get('/remove/:id', (req, res) => {
+router.delete('/remove/:id', (req, res) => {
   const contractId = req.params.id;
   removeContract(contractId,res)  
 });
