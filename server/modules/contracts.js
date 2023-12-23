@@ -106,6 +106,28 @@ async function removeContract(contractId, res) {
     }
 }
 
+async function saveContract(req, res) {
+  const db = new Database();
+
+  try {
+    await db.connect();
+    
+    const data = req.body;
+    const date = data.date;
+    const formattedDate = new Date(date).toISOString().slice(0, 10);
+
+
+    const sqlNewContract = 'INSERT INTO Contracts (contract_number, contract_date, counterparty_id, contract_amount) VALUES (?, ?, ?, ?)'
+    const resultNewContract = await db.query(sqlNewContract, [data.number,formattedDate,  data.counterparty_id, data.amount]);
+
+  } catch (error) {
+    console.error('Ошибка: ', error);
+  } finally {
+    await db.end();
+  }
+
+}
+
 
 router.get('/summary', (req, res) => {
   getSummary(req, res)
@@ -118,6 +140,10 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   const contractId = req.params.id;
   getContractById(contractId,res)  
+});
+
+router.post('/new', (req, res) => {
+  saveContract(req,res)
 });
 
 router.delete('/remove/:id', (req, res) => {

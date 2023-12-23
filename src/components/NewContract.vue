@@ -131,6 +131,9 @@ export default {
     },
     saveContract() {
       this.attemptedSave = true;
+      if (this.selectedOption) {
+        this.contract.counterparty_id = this.selectedOption.id;
+      }
       if (!this.contractID) {
         if (
           !this.contract.number ||
@@ -139,11 +142,7 @@ export default {
         ) {
           return;
         }
-    }
-      if (this.selectedOption) {
-        this.contract.counterparty_id = this.selectedOption.id;
       }
-
       this.$emit("save", this.contract);
     },
 
