@@ -23,6 +23,7 @@
         iconColor = "#F7FAFC"
     />
     <Widget
+        id="notificationsWidget"
         cardClass="gray"
         :iconUrl="notificationsSVG" 
         title="Уведомления"
@@ -95,6 +96,9 @@ export default {
   align-self: center;
 }
 
-
-
+@media screen and (max-width: 1024px) {
+  #notificationsWidget {
+    display: none;
+  }
+}
 </style>
