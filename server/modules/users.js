@@ -2,6 +2,8 @@ const express = require('express');
 const md5 = require('md5');
 const router = express.Router();
 const Database = require('./db');
+const jwt = require('jsonwebtoken');
+const config = require('./config')
 
 async function getUsers(req, res) {
   const db = new Database();
@@ -28,11 +30,16 @@ async function login(req, res) {
 
     const sqlQuery = 'SELECT * FROM `users` WHERE `username` = ? AND `password` = ?'
     const results = await db.query(sqlQuery, [username, hashedPassword]);
+
     if (results.length === 0) {
-      res.json({ authorized: false });
-    } else {
-      res.json({ authorized: true });
-    }
+    //   //res.json({ authorized: false });
+       res.status(401).json({ message: 'Invalid credentials' });
+     } else {
+      const user = { username };
+      const token = jwt.sign(user, config.jwtSecret, { expiresIn: '24h' });
+      res.json({ token });
+    //   //res.json({ authorized: true });
+     }
   } catch (error) {
     res.status(500).json({ authorized: false, error: 'Ошибка сервера' });
   } finally {
@@ -46,7 +53,6 @@ async function saveUser(req, res) {
   try {
     await db.connect();
 
-    //узнать, нет ли юзера 
     const sqlQuery = 'SELECT * FROM users WHERE `username` = ? ';
     const results = await db.query(sqlQuery, [username]);
     if (results.length > 0) {
@@ -70,7 +76,6 @@ async function removeUser(userId) {
   try {
     await db.connect();
 
-    //узнать, нет ли юзера 
     const sqlQuery = 'DELETE FROM users WHERE `id` = ? ';
     const results = await db.query(sqlQuery, [userId]);
   } catch (error) {

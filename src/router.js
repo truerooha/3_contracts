@@ -25,7 +25,8 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const isAuthorized = Cookies.get('authorized') === 'true';
+  const token = localStorage.getItem('token');
+  const isAuthorized = token !== null && token !== undefined;
 
   if (to.path !== '/login' && !isAuthorized) {
     next('/login');

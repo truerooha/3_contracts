@@ -35,21 +35,27 @@ export default {
       axios.post('http://localhost:3000/users/login', data)
         .then((response) => {
 
-          if (response.data.authorized === true) {
-
-            const expiresInDays = 1;
-            Cookies.set('authorized', 'true', { expires: expiresInDays });
-
+          if (response.data.token) {
+            localStorage.setItem('token', response.data.token);
             this.$router.push('/main');
           } else {
-            this.isValid = false
             console.log('Неправильное имя пользователя или пароль');
-            console.log(this.isValid);
-            
           }
+
+          // if (response.data.authorized === true) {
+
+          //   const expiresInDays = 1;
+          //   Cookies.set('authorized', 'true', { expires: expiresInDays });
+
+          //   this.$router.push('/main');
+          // } else {
+          //   this.isValid = false
+          //   console.log('Неправильное имя пользователя или пароль');
+          //   console.log(this.isValid);
+            
+          // }
         })
         .catch((error) => {
-
           console.error('Произошла ошибка при отправке запроса: ' + error);
       });
     },
