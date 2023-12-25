@@ -1,12 +1,22 @@
 <template>
   <div class="big-card">
       <div class="main-area" >
-        <div @click="addFile" class="add-el">
+        <div @click="toggleDropdown" class="add-el">
             <svg class="add" width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z" stroke="currentColor" stroke-width="1.5"/>
               <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
              <p> Добавить </p>
+             <div v-show="isDropdownVisible" id="myDropdown" class="dropdown-content">
+              <a href="" @click.prevent="addFiles">
+                <img class = "lil-icon" src="@/assets/icons/download.svg" alt="загрузить">
+                загрузить
+              </a>
+              <a href="">
+                <img class="lil-icon" src='@/assets/icons/scanner.svg' alt="сканер">
+                со сканера
+              </a>
+            </div>
         </div>
         <input type="file" @change="fileSelected" id="fileInput" style="display: none;" multiple>
         <TrayElement
@@ -35,6 +45,7 @@ export default {
   data() {
     return {
       isDropAreaVisible: true,
+      isDropdownVisible: false,
       files: [
         { fileType: 'group', fileDescrip: 'Пачка файлов' },
         { fileType: 'draft', fileDescrip: 'Черновик документа' },
@@ -78,7 +89,10 @@ export default {
         draggedElement.style.display = 'none';
       }
     },
-    addFile() {
+    toggleDropdown() {
+      this.isDropdownVisible = !this.isDropdownVisible 
+    },
+    addFiles() {
       const fileInput = document.getElementById('fileInput')
       fileInput.click()
     },
@@ -102,8 +116,8 @@ export default {
 
 <style scoped>
 p {
-    color: #4A5568;
-    font-size: 13px;
+  color: #4A5568;
+  font-size: 13px;
 }
 
 .add{
@@ -111,6 +125,7 @@ p {
   color: #CBD5E0
 }
 .add-el {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -199,5 +214,35 @@ p {
   background: #DEF7EC;
   border: 1px solid #31C48D;
 }
+
+.dropdown-content {
+  position: absolute;
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  min-width: 140px;
+  padding: 8px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  top: 60px;
+  left: 40px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 4px 8px;
+  text-decoration: none;
+  border-radius: 5px;
+  display: flex;
+  text-align: left;
+  align-items: center;
+}
+
+.dropdown-content a img {
+    margin-right: 8px;
+  }
+
+.dropdown-content a:hover {background-color: #ddd}
+
+.show {display:block;}
 
 </style>
