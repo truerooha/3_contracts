@@ -31,6 +31,7 @@ export default {
   methods: {
     toggleActive() {
         store.commit('setFilter', this.filterId)
+        this.$store.dispatch('fetchContracts');
         this.filterId === store.state.currentFilterIndex;
     }
   },

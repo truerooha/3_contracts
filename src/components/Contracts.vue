@@ -71,7 +71,6 @@ export default {
   name: 'Contracts',
   data() {
     return {
-      contracts: [],
       isContractFormVisible: false,
       isDialogVisible: false,
       deletedContract: null,
@@ -80,11 +79,14 @@ export default {
     };
   },
   mounted() {
-    this.loadContracts();
+    this.$store.dispatch('fetchContracts');
   },
   computed: {
     filters() {
       return this.$store.getters.getFilters;
+    },
+    contracts() {
+      return this.$store.getters.getContracts;
     },
   },
   methods: {
@@ -93,15 +95,6 @@ export default {
       this.dynamicTitle = "Старый договор"
       this.isContractFormVisible = true;
 
-    },
-    loadContracts() {
-      axios.get('http://localhost:3000/contracts')
-        .then((response) => {
-          this.contracts = response.data;
-        })
-        .catch((error) => {
-          console.error('Ошибка при загрузке данных:', error);
-        });
     },
     handleConfirm() {
         axios.delete(`http://localhost:3000/contracts/remove/${this.deletedContract.id}`)
@@ -142,13 +135,14 @@ export default {
           const toast = useToast();
           toast.success("Договор сохранён", {
           timeout: 2000
-      });
+          });
+        this.$store.dispatch('fetchContracts');
+
         })
         .catch((error) => {
           console.error('Ошибка при сохранении договора:', error);
         });
       this.hideContractForm();
-      this.loadContracts();
     }
   },
   components: {

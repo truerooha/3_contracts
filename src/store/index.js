@@ -1,7 +1,10 @@
 import { createStore } from 'vuex'
+import axios from 'axios'
+
 export const store = createStore({
     state: {
         currentFilterId: null,
+        contracts: [],
         filters: [
         { label: 'Номер' },
         { label: 'Дата' },
@@ -18,11 +21,31 @@ export const store = createStore({
         },
         clearFilter(state) {
             state.currentFilterId = null 
-        }
+        },
+        setContracts(state, contracts) {
+            state.contracts = contracts;
+        },
     },
+    actions: {
+        async fetchContracts({ commit, state }) {
+            try {
+                const response = await axios.get('http://localhost:3000/contracts', {
+                  params: {
+                    filter: state.currentFilterId,
+                  },
+                });
+                commit('setContracts', response.data);
+              } catch (error) {
+                console.error('Ошибка при загрузке данных:', error);
+              }
+            },
+        },
     getters: {
         getFilters: state => {
             return state.filters;
+        },
+        getContracts: state => {
+            return state.contracts;
         },
         getCurrentFilterText: state => {
             if (state.currentFilterId !== null) {

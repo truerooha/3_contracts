@@ -48,6 +48,8 @@ async function getContractById(contractId, res) {
 
 async function getContracts(req, res) {
   const db = new Database();
+  const { filter } = req.query;
+  console.log(filter)
   try { 
     await db.connect();
 
@@ -172,4 +174,4 @@ router.post('/', (req, res) => {
   res.send('Метод для создания нового договора');
 });
   
-  module.exports = router;
+module.exports = router;
