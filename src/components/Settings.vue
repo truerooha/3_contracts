@@ -29,13 +29,15 @@
           <tr>
             <th>№</th>
             <th>Имя пользователя</th>
+            <th>ID</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="user in users" :key="user.id">
-            <td>{{ user.id }}</td>
+          <tr v-for="(user, index) in users" :key="user.id">
+            <td>{{ index + 1}}</td>
             <td>{{ user.username }}</td>
+            <td>{{ user.id }}</td>
             <td>
               <span @click="deleteUser(user.id)">
                 <img src="@/assets/icons/trash.svg" class="lil-icon" alt="Удалить">
