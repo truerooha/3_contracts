@@ -55,7 +55,11 @@
             </td>
           </tr>
         </tbody>
+      <tr v-if="isEmptyContracts">
+        <td colspan = "6" class="no-contracts" >нет договоров</td>
+      </tr>
       </table>
+
   </div>
 </template>
 
@@ -148,10 +152,20 @@ export default {
   components: {
     ContractForm, Dialog, SearchInput, Badge
   },
+  computed: {
+    isEmptyContracts() {
+      return this.$store.state.contracts.length === 0;
+    }
+  }
 };
 </script>
 
 <style scoped>
+.no-contracts {
+  text-align: center;
+  width: 100%;
+  padding: 10px;
+}
 .filters {
   display: flex;
   margin-bottom: 30px;
