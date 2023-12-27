@@ -54,10 +54,11 @@
               </span>
             </td>
           </tr>
+          <tr v-if="isEmptyContracts">
+            <td colspan = "6" class="no-contracts" >нет договоров</td>
+          </tr>
         </tbody>
-      <tr v-if="isEmptyContracts">
-        <td colspan = "6" class="no-contracts" >нет договоров</td>
-      </tr>
+      
       </table>
 
   </div>
@@ -92,6 +93,9 @@ export default {
     contracts() {
       return this.$store.getters.getContracts;
     },
+    isEmptyContracts() {
+        return this.$store.state.contracts.length === 0;
+    }
   },
   methods: {
     openContract(contract) {
@@ -152,11 +156,6 @@ export default {
   components: {
     ContractForm, Dialog, SearchInput, Badge
   },
-  computed: {
-    isEmptyContracts() {
-      return this.$store.state.contracts.length === 0;
-    }
-  }
 };
 </script>
 
