@@ -97,15 +97,25 @@ export default {
       fileInput.click()
     },
     dragOverHandler(event) {
+      if (!event.target.classList.contains('main-area')) {
+        return
+      }
       event.target.style.border = '2px dashed #31C48D';
     },
      dragLeaveHandler(event) {
       event.target.style.border = 'none';
     },
     dropHandler(event) {
+      if (!event.target.classList.contains('main-area')) {
+        return
+      }
+
+      if (event.dataTransfer.files[0] === undefined)
+        return
+      ;
       var file = event.dataTransfer.files[0];
+
       const fileName = file.name;
-      console.log(fileName)
       const fileExtension = fileName.slice((fileName.lastIndexOf(".") - 1 >>> 0) + 2);
       this.files.push({ fileType: fileExtension, fileDescrip: fileName})
       event.target.style.border = 'none';
