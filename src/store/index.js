@@ -9,7 +9,8 @@ export const store = createStore({
         { label: 'Номер' },
         { label: 'Дата' },
         { label: 'ИНН' },
-        { label: 'Контрагент' }]
+        { label: 'Контрагент' }],
+        searchString: ''
     },
     mutations: {
         setFilter(state, filterIndex) {
@@ -25,6 +26,9 @@ export const store = createStore({
         setContracts(state, contracts) {
             state.contracts = contracts;
         },
+        setSearchString(state, searchString) {
+            state.searchString = searchString;
+        }
     },
     actions: {
         async fetchContracts({ commit, state }) {
@@ -32,6 +36,7 @@ export const store = createStore({
                 const response = await axios.get('http://localhost:3000/contracts', {
                   params: {
                     filter: state.currentFilterId,
+                    search: state.searchString,
                   },
                 });
                 commit('setContracts', response.data);

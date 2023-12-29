@@ -9,7 +9,6 @@
       :placeholder="placeholderText"
       @focus="updatePlaceholder('')"
       @blur="updatePlaceholder('Поиск')"
-      @input="handleInput"
     />
     <div class="filter-tags">
       <div v-if="currentFilterText" class="filter-tag">
@@ -35,10 +34,6 @@ export default {
     }
     },
     methods: {
-      handleInput() {
-      // Обработка ввода текста поиска
-      // Возможно, здесь вы захотите выполнить какие-то дополнительные действия
-      },
       removeFilter() {
           store.commit('clearFilter')
       },
@@ -48,8 +43,9 @@ export default {
     },
     watch: {
       searchQuery(newValue) {
-      console.log('Search query changed:', newValue);
-    },
+        this.$store.commit('setSearchString', newValue);
+        this.$store.dispatch('fetchContracts');
+      },
     }
 };
 </script>

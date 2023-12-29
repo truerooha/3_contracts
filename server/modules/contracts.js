@@ -48,12 +48,12 @@ async function getContractById(contractId, res) {
 
 async function getContracts(req, res) {
   const db = new Database();
-  const { filter } = req.query;
-  console.log(filter)
+  const { filter, search } = req.query;
+
   try { 
     await db.connect();
 
-    const sqlQuery = `
+    let sqlQuery = `
     SELECT 
         Contracts.contract_id AS id,
         Contracts.contract_number AS number,
@@ -63,8 +63,41 @@ async function getContracts(req, res) {
         CASE WHEN attachment_owners.contract_id IS NOT NULL THEN true ELSE false END AS hasFiles
     FROM Contracts
     INNER JOIN counterparties ON Contracts.counterparty_id = counterparties.id
-    LEFT JOIN attachment_owners ON Contracts.contract_id = attachment_owners.contract_id;
+    LEFT JOIN attachment_owners ON Contracts.contract_id = attachment_owners.contract_id
     `
+
+    if (search) {
+      sqlQuery += 'WHERE ';
+      if (filter) {
+        switch (filter) {
+          case '0':
+            sqlQuery += `Contracts.contract_number LIKE '%${search}%'`;
+            break;
+          case '1':
+            sqlQuery += `Contracts.contract_date LIKE '%${search}%'`;
+            break;
+          case '2':
+            sqlQuery += `counterparties.name LIKE '%${search}%'`;
+            break;
+          case '3':
+            sqlQuery += `counterparties.inn LIKE '%${search}%'`;
+            break;
+          default:
+            sqlQuery += `True`
+            break;
+        }
+      } else {
+        sqlQuery += `
+          Contracts.contract_number LIKE '%${search}%' OR
+          Contracts.contract_date LIKE '%${search}%' OR
+          counterparties.name LIKE '%${search}%' OR
+          counterparties.inn LIKE '%${search}%'
+        `;
+      }
+    } else {
+      sqlQuery += `;`
+    }
+
     const results = await db.query(sqlQuery);
 
     for (let result of results) {
@@ -84,7 +117,7 @@ async function getContracts(req, res) {
 async function removeContract(contractId, res) {
   const db = new Database();
   try {
-    // Проверяем наличие связанных записей в attachment_owners
+
     const sqlOwner = "SELECT * FROM attachment_owners WHERE `contract_id` = ?"
     const resultsOwner = await db.query(sqlOwner, [contractId]);
 
