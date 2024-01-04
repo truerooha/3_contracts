@@ -1,35 +1,34 @@
 <template>
   <div class="top">
     <h1 class="page-h1">Контрагенты</h1>
-    <button @click="openCPForm" class="addCP btn btn-prima">+ Создать контрагента</button>
+    <button @click="openCPForm" class="addCP btn btn-prima">+ Новый</button>
   </div>
   <div class="page-content" id="cp-page">
     <table class="cp-table common-table">
       <thead>
         <tr>
+          <th>№</th>
           <th>Наименование</th>
           <th>ИНН</th>
-          <th>E-mail</th>
-          <th>Телефон</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="CP in CPs" :key="CP.id">
-          <td>{{ CP.CPname }}</td>
-          <td>{{ CP.INN }}</td>
-          <td>{{ CP.email }}</td>
-          <td>{{ CP.phone }}</td>
+        <tr v-for="(CP, index) in CPs" :key="CP.id" @click="selectCP(CP)">
+          <td>{{ index + 1}}</td>
+          <td>{{ CP.name }}</td>
+          <td>{{ CP.inn }}</td>
           <td>
-          <span @click="deleteContract(CP)">
+          <span @click="deleteCP(CP)">
             <img src="@/assets/icons/trash.svg" class="lil-icon" alt="Удалить">
           </span>
         </td>
         </tr>
       </tbody>
     </table>
-    <div class="cp-form ">
-
+    <div v-if="CPnotEmpty" class="cp-form">
+      <h2 v-if="selectedCP">{{ selectedCP.name }}</h2>
+      <p v-if="selectedCP">ИНН: {{ selectedCP.inn }}</p>
     </div>
   </div>
 </template>
@@ -42,22 +41,32 @@ export default {
   data() {
     return {
       CPs: [
-        { id: 1, CPname: 'Контрагент 1', INN: '1234567890', email: 'cp1@example.com', phone: '123-456-7890' },
-        { id: 2, CPname: 'Контрагент 2', INN: '0987654321', email: 'cp2@example.com', phone: '987-654-3210' },
       ],
-      showForm: false
+      selectedCP: null
     };
+  },
+  computed: {
+    CPnotEmpty() {
+      return this.CPs.length > 0;
+    },
   },
   mounted() {
     this.fetchData()
   },
   methods: {
-    openCPForm() {
-      this.showForm = !this.showForm;
+    selectCP(CP) {
+      this.selectedCP = CP;
+    },
+    deleteCP() {
+
     },
     fetchData() {
       axios.get('http://localhost:3000/CP')
         .then(response => {
+          this.CPs = response.data;
+          if (this.CPs.length > 0) {
+            this.selectedCP = this.CPs[0];
+          }
         })
         .catch(error => {
           console.error('Error fetching data:', error);
@@ -87,7 +96,7 @@ export default {
 
 .cp-table {
   align-self: start;
-  width: 10%;
+  width: 50%;
 }
 
 .cp-form {
@@ -96,7 +105,7 @@ export default {
   padding: 20px;
   margin-right: 10px;
   width: 40%;
-  height: 90%;
+  height: 85%;
   box-shadow: 0 0 20px rgb(49, 196, 141, 0.1);
 }
 </style>
