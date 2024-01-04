@@ -1,10 +1,14 @@
 <template>
   <div class="top">
     <h1 class="page-h1">Контрагенты</h1>
-    <button @click="openCPForm" class="addCP btn btn-prima">+ Новый</button>
+    <button @click="openCPForm" :class="{'addCP': true, 'glowing': !CPnotEmpty }" class="btn btn-prima">+ Новый</button>
   </div>
   <div class="page-content" id="cp-page">
-    <table class="cp-table common-table">
+    <dummy v-if="!CPnotEmpty"
+      :imageUrl="CPDummySVG"
+      :title="'Пока пусто :('"
+    ></dummy>
+    <table v-if="CPnotEmpty" class="cp-table common-table">
       <thead>
         <tr>
           <th>№</th>
@@ -35,14 +39,17 @@
 
 <script>
 import axios from 'axios';
+import Dummy from './lib/Dummy.vue'
 
 export default {
   name: 'Counterparties',
+  components: {Dummy},
   data() {
     return {
       CPs: [
       ],
-      selectedCP: null
+      selectedCP: null,
+      CPDummySVG: require('@/assets/pics/confused.svg'),
     };
   },
   computed: {
@@ -77,10 +84,18 @@ export default {
 </script>
 
 <style>
+@keyframes glowing {
+    0% { background-color: #31C48D; box-shadow: 0 0 5px #31C48D; }
+    50% { background-color: #6ceeab; box-shadow: 0 0 20px rgb(49, 196, 141, 0.5); }
+    100% { background-color: #31C48D; box-shadow: 0 0 5px #31C48D; }
+}
 .addCP {
   margin-left: auto;
 }
 
+.glowing {
+  animation: glowing 3000ms infinite;
+}
 .top {
   display: flex;
   width: 100%;
