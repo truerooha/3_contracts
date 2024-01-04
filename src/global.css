@@ -63,6 +63,7 @@
     border-collapse: collapse;
     border-radius: 10px;
     overflow: hidden;
+    width: 100%;
     background-color: rgb(255, 255, 255);
   }
   

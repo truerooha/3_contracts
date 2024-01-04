@@ -8,28 +8,30 @@
       :imageUrl="CPDummySVG"
       :title="'Пока пусто :('"
     ></dummy>
-    <table v-if="CPnotEmpty" class="cp-table common-table">
-      <thead>
-        <tr>
-          <th>№</th>
-          <th>Наименование</th>
-          <th>ИНН</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(CP, index) in CPs" :key="CP.id" @click="selectCP(CP)">
-          <td>{{ index + 1}}</td>
-          <td>{{ CP.name }}</td>
-          <td>{{ CP.inn }}</td>
-          <td>
-          <span @click="deleteCP(CP)">
-            <img src="@/assets/icons/trash.svg" class="lil-icon" alt="Удалить">
-          </span>
-        </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-container">
+        <table v-if="CPnotEmpty" class="cp-table common-table">
+          <thead>
+            <tr>
+              <th>№</th>
+              <th>Наименование</th>
+              <th>ИНН</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(CP, index) in CPs" :key="CP.id" @click="selectCP(CP)">
+              <td>{{ index + 1}}</td>
+              <td>{{ CP.name }}</td>
+              <td>{{ CP.inn }}</td>
+              <td>
+              <span @click="deleteCP(CP)">
+                <img src="@/assets/icons/trash.svg" class="lil-icon" alt="Удалить">
+              </span>
+            </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
     <div v-if="CPnotEmpty" class="cp-form">
       <h2 v-if="selectedCP">{{ selectedCP.name }}</h2>
       <p v-if="selectedCP">ИНН: {{ selectedCP.inn }}</p>
@@ -101,6 +103,10 @@ export default {
   width: 100%;
 }
 
+.table-container {
+  width: 50%;
+}
+
 #cp-page {
   display: flex;
   border-radius: 10px;
@@ -111,7 +117,6 @@ export default {
 
 .cp-table {
   align-self: start;
-  width: 50%;
 }
 
 .cp-form {
