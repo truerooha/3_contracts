@@ -28,7 +28,7 @@
         <badge v-for="(filter, index) in filters" :key="index" :text="filter.label" :filterId="index"/>
       </div>
 
-      <table class="common-table">
+      <table class="common-table contracts-table">
         <thead>
           <tr>
             <th>Номер договора</th>
@@ -216,5 +216,9 @@ input {
   outline: none;
   width: 100%;
   height: 20px;
+}
+
+.contracts-table {
+  width: 100%;
 }
 </style>

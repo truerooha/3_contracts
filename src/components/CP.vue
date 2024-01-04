@@ -1,11 +1,6 @@
 <template>
   <div class="top">
     <h1 class="page-h1">Контрагенты</h1>
-    <transition name="slide">
-      <div v-if="showForm" class="form">
-          <h2>Моя форма</h2>
-      </div>
-    </transition>
     <button @click="openCPForm" class="addCP btn btn-prima">+ Создать контрагента</button>
   </div>
   <div class="page-content" id="cp-page">
@@ -32,7 +27,10 @@
         </td>
         </tr>
       </tbody>
-      </table>
+    </table>
+    <div class="cp-form ">
+
+    </div>
   </div>
 </template>
 
@@ -70,7 +68,6 @@ export default {
 </script>
 
 <style>
-
 .addCP {
   margin-left: auto;
 }
@@ -84,33 +81,22 @@ export default {
   display: flex;
   border-radius: 10px;
   padding: 30px;
-  align-items: flex-start;
-  width: 95%;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .cp-table {
-  justify-self: center;
+  align-self: start;
+  width: 10%;
 }
 
-.slide-enter-active, .slide-leave-active {
-    transition: transform 0.5s;
-}
-.slide-enter, .slide-leave-to /* .slide-leave-active в <2.1.8 */ {
-    transform: translateX(0);
-}
-.slide-enter-to, .slide-leave /* .slide-enter-active в <2.1.8 */ {
-    transform: translateX(100%);
-}
-
-/* Стили для формы */
-.form {
-    background-color: #ffffff;
-    padding: 20px;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 40%;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+.cp-form {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-right: 10px;
+  width: 40%;
+  height: 90%;
+  box-shadow: 0 0 20px rgb(49, 196, 141, 0.1);
 }
 </style>
