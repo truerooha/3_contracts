@@ -40,7 +40,7 @@
 
 <script>
 import Dropdown from "@/components/lib/Dropdown.vue"
-import axios from 'axios';
+import axios from '../axios';
 
 export default {
   components: {

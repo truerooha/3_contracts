@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from '../axios';
 import Dummy from './lib/Dummy.vue'
 
 export default {

@@ -11,7 +11,7 @@
 
 <script>
 import Cookies from "js-cookie";
-import axios from 'axios';
+import axios from '../axios';
 
 export default {
   data() {
@@ -41,19 +41,6 @@ export default {
           } else {
             console.log('Неправильное имя пользователя или пароль');
           }
-
-          // if (response.data.authorized === true) {
-
-          //   const expiresInDays = 1;
-          //   Cookies.set('authorized', 'true', { expires: expiresInDays });
-
-          //   this.$router.push('/main');
-          // } else {
-          //   this.isValid = false
-          //   console.log('Неправильное имя пользователя или пароль');
-          //   console.log(this.isValid);
-            
-          // }
         })
         .catch((error) => {
           console.error('Произошла ошибка при отправке запроса: ' + error);

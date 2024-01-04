@@ -40,7 +40,7 @@
 <script>
 import Tray from './Tray.vue';
 import Widget from './Widget.vue';
-import axios from 'axios';
+import axios from '../axios';
 
 export default {
   data() {

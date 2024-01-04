@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from '../axios';
 import ContractForm from "./NewContract.vue";
 import SearchInput from "./SearchInput.vue"
 import Dialog from './Dialog.vue';
