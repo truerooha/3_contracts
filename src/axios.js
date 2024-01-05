@@ -19,8 +19,7 @@ axios.interceptors.response.use(
 },
 (error) => {
     if (error.response && error.response.status === 401) {
-    // Обработка ошибки аутентификации (например, перенаправление на страницу входа)
-    // Можно также реализовать обновление токена и повторный запрос
+      localStorage.removeItem('token');
     }
     return Promise.reject(error);
 }

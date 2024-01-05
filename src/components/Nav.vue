@@ -110,7 +110,7 @@ export default {
       },
       handleConfirm() {
         this.$router.push('/login');
-        Cookies.remove("authorized")
+        localStorage.removeItem('token');
       },
       showModal() {
       this.isDialogVisible = true;
