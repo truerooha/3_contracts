@@ -88,7 +88,7 @@ export default {
         date: "",
         counterparty_id: null,
         amount: "",
-        attach: null
+        attaches: []
       }
     },
     handleOptionSelected(option) {

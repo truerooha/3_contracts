@@ -14,7 +14,7 @@
               <input v-model="contract.date" type="date" placeholder="Дата договора" @input="resetAttemptedSave" :class="{ 'error': attemptedSave && !contract.date }" required/>
               <Dropdown :options="CPs" :extOption="contract.counterparty_id" :attemptedSave="attemptedSave"  @option-selected="handleOptionSelected"/>
               <input v-model="contract.amount" placeholder="Сумма" required/>
-              <Files @onFileUpload="onFileUpload" :files="attaches"/>
+              <Files @onFileUpload="onFileUpload" :files="contract.attaches"/>
             </slot>
           </div>
           <div class="preview">
@@ -65,10 +65,9 @@ export default {
         date: "",
         counterparty_id: null,
         amount: "",
-        attach: null
+        attaches: null
       },
       CPs: [],
-      attaches: [],
       selectedOption: null,
       attemptedSave: false
     };
@@ -79,6 +78,7 @@ export default {
       handler(newValue) {
         if (newValue !== "") {
           this.fetchContractData()
+          this.fetchFiles()
         }
       },
     },
@@ -98,6 +98,21 @@ export default {
       this.contract.amount = contract.contract_amount
 
     },
+    async fetchFiles() {
+      try {
+        const apiUrl = `http://localhost:3000/files/${this.contractID}`;
+        axios.get(apiUrl)
+        .then(response => {
+          this.contract.attaches = response.data
+        })
+        .catch(error => {
+          console.error('Ошибка при выполнении запроса:', error);
+        });
+
+        } catch (error) {
+          console.error('Ошибка при загрузке файлов договора', error);
+        }
+    },
     async fetchContractData() {
       try {
         const apiUrl = `http://localhost:3000/contracts/${this.contractID}`;
@@ -111,7 +126,7 @@ export default {
 
           } catch (error) {
             console.error('Ошибка при загрузке данных', error);
-          }
+        }
     },
     async fetchCounterparties() {
       try {
