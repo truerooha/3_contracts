@@ -20,7 +20,6 @@
 <script>
 import { getImageSrc } from '@/files'
 export default {
-    
     props: {
         files: {
             type: Array,

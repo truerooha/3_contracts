@@ -117,7 +117,6 @@ export default {
       this.clearContract()
     },
     onFileUpload(attach) {
-      console.log(attach)
       this.contract.attach = attach;
       this.attaches.push(attach)
     },
