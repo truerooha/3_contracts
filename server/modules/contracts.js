@@ -157,18 +157,21 @@ async function saveContract(req, res) {
 
     const contractId = newContractResult.insertId;
     
-    if (data.attach) {
-
-      const sqlOwner = 'INSERT INTO attachment_owners (contract_id, owner_type) VALUES (?, ?)'
+    if (data.attaches && data.attaches.length > 0) {
+      const sqlOwner = 'INSERT INTO attachment_owners (contract_id, owner_type) VALUES (?, ?)';
       const ownerResult = await db.query(sqlOwner, [contractId, 'contracts']);
-      
+    
       const ownerId = ownerResult.insertId;
-      const fileName = data.attach.name.replace(/[^\w\s]/gi, '');
-      const fileData = data.attach.data.toString('base64');
-
-      const sqlAttach = 'INSERT INTO attachment_files (owner_id, file_name, file_data) VALUES (?, ?, ?)'
-      await db.query(sqlAttach, [ownerId, fileName, fileData]);
-
+    
+      const valuesToInsert = data.attaches.map(attach => {
+        const fileName = attach.name.replace(/[^\w\s.]/gi, '');
+        const fileType = attach.type;
+        const fileData = attach.data.toString('base64');
+        return [ownerId, fileName, fileType, fileData];
+      });
+    
+      const sqlAttach = 'INSERT INTO attachment_files (owner_id, file_name, file_ext, file_data) VALUES ?';
+      await db.query(sqlAttach, [valuesToInsert]);
     }
 
     res.send('Договор успешно сохранен.');

@@ -13,7 +13,7 @@
             <input v-model="contract.date" type="date" placeholder="Дата договора" @input="resetAttemptedSave" :class="{ 'error': attemptedSave && !contract.date }" required/>
             <Dropdown :options="CPs" :extOption="contract.counterparty_id" :attemptedSave="attemptedSave"  @option-selected="handleOptionSelected"/>
             <input v-model="contract.amount" placeholder="Сумма" required/>
-            <Files @onFileUpload="onFileUpload" :files="attaches"/>
+            <Files @onFileUpload="onFileUpload" :files="contract.attaches"/>
           </slot>
         </section>
 
@@ -29,8 +29,7 @@
           <button
             type="button"
             class="btn btn-common"
-            @click="closeForm"
-          >
+            @click="closeForm">
             Закрыть
           </button>
         </footer>
@@ -54,10 +53,9 @@ export default {
         date: "",
         counterparty_id: null,
         amount: "",
-        attach: null
+        attaches: [],
       },
       CPs: [],
-      attaches: [],
       selectedOption: null,
       attemptedSave: false
     };
@@ -117,8 +115,7 @@ export default {
       this.clearContract()
     },
     onFileUpload(attach) {
-      this.contract.attach = attach;
-      this.attaches.push(attach)
+      this.contract.attaches.push(attach)
     },
 
   }
