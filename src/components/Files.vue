@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="file-list" :class="{'scroll': shouldScroll }">
+    <div class="file-list">
         <div v-for= "fileItem in files" :key="fileItem.id" class="file-item">
             <img :src="getImageSrc(fileItem.type)" class="lil-icon" alt="">
             <span class="item-name">{{truncateName(fileItem.name) }}</span>
@@ -26,11 +26,6 @@ export default {
             type: Array,
             default: []
         },
-    },
-    computed: {
-        shouldScroll() {
-            return this.files.length > 2;
-        }
     },
     methods: {
         getImageSrc,
@@ -80,9 +75,11 @@ p {
     max-width: 300px;
     padding-top: 10px;
 }
+
 .files-input {
     display: none;
 }
+
 .file-item {
     display: flex;
     padding: 8px;
@@ -109,9 +106,5 @@ p {
 }
 .upload-area:hover {
     opacity: 70%;
-}
-
-.scroll {
-    overflow-y: scroll;
 }
 </style>
