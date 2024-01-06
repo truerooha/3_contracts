@@ -17,11 +17,17 @@
       <button @click="showContractForm" class="search-button btn btn-prima">+ Новый</button>
       </div>
 
-      <ContractForm
-        v-show="isContractFormVisible"
+      <NewContract
+        v-show="isNewContractVisible"
+        @close="hideNewContract"
+        @save="saveNewContract"
+      />
+
+      <SavedContract
+        v-show="isSavedContractVisible"
         :contractID="selectedContract"
         :dynamicTitle="dynamicTitle"
-        @close="hideContractForm"
+        @close="hideContract"
         @save="saveContract"
       />
       <div class="filters">
@@ -46,7 +52,7 @@
             <td>{{ contract.CPname }}</td>
             <td>{{ contract.amount }}</td>
             <td>
-                <img v-if="contract.hasFiles === 1" src="@/assets/icons/attach.svg" class="lil-icon img" alt="Есть файл">
+              <img v-if="contract.hasFiles === 1" src="@/assets/icons/attach.svg" class="lil-icon img" alt="Есть файл">
             </td>
             <td>
               <span @click.stop="deleteContract(contract)">
@@ -66,7 +72,8 @@
 
 <script>
 import axios from '../axios';
-import ContractForm from "./NewContract.vue";
+import NewContract from "./NewContract.vue";
+import SavedContract from "./Contract.vue";
 import SearchInput from "./SearchInput.vue"
 import Dialog from './lib/Dialog.vue';
 import Badge from './lib/Badge.vue'
@@ -76,7 +83,8 @@ export default {
   name: 'Contracts',
   data() {
     return {
-      isContractFormVisible: false,
+      isNewContractVisible: false,
+      isSavedContractVisible: false,
       isDialogVisible: false,
       deletedContract: null,
       selectedContract: "",
@@ -101,8 +109,7 @@ export default {
     openContract(contract) {
       this.selectedContract = contract.id.toString()
       this.dynamicTitle = "Старый договор"
-      this.isContractFormVisible = true;
-
+      this.isSavedContractVisible = true;
     },
     handleConfirm() {
         axios.delete(`http://localhost:3000/contracts/remove/${this.deletedContract.id}`)
@@ -127,12 +134,20 @@ export default {
     },
     showContractForm() {
       this.dynamicTitle = "Новый договор"
-      this.isContractFormVisible = true;
+      this.isNewContractVisible = true;
     },
-    hideContractForm() {
-      this.isContractFormVisible = false;
+    hideNewContract() {
+      this.isNewContractVisible = false;
     },
-    saveContract(contractData) {
+    hideContract() {
+      this.isSavedContractVisible = false;
+    },
+
+    saveNewContract(contractData) {
+      this.hideContract();
+    },
+
+    saveNewContract(contractData) {
       const contractJSON = JSON.stringify(contractData);
       axios.post('http://localhost:3000/contracts/new', contractJSON, {
         headers: {
@@ -150,11 +165,11 @@ export default {
         .catch((error) => {
           console.error('Ошибка при сохранении договора:', error);
         });
-      this.hideContractForm();
+      this.hideNewContract();
     }
   },
   components: {
-    ContractForm, Dialog, SearchInput, Badge
+    NewContract, SavedContract, Dialog, SearchInput, Badge
   },
 };
 </script>

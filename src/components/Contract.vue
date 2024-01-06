@@ -1,40 +1,40 @@
 <template>
     <div class="modal-backdrop">
-      <div class="modal main-form">
-        <header class="modal-header">
-          <slot name="header" >
-            Новый договор
-          </slot>
-        </header>
+    <div class="modal main-form">
+      <header class="modal-header">
+        <slot name="header" >
+          {{ dynamicTitle }}
+        </slot>
+      </header>
 
-        <section class="modal-body">
-          <slot name="body" >
-            <input v-model="contract.number" placeholder="Номер договора" @input="resetAttemptedSave" :class="{ 'error': attemptedSave && !contract.number }" required/>
-            <input v-model="contract.date" type="date" placeholder="Дата договора" @input="resetAttemptedSave" :class="{ 'error': attemptedSave && !contract.date }" required/>
-            <Dropdown :options="CPs" :extOption="contract.counterparty_id" :attemptedSave="attemptedSave"  @option-selected="handleOptionSelected"/>
-            <input v-model="contract.amount" placeholder="Сумма" required/>
-            <input type="file" @change="handleFileUpload" />
-          </slot>
-        </section>
+      <section class="modal-body">
+        <slot name="body" >
+          <input v-model="contract.number" placeholder="Номер договора" @input="resetAttemptedSave" :class="{ 'error': attemptedSave && !contract.number }" required/>
+          <input v-model="contract.date" type="date" placeholder="Дата договора" @input="resetAttemptedSave" :class="{ 'error': attemptedSave && !contract.date }" required/>
+          <Dropdown :options="CPs" :extOption="contract.counterparty_id" :attemptedSave="attemptedSave"  @option-selected="handleOptionSelected"/>
+          <input v-model="contract.amount" placeholder="Сумма" required/>
+          <input type="file" @change="handleFileUpload" />
+        </slot>
+      </section>
 
-        <footer class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-prima"
-            @click="saveContract"
-          >
-            Сохранить
-          </button>
+      <footer class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-prima"
+          @click="saveContract"
+        >
+          Сохранить
+        </button>
 
-          <button
-            type="button"
-            class="btn btn-common"
-            @click="closeForm"
-          >
-            Закрыть
-          </button>
-        </footer>
-      </div>
+        <button
+          type="button"
+          class="btn btn-common"
+          @click="closeForm"
+        >
+          Закрыть
+        </button>
+      </footer>
+    </div>
   </div>
 </template>
 
@@ -45,6 +45,13 @@ import axios from '../axios';
 export default {
   components: {
     Dropdown
+  },
+  props: {
+    contractID: {
+      type: String,
+      default: "",
+    },
+    dynamicTitle: "",
   },
   data() {
     return {
@@ -61,6 +68,17 @@ export default {
       attemptedSave: false
     };
   },
+  watch: {
+    contractID: {
+      immediate: false,
+      handler(newValue) {
+        if (newValue !== "") {
+          this.fetchContractData()
+        }
+      },
+    },
+
+  },
   mounted() {
     this.fetchCounterparties()
   },
@@ -74,6 +92,21 @@ export default {
       this.contract.counterparty_id = contract.counterparty_id
       this.contract.amount = contract.contract_amount
 
+    },
+    async fetchContractData() {
+      try {
+        const apiUrl = `http://localhost:3000/contracts/${this.contractID}`;
+        axios.get(apiUrl)
+        .then(response => {
+          this.fillContract(response.data)
+        })
+        .catch(error => {
+            console.error('Ошибка при выполнении запроса:', error);
+        });
+
+          } catch (error) {
+            console.error('Ошибка при загрузке данных', error);
+          }
     },
     async fetchCounterparties() {
       try {
@@ -101,12 +134,14 @@ export default {
       if (this.selectedOption) {
         this.contract.counterparty_id = this.selectedOption.id;
       }
-      if (
-        !this.contract.number ||
-        !this.contract.date ||
-        !this.contract.counterparty_id
-      ) {
-        return;
+      if (!this.contractID) {
+        if (
+          !this.contract.number ||
+          !this.contract.date ||
+          !this.contract.counterparty_id
+        ) {
+          return;
+        }
       }
       this.$emit("save", this.contract);
     },
@@ -142,9 +177,9 @@ export default {
 
 <style scoped>
 .main-form {
-  width: 280px;
+  width: 90%;
+  height: 90%;
 }
-
 input {
   display: block;
   border: 1px solid #f2f8e4;
