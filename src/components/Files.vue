@@ -4,7 +4,7 @@
         <div v-for= "fileItem in files" :key="fileItem.id" class="file-item">
             <img :src="getImageSrc(fileItem.type)" class="lil-icon" alt="">
             <span class="item-name">{{fileItem.name}}</span>
-            <span class="item-close">x</span>
+            <span class="item-close" @click="deleteItem">x</span>
         </div>
     </div>
     <div class="upload-area">
@@ -30,6 +30,9 @@ export default {
         getImageSrc,
         selectFile() {
             this.$refs.fileInput.click();
+        },
+        deleteItem() {
+
         },
         handleFileUpload(event) {
         const file = event.target.files[0];
@@ -73,6 +76,7 @@ p {
 }
 .item-close {
     margin-left: auto;
+    cursor: pointer;
 }
 .item-name {
     font-size: 14px;
