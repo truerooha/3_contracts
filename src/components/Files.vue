@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper">
-    <div class="file-list" >
+    <div class="file-list" :class="{'scroll': shouldScroll }">
         <div v-for= "fileItem in files" :key="fileItem.id" class="file-item">
             <img :src="getImageSrc(fileItem.type)" class="lil-icon" alt="">
-            <span class="item-name">{{fileItem.name}}</span>
+            <span class="item-name">{{truncateName(fileItem.name) }}</span>
             <span class="item-close" @click="deleteItem">x</span>
         </div>
     </div>
@@ -20,14 +20,27 @@
 <script>
 import { getImageSrc } from '@/files'
 export default {
+    
     props: {
         files: {
             type: Array,
             default: []
         },
     },
+    computed: {
+        shouldScroll() {
+            return this.files.length > 2;
+        }
+    },
     methods: {
         getImageSrc,
+        truncateName(name) {
+            if (name.length <= 24) {
+                return name;
+            } else {
+                return name.substring(0, 20) + '...';
+            }
+        },
         selectFile() {
             this.$refs.fileInput.click();
         },
@@ -96,5 +109,9 @@ p {
 }
 .upload-area:hover {
     opacity: 70%;
+}
+
+.scroll {
+    overflow-y: scroll;
 }
 </style>
