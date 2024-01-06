@@ -1,39 +1,44 @@
 <template>
     <div class="modal-backdrop">
-    <div class="modal main-form">
-      <header class="modal-header">
-        <slot name="header" >
-          {{ dynamicTitle }}
-        </slot>
-      </header>
+      <div class="modal main-form">
+        <header class="modal-header">
+          <slot name="header" >
+            {{ dynamicTitle }}
+          </slot>
+        </header>
 
-      <section class="modal-body">
-        <slot name="body" >
-          <input v-model="contract.number" placeholder="Номер договора" @input="resetAttemptedSave" :class="{ 'error': attemptedSave && !contract.number }" required/>
-          <input v-model="contract.date" type="date" placeholder="Дата договора" @input="resetAttemptedSave" :class="{ 'error': attemptedSave && !contract.date }" required/>
-          <Dropdown :options="CPs" :extOption="contract.counterparty_id" :attemptedSave="attemptedSave"  @option-selected="handleOptionSelected"/>
-          <input v-model="contract.amount" placeholder="Сумма" required/>
-          <input type="file" @change="handleFileUpload" />
-        </slot>
-      </section>
+        <section class="modal-body contract-body">
+          <div class="contract-data">
+            <slot name="body" >
+              <input v-model="contract.number" placeholder="Номер договора" @input="resetAttemptedSave" :class="{ 'error': attemptedSave && !contract.number }" required/>
+              <input v-model="contract.date" type="date" placeholder="Дата договора" @input="resetAttemptedSave" :class="{ 'error': attemptedSave && !contract.date }" required/>
+              <Dropdown :options="CPs" :extOption="contract.counterparty_id" :attemptedSave="attemptedSave"  @option-selected="handleOptionSelected"/>
+              <input v-model="contract.amount" placeholder="Сумма" required/>
+              <input type="file" @change="handleFileUpload" />
+            </slot>
+          </div>
+          <div class="preview">
+d
+          </div>
+        </section>
 
-      <footer class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-prima"
-          @click="saveContract"
-        >
-          Сохранить
-        </button>
+        <footer class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-prima"
+            @click="saveContract"
+          >
+            Сохранить
+          </button>
 
-        <button
-          type="button"
-          class="btn btn-common"
-          @click="closeForm"
-        >
-          Закрыть
-        </button>
-      </footer>
+          <button
+            type="button"
+            class="btn btn-common"
+            @click="closeForm"
+          >
+            Закрыть
+          </button>
+        </footer>
     </div>
   </div>
 </template>
@@ -176,6 +181,20 @@ export default {
 </script>
 
 <style scoped>
+.contract-body {
+  display: flex;
+  justify-content: space-between;
+}
+
+.contract-data {
+  width: 40%;
+}
+
+.preview {
+  background-color: white;
+  width: 50%;
+}
+
 .main-form {
   width: 90%;
   height: 90%;
