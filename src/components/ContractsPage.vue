@@ -143,7 +143,7 @@ export default {
       this.isSavedContractVisible = false;
     },
 
-    saveNewContract(contractData) {
+    saveContract(contractData) {
       this.hideContract();
     },
 

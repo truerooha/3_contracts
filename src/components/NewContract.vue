@@ -13,7 +13,7 @@
             <input v-model="contract.date" type="date" placeholder="Дата договора" @input="resetAttemptedSave" :class="{ 'error': attemptedSave && !contract.date }" required/>
             <Dropdown :options="CPs" :extOption="contract.counterparty_id" :attemptedSave="attemptedSave"  @option-selected="handleOptionSelected"/>
             <input v-model="contract.amount" placeholder="Сумма" required/>
-            <input type="file" @change="handleFileUpload" />
+            <Files @onFileUpload="onFileUpload" :files="attaches"/>
           </slot>
         </section>
 
@@ -40,11 +40,12 @@
 
 <script>
 import Dropdown from "@/components/lib/Dropdown.vue"
+import Files from "@/components/Files.vue"
 import axios from '../axios';
 
 export default {
   components: {
-    Dropdown
+    Dropdown, Files
   },
   data() {
     return {
@@ -55,8 +56,8 @@ export default {
         amount: "",
         attach: null
       },
-      CPs: [
-      ],
+      CPs: [],
+      attaches: [],
       selectedOption: null,
       attemptedSave: false
     };
@@ -115,34 +116,19 @@ export default {
       this.$emit("close")
       this.clearContract()
     },
+    onFileUpload(attach) {
+      console.log(attach)
+      this.contract.attach = attach;
+      this.attaches.push(attach)
+    },
 
-    handleFileUpload(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-
-        reader.onload = () => {
-          const fileData = reader.result;
-          const attach = {
-            name: file.name,
-            size: file.size,
-            type: file.type,
-            data: fileData, 
-          };
-
-          this.contract.attach = attach;
-
-        }
-        reader.readAsArrayBuffer(file);
-      }
-    }
   }
 };
 </script>
 
 <style scoped>
 .main-form {
-  width: 280px;
+  width: 320px;
 }
 
 </style>
