@@ -9,7 +9,7 @@
 
 <script>
 import Navigation from './components/Nav.vue';
-import LoginForm from './components/Login.vue';
+import LoginForm from './components/LoginPage.vue';
 
 export default {
   name: 'App',

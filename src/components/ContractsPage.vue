@@ -68,7 +68,7 @@
 import axios from '../axios';
 import ContractForm from "./NewContract.vue";
 import SearchInput from "./SearchInput.vue"
-import Dialog from './Dialog.vue';
+import Dialog from './lib/Dialog.vue';
 import Badge from './lib/Badge.vue'
 import { useToast } from "vue-toastification";
 

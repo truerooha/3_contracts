@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Main from './components/Main.vue';
-import Contracts from './components/Contracts.vue';
-import Counterparties from './components/CP.vue';
-import Search from './components/Search.vue';
-import Settings from './components/Settings.vue';
-import Support from './components/Support.vue';
-import Login from './components/Login.vue';
+import Main from './components/MainPage.vue';
+import Contracts from './components/ContractsPage.vue';
+import Counterparties from './components/CPPage.vue';
+import Search from './components/SearchPage.vue';
+import Settings from './components/SettingsPage.vue';
+import Support from './components/SupportPage.vue';
+import Login from './components/LoginPage.vue';
 import Cookies from 'js-cookie';
 
 const routes = [

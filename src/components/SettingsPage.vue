@@ -53,7 +53,7 @@
 <script>
 import axios from '../axios';
 import { useToast } from "vue-toastification";
-import Dialog from './Dialog.vue';
+import Dialog from './lib/Dialog.vue';
 
 
 export default {

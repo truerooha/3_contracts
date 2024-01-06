@@ -99,7 +99,7 @@
 
 <script>
 import Cookies from "js-cookie";
-import Dialog from './Dialog.vue';
+import Dialog from './lib/Dialog.vue';
 
 export default {
   components: { Dialog },
