@@ -48,10 +48,11 @@ export default {
 
             reader.onload = () => {
                 const fileData = reader.result;
+                const fileExtension = file.name.slice((file.name.lastIndexOf(".") - 1 >>> 0) + 2);
                 const attach = {
                     name: file.name,
                     size: file.size,
-                    type: file.type,
+                    type: fileExtension,
                     data: fileData, 
                 };
 
