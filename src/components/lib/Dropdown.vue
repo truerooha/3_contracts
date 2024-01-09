@@ -48,8 +48,11 @@ export default {
 </script>
 
 <style scoped>
+.custom-select {
+  width: 97%;
+}
+
 select {
-    display: block;
     border: 1px solid #f2f8e4;
     margin-top: 10px;
     border-radius: 6px;

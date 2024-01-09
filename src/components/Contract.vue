@@ -7,19 +7,25 @@
           </slot>
         </header>
 
-        <section class="modal-body contract-body">
-          <div class="contract-data">
-            <slot name="body" >
+        <div class="modal-body contract-body">
+          <div class="contract-data section">
+            <div class="inputs">
               <input v-model="contract.number" placeholder="Номер договора" @input="resetAttemptedSave" :class="{ 'error': attemptedSave && !contract.number }" required/>
               <input v-model="contract.date" type="date" placeholder="Дата договора" @input="resetAttemptedSave" :class="{ 'error': attemptedSave && !contract.date }" required/>
               <Dropdown :options="CPs" :extOption="contract.counterparty_id" :attemptedSave="attemptedSave"  @option-selected="handleOptionSelected"/>
               <input v-model="contract.amount" placeholder="Сумма" required/>
+            </div>
+            
+          </div>
+
+          <div class="contract-files section">
               <Files @onFileUpload="onFileUpload" :files="contract.attaches"/>
-            </slot>
           </div>
-          <div class="preview">
+
+          <div class="file-preview section">
+            <div class="preview"> dsds </div>
           </div>
-        </section>
+        </div>
 
         <footer class="modal-footer">
           <button
@@ -179,31 +185,37 @@ export default {
 </script>
 
 <style scoped>
+
 .contract-body {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;  /* Создает три столбца равной ширины */
+  gap: 10px; /* Пространство между элементами */
+  padding: 20px;
+  grid-template-rows: 1fr;
+  gap: 20px;
+  height: 100%;
 }
 
-.contract-data {
-  width: 40%;
+.contract-files {
+  width: 200px;
 }
 
 .preview {
   background-color: white;
-  width: 50%;
+  height: 100%;
+  border-radius: 10px;
 }
 
 .main-form {
   width: 90%;
   height: 90%;
 }
+
 input {
   display: block;
   border: 1px solid #f2f8e4;
   margin-top: 10px;
   border-radius: 6px;
-  padding: 10px;
-  width: 90%;
 }
 
 input.error {

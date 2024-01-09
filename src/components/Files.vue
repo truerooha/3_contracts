@@ -72,20 +72,28 @@ p {
     margin-left: 5px;
 }
 .wrapper {
-    max-width: 300px;
-    padding-top: 10px;
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .files-input {
     display: none;
 }
 
+.file-list {
+    width: 100%;
+}
+
 .file-item {
     display: flex;
     padding: 8px;
+    width: 100%;
 }
 .item-close {
     margin-left: auto;
+    margin-right: 16px;
     cursor: pointer;
 }
 .item-name {
@@ -102,7 +110,9 @@ p {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    height: 80px;
+    height: 40px;
+    padding: 10px;
+    width: 85%;
 }
 .upload-area:hover {
     opacity: 70%;
