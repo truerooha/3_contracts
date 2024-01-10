@@ -82,6 +82,7 @@ export default {
     contractID: {
       immediate: false,
       handler(newValue) {
+        this.clearContract() 
         if (newValue !== "") {
           this.fetchContractData()
           this.fetchFiles()
@@ -174,7 +175,6 @@ export default {
 
     closeForm() {
       this.$emit("close")
-      this.clearContract()
     },
     onFileUpload(attach) {
       this.contract.attach = attach;
