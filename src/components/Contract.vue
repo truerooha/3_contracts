@@ -188,8 +188,8 @@ export default {
 
 .contract-body {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;  /* Создает три столбца равной ширины */
-  gap: 10px; /* Пространство между элементами */
+  grid-template-columns: 1fr auto 1fr;
+  gap: 10px;
   padding: 20px;
   grid-template-rows: 1fr;
   gap: 20px;
