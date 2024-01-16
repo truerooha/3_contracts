@@ -32,13 +32,12 @@ async function login(req, res) {
     const results = await db.query(sqlQuery, [username, hashedPassword]);
 
     if (results.length === 0) {
-    //   //res.json({ authorized: false });
        res.status(401).json({ message: 'Invalid credentials' });
      } else {
       const user = { username };
+
       const token = jwt.sign(user, config.jwtSecret, { expiresIn: '24h' });
-      res.json({ token });
-    //   //res.json({ authorized: true });
+      res.json({ token, userId: results[0].id });
      }
   } catch (error) {
     res.status(500).json({ authorized: false, error: 'Ошибка сервера' });

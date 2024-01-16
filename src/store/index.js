@@ -10,9 +10,13 @@ export const store = createStore({
         { label: 'Дата' },
         { label: 'ИНН' },
         { label: 'Контрагент' }],
-        searchString: ''
+        searchString: '',
+        currentUserId: null
     },
     mutations: {
+        setUserId(state, userId) {
+            state.currentUserId = userId;
+        },
         setFilter(state, filterIndex) {
             if (filterIndex >= 0 && filterIndex < state.filters.length) {
                 state.currentFilterId = filterIndex;
