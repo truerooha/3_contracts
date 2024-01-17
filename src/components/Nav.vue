@@ -14,7 +14,8 @@
         <div class="logo"><span class="green">.</span>contracts</div>
       </div>
       <div class="mini-profile">
-        <img src="@/assets/user.jpeg" alt="" class="mp-logo">
+        <img v-if="computedAva===null" src="@/assets/icons/account.svg" alt="" class="mp-logo">
+        <img v-else :src="computedAva" alt="" class="mp-logo">
         <div class="user-name">
            <div class="user-firstname">{{ computedFirstName }}</div>
            <div class="user-secondname">{{ computedSecondName }}</div>
@@ -121,16 +122,20 @@ export default {
     },
   data() {
     return {
-      isDialogVisible: false
+      isDialogVisible: false,
+      logoLoaded: false,
     };
   },
   computed: {
+    computedAva() {
+      return null
+    },
     computedFirstName() {
       return this.$store.getters.getProfileData.firstName;
     },
     computedSecondName() {
       return this.$store.getters.getProfileData.secondName;
-    }
+    },
   },
 }
 </script>

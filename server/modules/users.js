@@ -97,7 +97,6 @@ router.post('/new', (req, res) => {
 });
 
 router.delete('/remove/:id', (req, res) => {
-  console.log(req.params.id)
   removeUser(req.params.id)
 });
   
