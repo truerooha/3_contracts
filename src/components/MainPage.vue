@@ -81,6 +81,7 @@ export default {
   },
   mounted() {
     this.loadDataFromServer();
+    this.$store.dispatch('fetchUserProfile');
   },
 }
 </script>

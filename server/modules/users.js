@@ -34,10 +34,10 @@ async function login(req, res) {
     if (results.length === 0) {
        res.status(401).json({ message: 'Invalid credentials' });
      } else {
-      const user = { username };
-
+      const user = { username, userId: results[0].id };
       const token = jwt.sign(user, config.jwtSecret, { expiresIn: '24h' });
-      res.json({ token, userId: results[0].id });
+
+      res.json({ token });
      }
   } catch (error) {
     res.status(500).json({ authorized: false, error: 'Ошибка сервера' });

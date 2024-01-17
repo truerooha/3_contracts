@@ -11,7 +11,12 @@ export const store = createStore({
         { label: 'ИНН' },
         { label: 'Контрагент' }],
         searchString: '',
-        currentUserId: null
+        currentUserId: null,
+        profileData: {
+            firstName: '',
+            secondName: '',
+            avatar: ''
+          }
     },
     mutations: {
         setUserId(state, userId) {
@@ -32,9 +37,24 @@ export const store = createStore({
         },
         setSearchString(state, searchString) {
             state.searchString = searchString;
+        },
+        setUserProfile(state, profileData) {
+            state.profileData = profileData;
         }
     },
     actions: {
+        async fetchUserProfile({ commit, state }) {
+            const url = `http://localhost:3000/profile`;
+            axios.get(url)
+              .then(response => {
+                const profileData = response.data;
+                console.log(profileData)
+                commit('setUserProfile', profileData);
+              })
+              .catch(error => {
+                console.error('Ошибка при получении профиля:', error);
+              });
+        },
         async fetchContracts({ commit, state }) {
             try {
                 const response = await axios.get('http://localhost:3000/contracts', {
@@ -50,6 +70,9 @@ export const store = createStore({
             },
         },
     getters: {
+        getProfileData: state => {
+            return state.profileData;
+        },
         getFilters: state => {
             return state.filters;
         },
