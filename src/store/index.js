@@ -15,7 +15,6 @@ export const store = createStore({
         profileData: {
             firstName: '',
             secondName: '',
-            avatar: ''
           }
     },
     mutations: {

@@ -17,8 +17,7 @@ async function getProfileById(req, res) {
   
       const sqlQuery = `
         SELECT user_profiles.first_name,
-                user_profiles.last_name,
-                user_profiles.avatar
+                user_profiles.last_name
         FROM user_profiles
         WHERE user_profiles.user_id = ?;
       `
@@ -28,7 +27,6 @@ async function getProfileById(req, res) {
         const profile = {
             firstName: results[0].first_name,
             secondName: results[0].last_name,
-            avatar: results[0].avatar
         };
         res.json(profile);
 
