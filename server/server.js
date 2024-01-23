@@ -2,6 +2,8 @@ const express = require('express');
 var cors = require('cors')
 const app = express();
 const port = 3000;
+const path = require('path');
+
 
 app.use(cors())
 app.use(express.json())
@@ -12,10 +14,11 @@ const filesRoutes = require('./modules/files.js');
 const CPRoutes = require('./modules/CP.js');
 const usersRoutes = require('./modules/users.js');
 const profileRoutes = require('./modules/profile.js');
+const uploadsPath = path.join(__dirname, 'uploads');
+app.use('/uploads', express.static(uploadsPath));
 
 
 app.use(middleware.requestMiddleware);
-
 app.use('/files', filesRoutes);
 app.use('/contracts', contractsRoutes);
 app.use('/CP', CPRoutes);

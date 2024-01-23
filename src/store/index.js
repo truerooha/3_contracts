@@ -15,6 +15,7 @@ export const store = createStore({
         profileData: {
             firstName: '',
             secondName: '',
+            avaPath: '',
           }
     },
     mutations: {
@@ -47,7 +48,6 @@ export const store = createStore({
             axios.get(url)
               .then(response => {
                 const profileData = response.data;
-                console.log(profileData)
                 commit('setUserProfile', profileData);
               })
               .catch(error => {
