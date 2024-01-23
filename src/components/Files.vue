@@ -11,7 +11,7 @@
         <div class="upload" @click="selectFile">
             <img src="@/assets/icons/attach-outline.svg" alt="файл">
             <p>Загрузить файл</p>
-            <input ref="fileInput" class="files-input" type="file" @change="handleFileUpload" />
+            <input ref="fileInput" class="files-input" type="file" accept="text/*,image/*,application/pdf" @change="handleFileUpload" />
         </div>
     </div>
   </div>
