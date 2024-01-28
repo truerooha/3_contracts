@@ -72,6 +72,7 @@
 
 <script>
 import axios from '../axios';
+import config from '../config';
 import NewContract from "./NewContract.vue";
 import SavedContract from "./Contract.vue";
 import SearchInput from "./SearchInput.vue"
@@ -146,26 +147,51 @@ export default {
     saveContract(contractData) {
       this.hideContract();
     },
+    saveFileMetadata(contractId, attaches) {
+      if (attaches.length === 0) {
+        return Promise.resolve(); 
+      }
 
-    saveNewContract(contractData) {
+      const fileMetadata = {
+        contractId: contractId,
+        attaches: attaches
+      };
+
+      axios.post(config.apiUrl.files, fileMetadata);
+    },
+
+    async saveNewContract(contractData) {
+      
+      try {
       const contractJSON = JSON.stringify(contractData);
-      axios.post('http://localhost:3000/contracts/new', contractJSON, {
+      const response = await axios.post(config.apiUrl.createContract, contractJSON, {
         headers: {
           'Content-Type': 'application/json',
+        }
+      });
+
+      await this.saveFileMetadata(response.data.contractId, contractData.attaches);
+      const formData = new FormData();
+      const files = contractData.attaches.map(attach => attach.fileObj);
+      formData.append('files', files);
+
+      files.forEach(file => {
+        formData.append('files', file);
+      });
+      await axios.post(config.apiUrl.uploads, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
         },
-      })
-        .then((response) => {
-          const toast = useToast();
+      });
+      this.$store.dispatch('fetchContracts');
+      const toast = useToast();
           toast.success("Договор сохранён", {
           timeout: 2000
           });
-        this.$store.dispatch('fetchContracts');
-
-        })
-        .catch((error) => {
-          console.error('Ошибка при сохранении договора:', error);
-        });
       this.hideNewContract();
+      } catch (error) {
+        console.error('Ошибка при сохранении договора:', error);
+      }
     }
   },
   components: {

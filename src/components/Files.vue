@@ -52,8 +52,10 @@ export default {
                 const attach = {
                     name: file.name,
                     size: file.size,
-                    type: fileExtension,
-                    data: fileData, 
+                    type: file.type,
+                    ext: fileExtension,
+                    data: fileData,
+                    fileObj: file
                 };
 
                 this.$emit("onFileUpload", attach);
