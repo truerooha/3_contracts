@@ -31,27 +31,29 @@
   </div> 
 </template>
 
-<script>
-export default {
-   props: {
-    cardClass: String,
-    iconUrl: String,
-    title: String,
-    attr1Value: String,
-    attr1Label: String,
-    attr2Value: String,
-    attr2Label: String,
-    iconColor: {
-      type: String,
-      default: 'white'
-    }
-    },
-    methods: {
-        handleClick() {
-        this.$emit('click');
-        }
-    },
-}
+<script setup>
+
+import { defineProps, defineEmits } from 'vue'
+const emit = defineEmits(['click'])
+
+const props = defineProps({
+  cardClass: String,
+  iconUrl: String,
+  title: String,
+  attr1Value: String,
+  attr1Label: String,
+  attr2Value: String,
+  attr2Label: String,
+  iconColor: {
+    type: String,
+    default: 'white'
+  }
+})
+
+const handleClick = () => {
+  emit('click');
+};
+
 </script>
 
 <style scoped>
