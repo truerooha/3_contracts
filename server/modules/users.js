@@ -74,15 +74,17 @@ async function saveUser(req, res) {
   }
 }
 
-async function removeUser(userId) {
+async function removeUser(userId, res) {
   const db = new Database();
   try {
     await db.connect();
 
     const sqlQuery = 'DELETE FROM users WHERE `id` = ? ';
     const results = await db.query(sqlQuery, [userId]);
+    res.status(200).json({ message: 'Пользователь успешно удален.' });
   } catch (error) {
     console.error('Ошибка: ', error);
+    res.status(500).json({ error: 'Произошла ошибка при удалении пользователя.' });
   } finally {
     await db.end();
   }
@@ -101,7 +103,7 @@ router.post('/new', (req, res) => {
 });
 
 router.delete('/remove/:id', (req, res) => {
-  removeUser(req.params.id)
+  removeUser(req.params.id, res)
 });
   
 module.exports = router;
