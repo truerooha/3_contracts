@@ -3,8 +3,8 @@
     <div class="file-list">
         <div v-for= "fileItem in files" :key="fileItem.id" class="file-item">
             <img :src="getImageSrc(fileItem.type)" class="lil-icon" alt="">
-            <span class="item-name">{{truncateName(fileItem.name) }}</span>
-            <span class="item-close" @click="deleteItem">x</span>
+            <span class="item-name" @click="clickItem(fileItem)" >{{truncateName(fileItem.name) }}</span>
+            <span class="item-close" @click="deleteItem(fileItem)">x</span>
         </div>
     </div>
     <div class="upload-area">
@@ -38,8 +38,11 @@ export default {
         selectFile() {
             this.$refs.fileInput.click();
         },
-        deleteItem() {
-
+        deleteItem(fileItem) {
+            this.$emit('deleteFile', fileItem);
+        },
+        clickItem(fileItem) {
+            this.$emit('clickFile', fileItem);
         },
         handleFileUpload(event) {
         const file = event.target.files[0];
@@ -92,6 +95,7 @@ p {
     display: flex;
     padding: 8px;
     width: 100%;
+    cursor: pointer;
 }
 .item-close {
     margin-left: auto;

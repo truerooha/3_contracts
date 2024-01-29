@@ -19,7 +19,7 @@
           </div>
 
           <div class="contract-files section">
-              <Files @onFileUpload="onFileUpload" :files="contract.attaches"/>
+              <Files @onFileUpload="onFileUpload" @deleteFile="onFileDelete" @clickFile="onFileClick" :files="contract.attaches"/>
           </div>
 
           <div class="file-preview section">
@@ -179,6 +179,12 @@ export default {
     onFileUpload(attach) {
       this.contract.attach = attach;
       this.attaches.push(attach)
+    },
+    onFileClick(attach) {
+      console.log(attach)
+    },
+    onFileDelete(attach) {
+      console.log(attach)
     },
   }
 };
