@@ -56,12 +56,16 @@ async function saveUser(req, res) {
     const results = await db.query(sqlQuery, [username]);
     if (results.length > 0) {
       const errorMessage = { Message: 'Пользователь с таким логином уже существует', Code: '0001' };
-      return { statusCode: 207, body: JSON.stringify(errorMessage) };
+      res.json({ statusCode: 207, body: JSON.stringify(errorMessage) }); //todo доделать отправку статуса, сейчас не работает
     }
 
     const hashedPassword= md5(password + 'itsalive');
     const sqlNewUser = "INSERT INTO users (username, password) VALUES (?, ?)";
     const resultNewUser = await db.query(sqlNewUser, [username, hashedPassword]);
+    if (resultNewUser.affectedRows > 0) {
+      const successMessage = { Message: 'Пользователь успешно создан', Code: '0002' };
+      res.json({ success: true, successMessage});
+    }
 
   } catch (error) {
     console.error('Ошибка: ', error);

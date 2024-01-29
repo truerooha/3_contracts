@@ -118,7 +118,7 @@ export default {
           this.contracts = this.contracts.filter(contract => contract.id !== this.deletedContract.id);
           this.deletedContract = null
           console.log('Договор удален успешно.');
-            this.closeModal()
+          this.closeModal()
 
         })
         .catch((error) => {
