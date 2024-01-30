@@ -23,6 +23,7 @@
           </div>
 
           <div class="file-preview section">
+            <img :src="selectedFile" alt="no file">
             <div class="preview"> dsds </div>
           </div>
         </div>
@@ -52,6 +53,7 @@
 import Dropdown from "@/components/lib/Dropdown.vue"
 import Files from "@/components/Files.vue"
 import axios from '../axios';
+import config from '../config';
 
 export default {
   components: {
@@ -75,7 +77,8 @@ export default {
       },
       CPs: [],
       selectedOption: null,
-      attemptedSave: false
+      attemptedSave: false,
+      selectedFile: null
     };
   },
   watch: {
@@ -180,8 +183,10 @@ export default {
       this.contract.attach = attach;
       this.attaches.push(attach)
     },
-    onFileClick(attach) {
-      console.log(attach)
+    async onFileClick(attach) {
+      const result = await axios.get(config.apiUrl.uploads + '/dadwdawd');
+      this.selectedFile = result.data
+      console.log(result)
     },
     onFileDelete(attach) {
       console.log(attach)
