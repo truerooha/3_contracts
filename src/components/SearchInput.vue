@@ -57,16 +57,6 @@ input {
   margin: 0;
 }
 
-.custom-input {
-  display: flex;
-  align-items: center;
-  position: relative;
-  background-color: #fff;
-  border-radius: 10px;
-  border: 1px solid #CBD5E0;
-  width: 100%;
-}
-
 .search-icon {
   margin: 10px 0px 8px 16px;
 }

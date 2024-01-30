@@ -20,7 +20,7 @@
               @click="saveUser"
             >
               Создать
-            </button>
+          </button>
       </section>  
 
       <section class="all-users">
