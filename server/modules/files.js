@@ -11,7 +11,7 @@ async function getFilesByContractId(contractId, res) {
         SELECT attachment_files.file_name AS name,
               attachment_files.file_ext AS type
         FROM attachment_owners
-        JOIN attachment_files ON attachment_owners.owner_id = attachment_files.owner_id
+        JOIN attachment_files ON attachment_owners.id = attachment_files.owner_id
         WHERE attachment_owners.contract_id = ?;
       `
       const results = await db.query(sqlQuery, [contractId]);

@@ -31,7 +31,7 @@ async function getContractById(contractId, res) {
   try { 
     await db.connect();
 
-    const sqlQuery = 'SELECT * FROM contracts WHERE contract_id = ?';
+    const sqlQuery = 'SELECT * FROM contracts WHERE id = ?';
     const results = await db.query(sqlQuery, [contractId]);
     const result = results.length > 0 ? results[0] : null;
     if (result && result.contract_date) {
@@ -55,15 +55,15 @@ async function getContracts(req, res) {
 
     let sqlQuery = `
     SELECT 
-        Contracts.contract_id AS id,
-        Contracts.contract_number AS number,
-        Contracts.contract_date AS date,
-        Contracts.contract_amount AS amount,
+        contracts.id AS id,
+        contracts.contract_number AS number,
+        contracts.contract_date AS date,
+        contracts.contract_amount AS amount,
         counterparties.name AS CPname,
         CASE WHEN attachment_owners.contract_id IS NOT NULL THEN true ELSE false END AS hasFiles
-    FROM Contracts
-    INNER JOIN counterparties ON Contracts.counterparty_id = counterparties.id
-    LEFT JOIN attachment_owners ON Contracts.contract_id = attachment_owners.contract_id
+    FROM contracts
+    INNER JOIN counterparties ON contracts.counterparty_id = counterparties.id
+    LEFT JOIN attachment_owners ON contracts.id = attachment_owners.contract_id
     `
 
     if (search) {
@@ -88,8 +88,8 @@ async function getContracts(req, res) {
         }
       } else {
         sqlQuery += `
-          Contracts.contract_number LIKE '%${search}%' OR
-          Contracts.contract_date LIKE '%${search}%' OR
+          contracts.contract_number LIKE '%${search}%' OR
+          contracts.contract_date LIKE '%${search}%' OR
           counterparties.name LIKE '%${search}%' OR
           counterparties.inn LIKE '%${search}%'
         `;
@@ -125,14 +125,14 @@ async function removeContract(contractId, res) {
         const resultOwner = resultsOwner[0]
 
         const owner_id = resultOwner.owner_id;
-        const sqlAttach = "DELETE FROM attachment_files WHERE `owner_id` = ?";
+        const sqlAttach = "DELETE FROM attachment_files WHERE `id` = ?";
         await db.query(sqlAttach, [owner_id])
 
         const sqlDeleteOwners = "DELETE FROM attachment_owners WHERE `contract_id` = ?"
         await db.query(sqlDeleteOwners, [contractId])
          
     }
-    const sqlQuery = 'DELETE FROM Contracts WHERE `contract_id` = ? ';
+    const sqlQuery = 'DELETE FROM contracts WHERE `id` = ? ';
     const results = await db.query(sqlQuery, [contractId]);
     res.send("Договор успешно удален.");
 
