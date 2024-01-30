@@ -61,8 +61,8 @@ export default {
       try {
         const response = await axios.get('http://localhost:3000/contracts/summary');
         const data = response.data
-        this.expiredContracts= data.expired_contracts.toString() || '';
-        this.totalContracts= data.total_contracts.toString() || '';
+        this.expiredContracts= data.expired_contracts === null ? '0' : data.expired_contracts .toString()
+        this.totalContracts= data.total_contracts === null ? '0' : data.total_contracts.toString()
 
         this.dataLoaded = true;
       } catch (error) {
