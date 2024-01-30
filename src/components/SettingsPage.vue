@@ -93,17 +93,20 @@ export default {
     closeModal() {
       this.isDialogVisible = false;
     },
-    handleConfirm() {
-        axios.delete(`http://localhost:3000/users/remove/${this.deletedUserID}`)
-        .then(() => {
-          this.users = this.users.filter(user => user.id !== this.deletedUserID);
-          this.deletedUserID = null
-          console.log('Пользователь успешно удален');
-          this.closeModal()
-        })
-        .catch((error) => {
-          console.error('Ошибка при удалении пользователя:', error);
+    async handleConfirm() {
+      try {
+        const toast = useToast();
+        const response = await axios.delete(`http://localhost:3000/users/remove/${this.deletedUserID}`)
+        this.users = this.users.filter(user => user.id !== this.deletedUserID);
+        this.deletedUserID = null
+        toast.success("Пользователь успешно удалён", {
+          timeout: 2000
         });
+        this.closeModal()
+  
+        } catch (error) {
+          console.error('Ошибка при удалении пользователя:', error);
+        }
     },
     async saveUser() {
       if (!this.isFormValid()) {

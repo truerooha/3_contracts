@@ -6,7 +6,6 @@ import Search from './components/SearchPage.vue';
 import Settings from './components/SettingsPage.vue';
 import Support from './components/SupportPage.vue';
 import Login from './components/LoginPage.vue';
-import Cookies from 'js-cookie';
 
 const routes = [
   { path: '/', redirect: '/main' },
