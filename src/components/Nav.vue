@@ -98,7 +98,6 @@
 </template>
 
 <script>
-import Cookies from "js-cookie";
 import Dialog from './lib/Dialog.vue';
 
 export default {
