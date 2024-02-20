@@ -31,7 +31,7 @@ router.post('/', upload.array('files'), (req, res) => {
 
 router.get('/:filename', (req, res) => {
  // const { filename } = req.params;
-  const filename = "1706594009671.jpeg"
+  const filename = "1706594009671.jpeg" //todo времянка
   const filePath = path.join(uploadPath, filename);
 
   try {

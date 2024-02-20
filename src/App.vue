@@ -29,7 +29,20 @@ export default {
   color: #2c3e50;
   height: 100%;
   width: 100%;
-  }
+}
+
+input {
+  display: block;
+  border: 1px solid #f2f8e4;
+  margin-top: 10px;
+  border-radius: 6px;
+  padding: 10px;
+  width: 90%;
+}
+
+input.error {
+  border-color: red;
+}
 
 body {
     font-family: Arial, sans-serif;
@@ -38,7 +51,7 @@ body {
     padding: 0;
     background-color: white;
     height: 100%;
-  }
+}
   
 .container {
   display: flex;
