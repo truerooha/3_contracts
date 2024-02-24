@@ -16,6 +16,16 @@ export default {
   components: {
     LoginForm,
     Navigation
+  },
+  computed: {
+    loadedPermissions() {
+      return this.$store.state.loadedPermissions;
+    }
+  },
+  created() {
+    if (!this.loadedPermissions) {
+      this.$store.dispatch('loadPermissions');
+    }
   }
 }
 </script>

@@ -20,5 +20,8 @@ export default {
     },
     setUserProfile(state, profileData) {
         state.profileData = profileData;
+    },
+    setPermissions(state, permissions) {
+    
     }
 }

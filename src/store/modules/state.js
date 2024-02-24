@@ -1,4 +1,6 @@
 export default {
+    loadedPermissions: false,
+    permissions: [],
     currentFilterId: null,
     contracts: [],
     filters: [

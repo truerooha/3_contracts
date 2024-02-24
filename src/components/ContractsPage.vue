@@ -14,7 +14,7 @@
         <div class="input-wrapper">
           <search-input/>
         </div>
-      <button @click="showContractForm" class="search-button btn btn-prima">+ Новый</button>
+      <button v-if="hasPermission('CAN_EDIT_CONTRACTS')" @click="showContractForm" class="search-button btn btn-prima">+ Новый</button>
       </div>
 
       <NewContract
