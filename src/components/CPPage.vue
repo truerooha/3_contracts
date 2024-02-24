@@ -1,7 +1,7 @@
 <template>
   <div class="top">
     <h1 class="page-h1">Контрагенты</h1>
-    <button @click="openCPForm" :class="{'addCP': true, 'glowing': !CPnotEmpty }" class="btn btn-prima">+ Новый</button>
+    <button v-if="hasPermission('CAN_EDIT_CPs')" @click="openCPForm" :class="{'addCP': true, 'glowing': !CPnotEmpty }" class="btn btn-prima">+ Новый</button>
   </div>
   <div class="page-content" id="cp-page">
     <dummy v-if="!CPnotEmpty"

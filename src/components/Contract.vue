@@ -32,6 +32,7 @@
           <button
             type="button"
             class="btn btn-prima"
+            v-if="hasPermission('CAN_EDIT_CONTRACTS')"
             @click="saveContract"
           >
             Сохранить
