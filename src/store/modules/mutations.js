@@ -22,6 +22,7 @@ export default {
         state.profileData = profileData;
     },
     setPermissions(state, permissions) {
-    
+        state.permissions = permissions;
+        state.loadedPermissions = true;
     }
 }

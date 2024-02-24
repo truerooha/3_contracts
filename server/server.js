@@ -14,6 +14,8 @@ const CPRoutes = require('./modules/CP.js');
 const usersRoutes = require('./modules/users.js');
 const profileRoutes = require('./modules/profile.js');
 const fileUploadRoutes = require('./modules/fileUploads');
+const permissionRoutes = require('./modules/permissions');
+
 
 app.use(middleware.requestMiddleware);
 app.use('/uploads', fileUploadRoutes);
@@ -22,7 +24,7 @@ app.use('/contracts', contractsRoutes);
 app.use('/CP', CPRoutes);
 app.use('/users', usersRoutes);
 app.use('/profile', profileRoutes);
-
+app.use('/permissions', permissionRoutes);
 
 app.get('/api', (req, res) => {
     res.json({ message: 'API' });

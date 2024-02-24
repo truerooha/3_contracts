@@ -26,7 +26,12 @@ export default {
       }
     },
   async loadPermissions({ commit, state }) {
-      const permissions = ['CAN_READ_CONTRACTS', 'CAN_EDIT_CONTRACTS', 'CAN_READ_CPs', 'CAN_EDIT_CPs']
-      commit('setPermissions', permissions)
+
+      try {
+        const response = await axios.get('http://localhost:3000/permissions');
+        commit('setPermissions', response.data);
+        } catch (error) {
+          console.error('Ошибка при загрузке данных:', error);
+        }
   }
 }
