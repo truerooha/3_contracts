@@ -8,7 +8,6 @@ async function getPermissions(req, res) {
     try {
         await db.connect();
 
-        //получить роли текущего пользователя
         const sqlQuery = 'SELECT role_id FROM user_roles WHERE user_id = ?';
         const userId = req.user.userId;
         const resultsRoles = await db.query(sqlQuery, [userId]);
