@@ -108,6 +108,7 @@ export default {
         this.$router.push('/main');  
       },
       handleConfirm() {
+        this.$store.commit('resetState');
         this.$router.push('/login');
         localStorage.removeItem('token');
       },
