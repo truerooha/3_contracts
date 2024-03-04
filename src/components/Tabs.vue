@@ -35,15 +35,19 @@ export default {
 <style scoped>
 .tabs {
   display: flex;
+  gap: 20px;
 }
 
 .tab {
-  padding: 10px 10px;
+  padding: 5px 10px;
   cursor: pointer;
+  font-size: 14px;
+  color: #718096;
 }
 
 .tab.active {
-  border-bottom: 2px solid #31C48D;
+  color: #31c48d;
+  border-bottom: 2px solid #31c48d;;
 }
 
 .tab-content {

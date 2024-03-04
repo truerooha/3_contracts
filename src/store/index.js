@@ -4,7 +4,7 @@ import getters from './modules/getters'
 
 const getDefaultState = () => {
     return {
-        currentTab: 1,
+        currentTab: 2,
         loadedPermissions: false,
         permissions: [],
         currentFilterId: null,

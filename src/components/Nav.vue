@@ -14,7 +14,7 @@
         <div class="logo"><span class="green">.</span>contracts</div>
       </div>
       <div class="mini-profile">
-        <img :src="computedAva" alt="" class="mp-logo">
+        <img :src="avaSrc" alt="123" class="mp-logo">
         <div class="user-name">
            <div class="user-firstname">{{ computedFirstName }}</div>
            <div class="user-secondname">{{ computedSecondName }}</div>
@@ -99,6 +99,7 @@
 
 <script>
 import Dialog from './lib/Dialog.vue';
+import axios from '../axios';
 
 export default {
   components: { Dialog },
@@ -118,11 +119,22 @@ export default {
       closeModal() {
         this.isDialogVisible = false;
       },
+      fetchAva() {
+        axios.get('http://localhost:3000/uploads/123', { responseType: 'blob' })
+          .then(response => {
+            const imageURL = URL.createObjectURL(response.data);
+            this.avaSrc = imageURL;
+          })
+          .catch(error => {
+            this.avaSrc = this.defaultAvaSrc;
+          });
+      },
     },
   data() {
     return {
       isDialogVisible: false,
       avaSrc: null,
+      defaultAvaSrc: '@/assets/icons/account.svg', 
     };
   },
   computed: {
@@ -131,10 +143,10 @@ export default {
     },
     computedSecondName() {
       return this.$store.getters.getProfileData.secondName;
-    },
-    computedAva() {
-      return 'http://localhost:3000/uploads/' + this.$store.getters.getProfileData.avaPath
-    },
+    }
+  },
+   mounted() {
+    this.fetchAva();
   },
 }
 </script>

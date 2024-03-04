@@ -145,9 +145,15 @@ export default {
 </script>
 
 <style scoped>
+  input {
+    width: 200p;
+  }
   .new-user {
+    display: flex;
+    justify-content: left;
+    gap: 10px;
     margin-top: 30px;
-    width: 280px;
+    width: 50%;
   }
 
   #users-table {
