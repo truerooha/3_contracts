@@ -4,6 +4,7 @@ import getters from './modules/getters'
 
 const getDefaultState = () => {
     return {
+        currentTab: 1,
         loadedPermissions: false,
         permissions: [],
         currentFilterId: null,
@@ -54,7 +55,10 @@ const mutations = {
     },
     resetState (state) {
         Object.assign(state, getDefaultState())
-    }
+    },
+    setCurrentTab(state, tab) {
+        state.currentTab = tab;
+    },
   }
 
 export const store = createStore({

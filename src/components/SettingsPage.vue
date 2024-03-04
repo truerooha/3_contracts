@@ -2,14 +2,23 @@
   <h1 class="page-h1">Настройки системы</h1>
   <div class="page-content">
     <Tabs/>
+    <div v-if="currentTab === 1">Основное</div>
+    <Users v-if="currentTab === 2"/>
+    <div v-if="currentTab === 3">Уведомления</div>
   </div>
 </template>
 
 <script>
 import Tabs from './Tabs.vue'
+import Users from './Users.vue'
 
 export default {
-  components: {Tabs},
+  computed: {
+    currentTab() {
+      return this.$store.state.currentTab;
+    }
+  },
+  components: {Tabs, Users},
 }
 
 </script>

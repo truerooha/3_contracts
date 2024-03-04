@@ -1,47 +1,53 @@
 <template>
-  <div class="tabs">
-    <div class="tab" v-for="(tab, index) in tabs" :key="index" @click="currentTab = tab">
-      {{ tab }}
-    </div>
-    <div class="tab-content">
-      <div v-if="currentTab === 'Основное'">
-      </div>
-
-      <Users v-if="currentTab === 'Пользователи'"/>
-
-      <div v-if="currentTab === 'Уведомления'">
+  <div>
+    <div class="tabs">
+      <div
+        v-for="(tab, index) in tabs"
+        :key="index"
+        :class="{ 'active': currentTab === index + 1 }"
+        @click="changeTab(index)"
+        class="tab"
+      >
+        {{ tab }}
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Users from './Users.vue'
 export default {
-    components: {Users},
-    data() {
-        return {
-            tabs: ['Основное', 'Пользователи', 'Уведомления'],
-            currentTab: 'Основное'
-        };
+  methods: {
+    changeTab(index) {
+      this.$store.commit('setCurrentTab', index+1);
     }
-};
+  },
+  computed: {
+    currentTab() {
+      return this.$store.state.currentTab;
+    },
+    tabs() {
+      return ['Основное', 'Пользователи', 'Уведомления']
+    }
+  },
+}
 </script>
 
-<style>
+<style scoped>
 .tabs {
   display: flex;
-  flex-direction: row;
 }
 
 .tab {
-  padding: 10px;
+  padding: 10px 10px;
   cursor: pointer;
 }
 
+.tab.active {
+  border-bottom: 2px solid #31C48D;
+}
+
 .tab-content {
-  display: flex;
-  flex-direction: column;
   margin-top: 10px;
 }
+
 </style>

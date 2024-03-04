@@ -145,15 +145,8 @@ export default {
 </script>
 
 <style scoped>
-  .settings-page {
-    display: block;
-    height: 90%;
-    border-radius: 10px;
-    padding: 30px;
-    justify-self: center;
-    align-self: center;
-  }
   .new-user {
+    margin-top: 30px;
     width: 280px;
   }
 
