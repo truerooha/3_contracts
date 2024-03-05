@@ -1,13 +1,13 @@
 <template>
   <div class="top">
     <h1 class="page-h1">Контрагенты</h1>
-    <button v-if="hasPermission('CAN_EDIT_CPs')" @click="openCPForm" :class="{'addCP': true, 'glowing': !CPnotEmpty }" class="btn btn-prima">+ Новый</button>
+    <button v-if="hasPermission('CAN_EDIT_CPs')" @click="toggleNewCounterpartyCard" :class="{'addCP': true, 'glowing': !CPnotEmpty }" class="btn btn-prima">+ Новый</button>
   </div>
   <div class="page-content" id="cp-page">
     <dummy v-if="!CPnotEmpty"
       :imageUrl="CPDummySVG"
       :title="'Пока пусто :('"
-    ></dummy>
+    />
     <div class="table-container">
         <table v-if="CPnotEmpty" class="cp-table common-table">
           <thead>
@@ -32,10 +32,15 @@
           </tbody>
         </table>
     </div>
-    <div v-if="CPnotEmpty" class="cp-form">
-      <h2 v-if="selectedCP">{{ selectedCP.name }}</h2>
-      <p v-if="selectedCP">ИНН: {{ selectedCP.inn }}</p>
+    <div class="counterparty-details">
+      <div v-if="!showNewCounterpartyCard" class="cp-form">
+        <h2 v-if="selectedCP">{{ selectedCP.name }}</h2>
+        <p v-if="selectedCP">ИНН: {{ selectedCP.inn }}</p>
+      </div>
+      <div v-else class="cp-form new-counterparty-card ">Карточка создания нового контрагента</div>
     </div>
+    <div class="overlay" v-if="showNewCounterpartyCard"></div>
+    
   </div>
 </template>
 
@@ -50,6 +55,7 @@ export default {
     return {
       CPs: [
       ],
+      showNewCounterpartyCard: false,
       selectedCP: null,
       CPDummySVG: require('@/assets/pics/confused.svg'),
     };
@@ -63,6 +69,9 @@ export default {
     this.fetchData()
   },
   methods: {
+    toggleNewCounterpartyCard() {
+      this.showNewCounterpartyCard = !this.showNewCounterpartyCard;
+    },
     selectCP(CP) {
       this.selectedCP = CP;
     },
@@ -122,10 +131,30 @@ export default {
 .cp-form {
   background-color: #ffffff;
   border-radius: 12px;
-  padding: 20px;
-  margin-right: 10px;
-  width: 40%;
-  height: 85%;
+  width: 90%;
+  height: 100%;
   box-shadow: 0 0 20px rgb(49, 196, 141, 0.1);
+  padding: 20px;
+}
+
+.counterparty-details {
+  width: 45%;
+  margin-right: 20px;
+  height: 85%;
+}
+
+.new-counterparty-card {
+  position: relative;
+  z-index: 999; /* Устанавливаем поверх остального контента */
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Затемнение с полупрозрачным цветом */
+  z-index: 998; /* Устанавливаем поверх всего остального */
 }
 </style>
