@@ -26,7 +26,8 @@ export default {
     if (!this.loadedPermissions) {
       this.$store.dispatch('loadPermissions');
     }
-  }
+    this.$store.dispatch('fetchUserProfile');
+  },
 }
 </script>
 

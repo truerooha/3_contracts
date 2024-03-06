@@ -145,7 +145,7 @@ export default {
       return this.$store.getters.getProfileData.secondName;
     }
   },
-   mounted() {
+  mounted() {
     this.fetchAva();
   },
 }
