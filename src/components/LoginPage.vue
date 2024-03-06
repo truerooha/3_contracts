@@ -39,6 +39,7 @@ export default {
             localStorage.setItem('token', response.data.token);
             store.commit('setUserId', response.data.userId)
             this.$store.dispatch('loadPermissions');
+            this.$store.dispatch('fetchUserProfile');
             this.$router.push('/main');
           } else {
             console.log('Неправильное имя пользователя или пароль');
