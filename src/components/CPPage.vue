@@ -37,7 +37,7 @@
         <h2 v-if="selectedCP">{{ selectedCP.name }}</h2>
         <p v-if="selectedCP">ИНН: {{ selectedCP.inn }}</p>
       </div>
-      <div v-else class="cp-form new-counterparty-card ">Карточка создания нового контрагента</div>
+      <NewCP v-else class="cp-form new-counterparty-card" @close="hideNewCP" @save="saveNewCP"/>
     </div>
     <div class="overlay" v-if="showNewCounterpartyCard"></div>
     
@@ -47,10 +47,11 @@
 <script>
 import axios from '../axios';
 import Dummy from './lib/Dummy.vue'
+import NewCP from './NewCP.vue'
 
 export default {
   name: 'Counterparties',
-  components: {Dummy},
+  components: {Dummy, NewCP},
   data() {
     return {
       CPs: [
@@ -69,6 +70,14 @@ export default {
     this.fetchData()
   },
   methods: {
+    saveNewCP() {
+      //запрос на сохранение контрагента
+      //если всё ок, то
+      this.showNewCounterpartyCard = false;
+    },
+    hideNewCP() {
+      this.showNewCounterpartyCard = false;
+    },
     toggleNewCounterpartyCard() {
       this.showNewCounterpartyCard = !this.showNewCounterpartyCard;
     },
